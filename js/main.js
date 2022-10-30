@@ -12,6 +12,7 @@ function setup() {
   level.setup();
   balls.setup();
   textAlign(RIGHT);
+  console.log('testing a change')
 }
 function draw() {
   player.draw(balls);
