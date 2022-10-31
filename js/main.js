@@ -1,12 +1,16 @@
 "use strict";
+let building1;
+let bricks1;
 
-function preload() {}
+function preload() {
+  loadScenePics ();
+}
 
 function setup() {
   createCanvas(W, H);
 
 }
 function draw() {
-  background("grey");
+  //background("grey");
   testScene();
 }
