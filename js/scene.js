@@ -1,10 +1,11 @@
+function loadScenePics (){
+   building1 = loadImage("assets/img/building1.png");
+}
+
 function testScene(){
-    fill(0,0,255)
-    rectMode(CENTER);
-    rect(width/2, height/2, 200,200);
-    stroke(255)
-    textAlign(CENTER)
-    textSize(30)
-    text("Scene Test", width/2, height/2);
+    background (32,42,68);
+    image(building1,0,385);
+    fill(65);
+    rect(0,485,1000,120)
 
 }
