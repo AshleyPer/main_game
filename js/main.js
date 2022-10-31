@@ -20,6 +20,6 @@ function draw() {
   //background("grey");
   testScene();
 
-  //drawSprites()
+  drawSprites()
 
 }
