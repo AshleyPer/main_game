@@ -17,14 +17,11 @@ function setup() {
     
 }
 function draw() {
-  //background("grey");
- // testScene();
+  background("grey");
+  testScene();
 
-  drawSprites()
+  drawSprites();
     
+  ninja.attackAnimation();
   
-  
-  ninja.attackAnimation()
-
-
 }
