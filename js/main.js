@@ -18,7 +18,7 @@ function setup() {
 }
 function draw() {
   //background("grey");
- // testScene();
+  testScene();
 
   drawSprites()
     
