@@ -11,6 +11,7 @@ const GAMEPLAY = 2;
 const GAME_OVER = 3;
 const LEADER_BOARD = 4;
 let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
+let gameFinish = True;
 
 
 function preload() {
@@ -45,6 +46,7 @@ function draw() {
 
 function drawLoading() {
   hideAllBns();
+  gameFinish = true;
 
 }
 
@@ -68,14 +70,16 @@ function drawGameplay() {
 
 function drawGameover() {
   hideAllBns();
-  
+  gameFinish = true;
 }
 
 function drawLeaderBoard(){
   mainMenuBn.show();
+  
 }
 
 function mainMenuBnPressed(){//change screen and reset any variables, sound etc
+  gameFinish = true;
   hideAllBns();
   screenState = 1;
  
@@ -83,18 +87,20 @@ function mainMenuBnPressed(){//change screen and reset any variables, sound etc
 
 function gamePlayBnPressed(){
   hideAllBns();
+  gameFinish = false;
   screenState = 2;
 }
 
 function leaderBdBnPressed(){
+  gameFinish = true;//?
   hideAllBns();
   screenState = 4;
 }
 
 function exitBnPressed(){//takes you where? - may not use yet
+  gameFinish = true;
 
 }
-
 
 
 function hideAllBns(){
