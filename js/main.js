@@ -3,7 +3,7 @@ let building1;
 let bricks1;
 
 let ninja = new Ninja(W / 2, H / 2);
-
+let gameFinish = true;
 let screenState = 1;//changed to main for build, change back to load when done
 const LOADING = 0;
 const MAIN_MENU = 1;
@@ -11,7 +11,7 @@ const GAMEPLAY = 2;
 const GAME_OVER = 3;
 const LEADER_BOARD = 4;
 let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
-let gameFinish = True;
+
 
 
 function preload() {
