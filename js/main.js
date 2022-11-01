@@ -40,6 +40,9 @@ function draw() {
     case 3:
       drawGameover();
       break;
+    case 4:
+      drawLeaderBoard();
+      break;
   }
   
 }
@@ -47,6 +50,12 @@ function draw() {
 function drawLoading() {
   hideAllBns();
   gameFinish = true;
+  background(255,255,0)
+  textSize(30);
+  textAlign(CENTER);
+  stroke(0);
+  text("Loading", width/2, height/2 - 100);
+  text("Under Construction", width/2, height/2 - 50);
 
 }
 
@@ -55,7 +64,15 @@ function drawMainMenu() {
   gamePlayBn.show();
   exitBn.show();
   leaderBoardBn.show();
-  
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  stroke(255);
+  text("Main Menu", width/2, height/2 - 100);
+  text("Under Construction", width/2, height/2 - 50);
+  text("Adding Art", width/2, height/2 );
+  text("Maybe links to Character info", width/2, height/2 + 50);
+  text("other stuff tbc", width/2, height/2 + 100);
   
 }
 
@@ -71,10 +88,23 @@ function drawGameplay() {
 function drawGameover() {
   hideAllBns();
   gameFinish = true;
+  background(0,255,0)
+  textSize(30);
+  textAlign(CENTER);
+  stroke(0);
+  text("Game Over", width/2, height/2 - 100);
+  text("Under Construction", width/2, height/2 - 50);
 }
 
 function drawLeaderBoard(){
+  background(0,0,255)
   mainMenuBn.show();
+  textSize(40);
+  textAlign(CENTER);
+  stroke(0);
+  text("Leader Board", width/2, height/2 - 100);
+  text("Under Construction", width/2, height/2 - 50);
+  text("may or may not be used", width/2, height/2 );
   
 }
 
