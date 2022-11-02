@@ -8,6 +8,7 @@ let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
 let ninTest;
 let ninjaLoadingScreen;
 let nls;
+let hero;
 
 
 
@@ -16,15 +17,13 @@ function preload() {
   loadScenePics();
   ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
   ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
+  hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
 }
 
 function setup() {
   createCanvas(W, H);
   buttonSetUp();
   ninja.createNinja()
-
-  //createDiv("Countdown to Jam")
-  // createDiv(Date)
 
 }
 function draw() {
@@ -51,7 +50,6 @@ function draw() {
 
 function drawLoading() {
   hideAllBns();
-  gameFinish = true;
   background(20)
   textSize(30);
   textAlign(CENTER);
@@ -91,6 +89,8 @@ function drawMainMenu() {
   text("Adding Art", width / 2, height / 2);
   text("Maybe links to Character info", width / 2, height / 2 + 50);
   text("other stuff inc maybe levels tbc", width / 2, height / 2 + 100);
+  textSize(16)
+  text("Hover Mouse over Characters for Specs", width / 2 - 340, height / 2 + 220);
   //this is test code for character info
   //this may stay on main menu(if we use) 
   //or a new screen will make for it that's accessed from Main menu
@@ -191,12 +191,14 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     rect(200, 200, 150, 150, 30)
     noStroke()
     fill(0)
-    text("Hero Ninja", 200, 160)
-    text("He/she has a sword", 200, 180)//add specs
-    text("Move him with left", 200, 200)
-    text("and right arrows", 200, 220)
-    text("space bar on/off", 200, 240)
-    text("for attack ", 200, 260)
+    hero.resize(0,35)
+    image(hero,150,132)
+    text("Hero Ninja", 215, 154)
+    text("He/she has a sword", 200, 185)//add specs
+    text("Move him with left", 200, 205)
+    text("and right arrows", 200, 225)
+    text("space bar for attack", 200, 245)
+    text(" ", 200, 265)
   }
   if (mouseX > 880 && mouseX < 960 && mouseY < 100 && mouseY > 35) {//check these once image up
     stroke(120)
