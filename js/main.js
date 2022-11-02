@@ -1,16 +1,11 @@
 "use strict";
-let building1;
-let bricks1;
 
-let ninja = new Ninja(W / 2, H / 2);
+let testAlley;
+let ninja = new Ninja(W / 2 +200, H / 2+200);
 let gameFinish = true;
 let screenState = 1;//changed to main for build, change back to load when done
-const LOADING = 0;
-const MAIN_MENU = 1;
-const GAMEPLAY = 2;
-const GAME_OVER = 3;
-const LEADER_BOARD = 4;
 let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
+let ninTest;
 
 
 
@@ -18,6 +13,7 @@ function preload() {
  
   ninja.loadNinjaAnimations();
   loadScenePics ();
+  ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
 }
 
 function setup() {
@@ -60,24 +56,48 @@ function drawLoading() {
 }
 
 function drawMainMenu() {
-  background(0)
+  background(80)
   gamePlayBn.show();
   exitBn.show();
   leaderBoardBn.show();
-  fill(255);
-  textSize(30);
+  //below is all testing code 
+  fill(150);
+  textSize(25);
   textAlign(CENTER);
-  stroke(255);
+  stroke(150);
   text("Main Menu", width/2, height/2 - 100);
   text("Under Construction", width/2, height/2 - 50);
   text("Adding Art", width/2, height/2 );
   text("Maybe links to Character info", width/2, height/2 + 50);
-  text("other stuff tbc", width/2, height/2 + 100);
+  text("other stuff inc maybe levels tbc", width/2, height/2 + 100);
+  //this is test code for character info
+    //this may stay on main menu(if we use) 
+      //or a new screen will made for it that's accessed from Main menu
+  image(ninTest, 30,170);
+  rectMode(CENTER);
+  fill(100);
+  rect(920,70,95,80);//sample space  - image to replace
+  rect(920,170,65,80);
+  rect(920,270,65,80);
+  rect(920,370,65,80);
+  rect(920,470,65,80);
+  fill(0);
+  noStroke();
+  strokeWeight(2);
+  textSize(14)
+  textStyle(BOLD);
+  text("Boss Enemy", 920,70);
+  text("Enemy 1", 920,170);
+  text("Enemy 2", 920,270);
+  text("Enemy 3", 920,370);
+  text("Enemy 4", 920,470);
+  
   
 }
 
 function drawGameplay() {
   background("grey");
+  hideAllBns();
   testScene();
 
   drawSprites();
@@ -116,7 +136,7 @@ function mainMenuBnPressed(){//change screen and reset any variables, sound etc
 }
 
 function gamePlayBnPressed(){
-  hideAllBns();
+  
   gameFinish = false;
   screenState = 2;
 }
