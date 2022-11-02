@@ -17,6 +17,8 @@ class Ninja {
         this.attackEast = loadAnimation('assets/img/ninja_player/attack/attack_east/attack_1.png', 'assets/img/ninja_player/attack/attack_east/attack_6.png');
         this.idleWest = loadAnimation('assets/img/ninja_player/idle/idle_west/idle_1.png', 'assets/img/ninja_player/idle/idle_west/idle_2.png', 'assets/img/ninja_player/idle/idle_west/idle_3.png', 'assets/img/ninja_player/idle/idle_west/idle_4.png')
         this.attackWest = loadAnimation('assets/img/ninja_player/attack/attack_west/attack_1.png', 'assets/img/ninja_player/attack/attack_west/attack_6.png');
+        this.runWest = loadAnimation('assets/img/ninja_player/run/run_west/ninja_1.png', 'assets/img/ninja_player/run/run_west/ninja_4.png')
+        this.runEast = loadAnimation('assets/img/ninja_player/run/run_east/ninja_1.png', 'assets/img/ninja_player/run/run_east/ninja_4.png');
         // this.attackEast.frameCount = 1;
     }
 
@@ -26,6 +28,8 @@ class Ninja {
         this.ninjaSprite.addAnimation('attackEast', this.attackEast);
         this.ninjaSprite.addAnimation('idleWest', this.idleWest);
         this.ninjaSprite.addAnimation('attackWest', this.attackWest);
+        this.ninjaSprite.addAnimation('runWest', this.runWest);
+        this.ninjaSprite.addAnimation('runEast', this.runEast);
         console.log(this.ninjaSprite.getAnimationLabel());
         this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
@@ -36,12 +40,12 @@ class Ninja {
     move() {
         if (keyIsDown(LEFT_ARROW)) {
             this.ninjaSprite.position.x = this.ninjaSprite.position.x - 1
-            this.ninjaSprite.changeAnimation('idleWest')
+            this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
         }
         if (keyIsDown(RIGHT_ARROW)) {
             this.ninjaSprite.position.x = this.ninjaSprite.position.x + 1
-            this.ninjaSprite.changeAnimation('idleEast')
+            this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
         }
     }
