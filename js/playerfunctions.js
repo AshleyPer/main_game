@@ -1,5 +1,4 @@
-let ninjaAttackOn = false;
-let ninjaDirectionEast = true;
+
 
 class Ninja {
     constructor(positionX, positionY) {
@@ -8,6 +7,8 @@ class Ninja {
         this.attackEast;
         this.idleEast;
         this.ninjaSprite;
+        this.ninjaAttackOn = false;
+        this.ninjaDirectionEast = true;
     }
 
 
@@ -16,7 +17,7 @@ class Ninja {
         this.attackEast = loadAnimation('assets/img/ninja_player/attack/attack_east/attack_1.png', 'assets/img/ninja_player/attack/attack_east/attack_6.png');
         this.idleWest = loadAnimation('assets/img/ninja_player/idle/idle_west/idle_1.png', 'assets/img/ninja_player/idle/idle_west/idle_2.png', 'assets/img/ninja_player/idle/idle_west/idle_3.png', 'assets/img/ninja_player/idle/idle_west/idle_4.png')
         this.attackWest = loadAnimation('assets/img/ninja_player/attack/attack_west/attack_1.png', 'assets/img/ninja_player/attack/attack_west/attack_6.png');
-       // this.attackEast.frameCount = 1;
+        // this.attackEast.frameCount = 1;
     }
 
     createNinja() {
@@ -29,44 +30,46 @@ class Ninja {
         this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         //this.attackEast.looping = false;
-       
+
+
     }
-    move(){
-        if (keyIsDown(LEFT_ARROW)){
-            this.ninjaSprite.position.x = this.ninjaSprite.position.x -1
+    move() {
+        if (keyIsDown(LEFT_ARROW)) {
+            this.ninjaSprite.position.x = this.ninjaSprite.position.x - 1
             this.ninjaSprite.changeAnimation('idleWest')
-            ninjaDirectionEast = false;
+            this.ninjaDirectionEast = false;
         }
-        if (keyIsDown(RIGHT_ARROW)){
-            this.ninjaSprite.position.x = this.ninjaSprite.position.x +1
+        if (keyIsDown(RIGHT_ARROW)) {
+            this.ninjaSprite.position.x = this.ninjaSprite.position.x + 1
             this.ninjaSprite.changeAnimation('idleEast')
-            ninjaDirectionEast = true;
+            this.ninjaDirectionEast = true;
         }
     }
-  
+
     attackAnimation() {
-        if (keyIsDown(32) && ninjaAttackOn === false) {
-            if(ninjaDirectionEast == true){
+        
+        if (keyWentDown(32) && this.ninjaAttackOn === false) {
+            if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('attackEast');
             }
-            if(ninjaDirectionEast == false){
+            if (this.ninjaDirectionEast == false) {
                 this.ninjaSprite.changeAnimation('attackWest');
             }
-          //  this.attackEast.play();
-          ninjaAttackOn = true;
+            this.ninjaAttackOn = true;
 
-        }
-        else if (keyIsDown(32) && ninjaAttackOn === true) {
-            if (ninjaDirectionEast == true){
+        } 
+        
+        if(this.ninjaAttackOn = true && frameCount % 24 == 0){
+            if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('idleEast');
             }
-            else if (ninjaDirectionEast == false){
+            else if (this.ninjaDirectionEast == false) {
                 this.ninjaSprite.changeAnimation('idleWest');
             }
-          //  this.attackEast.play();
-          ninjaAttackOn = false;
+            this.ninjaAttackOn = false;
 
         }
 
     }
+    
 }
