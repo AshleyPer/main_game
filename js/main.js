@@ -20,9 +20,13 @@ function setup() {
   createCanvas(W, H);
   buttonSetUp();
   ninja.createNinja()
+  
+  //createDiv("Countdown to Jam")
+ // createDiv(Date)
     
 }
 function draw() {
+  
   switch(screenState){
     case 0:
       drawLoading();
@@ -72,7 +76,7 @@ function drawMainMenu() {
   text("other stuff inc maybe levels tbc", width/2, height/2 + 100);
   //this is test code for character info
     //this may stay on main menu(if we use) 
-      //or a new screen will made for it that's accessed from Main menu
+      //or a new screen will make for it that's accessed from Main menu
   image(ninTest, 30,170);
   rectMode(CENTER);
   fill(100);
@@ -103,6 +107,8 @@ function drawGameplay() {
   drawSprites();
     
   ninja.attackAnimation();
+  ninja.move();
+
 }
 
 function drawGameover() {
