@@ -9,7 +9,8 @@ let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
 let ninTest;
 let ninjaLoadingScreen;
 let nls;
-let hero;
+let hero, redN, redN2;//spec pics
+
 let x1 = 0;
 let x2;
 let scrollSpeed = 2;
@@ -26,6 +27,8 @@ function preload() {
   ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
   ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
   hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
+  redN = loadImage('assets/img/enemies/red_ninja/run/run1.png');
+  redN2 = loadImage('assets/img/enemies/red_ninja/attack/attack3.png');
 }
 
 function setup() {
@@ -186,11 +189,13 @@ function exitBnPressed() {//takes you where? - may not use yet
 
 function characterImages() {
   image(ninTest, 30, 170);
+  redN2.resize(0,60)
+  image(redN2,890,145)
   //replace the following code with enemy images
   rectMode(CENTER);
   fill(100);
   rect(920, 70, 95, 80);//sample space  - image to replace
-  rect(920, 170, 65, 80);
+  //rect(920, 170, 65, 80);
   rect(920, 270, 65, 80);
   rect(920, 370, 65, 80);
   rect(920, 470, 65, 80);
@@ -200,7 +205,7 @@ function characterImages() {
   textSize(14)
   textStyle(BOLD);
   text("Boss Enemy", 920, 70);
-  text("Enemy 1", 920, 170);
+ // text("Red Ninja", 920, 170);
   text("Enemy 2", 920, 270);
   text("Enemy 3", 920, 370);
   text("Enemy 4", 920, 470);
@@ -216,7 +221,7 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     hero.resize(0,35)
     image(hero,150,132)
     text("Hero Ninja", 215, 154)
-    text("He/she has a sword", 200, 185)//add specs
+    text("UPDATE INFO", 200, 185)//add specs
     text("Move him with left", 200, 205)
     text("and right arrows", 200, 225)
     text("space bar for attack", 200, 245)
@@ -240,12 +245,14 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     stroke(120)
     fill(100)
     rect(800, 170, 110, 80, 30)
+    redN.resize(0,30)
+    image(redN,750,150)
     noStroke()
     fill(0)
     textSize(12)
-    text("Enemy 1", 800, 150)
-    text("He/she is also bad", 800, 170)//add specs
-    text("but is not boss", 800, 190)
+    text("Red Ninja", 800, 150)
+    text("more info", 800, 170)//add specs
+    text(".......", 800, 190)
 
   }
   if (mouseX > 890 && mouseX < 950 && mouseY < 300 && mouseY > 235) {//check these once image up
