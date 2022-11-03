@@ -9,6 +9,9 @@ class Ninja {
         this.ninjaSprite;
         this.ninjaAttackOn = false;
         this.ninjaDirectionEast = true;
+        this.runWest;
+        this.runEast;
+
     }
 
 
@@ -30,7 +33,7 @@ class Ninja {
         this.ninjaSprite.addAnimation('attackWest', this.attackWest);
         this.ninjaSprite.addAnimation('runWest', this.runWest);
         this.ninjaSprite.addAnimation('runEast', this.runEast);
-        console.log(this.ninjaSprite.getAnimationLabel());
+       // console.log(this.ninjaSprite.getAnimationLabel());
         this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         //this.attackEast.looping = false;
@@ -39,30 +42,36 @@ class Ninja {
     }
     move() {
         if (keyIsDown(LEFT_ARROW)) {
-            this.ninjaSprite.position.x = this.ninjaSprite.position.x - 1
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
+            this.ninjaSprite.animation.play();
+            this.ninjaSprite.position.x = this.ninjaSprite.position.x - 1
+
         }
         if (keyIsDown(RIGHT_ARROW)) {
             this.ninjaSprite.position.x = this.ninjaSprite.position.x + 1
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
+            this.ninjaSprite.animation.play();
         }
     }
 
     attackAnimation() {
         
-        if (keyWentDown(32) && this.ninjaAttackOn === false) {
+        if (keyIsDown(32) && this.ninjaAttackOn === false) {
             if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('attackEast');
+                this.ninjaSprite.animation.play();
             }
             if (this.ninjaDirectionEast == false) {
                 this.ninjaSprite.changeAnimation('attackWest');
+                this.ninjaSprite.animation.play();
             }
             this.ninjaAttackOn = true;
 
         } 
         
+        /*
         if(this.ninjaAttackOn = true && frameCount % 24 == 0){
             if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('idleEast');
@@ -72,8 +81,46 @@ class Ninja {
             }
             this.ninjaAttackOn = false;
 
+        }*/
+
+    }
+
+    isBusy(){
+        if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW) || keyIsDown(32)) {
+            return true;
         }
 
+    }
+
+    notBusy(){
+        let result;
+        if(this.isBusy()){ //the player is Busy
+            result=false //the player isBusy
+        } else {
+            result=true //the player is not busy
+        }
+        return result;
+    }
+
+    checkNinjaStatus(){
+
+        if(this.notBusy()){
+            this.ninjaAttackOn = false;
+            this.ninjaSprite.animation.stop();
+            this.ninjaSprite.animation.rewind();
+            if(this.ninjaDirectionEast){
+                this.ninjaSprite.changeAnimation('idleEast');
+                this.ninjaSprite.animation.play('idleEast');
+            }else{
+                this.ninjaSprite.changeAnimation('idleWest');
+                this.ninjaSprite.animation.play('idleWest');
+            }
+            
+         
+        }
+        if(this.isBusy()){
+            
+        }
     }
     
 }

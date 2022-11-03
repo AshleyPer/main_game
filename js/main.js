@@ -45,7 +45,7 @@ function draw() {
       drawLeaderBoard();
       break;
   }
-
+  ninja.checkNinjaStatus();
 }
 
 function drawLoading() {
