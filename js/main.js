@@ -188,7 +188,7 @@ function exitBnPressed() {//takes you where? - may not use yet
 }
 
 function characterImages() {
-  image(ninTest, 30, 170);
+  image(ninTest, 60, 170);
   redN2.resize(0,60)
   image(redN2,890,145)
   //replace the following code with enemy images
@@ -215,17 +215,17 @@ function characterPopUps() {//test code maybe use a function/class with paramete
   if (mouseX > 30 && mouseX < 125 && mouseY < 430 && mouseY > 170) {//check position when final
     stroke(120)
     fill(100)
-    rect(200, 200, 150, 150, 30)
+    rect(230, 200, 150, 150, 30)
     noStroke()
     fill(0)
     hero.resize(0,35)
-    image(hero,150,132)
-    text("Hero Ninja", 215, 154)
-    text("UPDATE INFO", 200, 185)//add specs
-    text("Move him with left", 200, 205)
-    text("and right arrows", 200, 225)
-    text("space bar for attack", 200, 245)
-    text(" ", 200, 265)
+    image(hero,180,132)
+    text("Hero Ninja", 245, 154)
+    text("UPDATE INFO", 230, 185)//add specs
+    text("Move him with left", 230, 205)
+    text("and right arrows", 230, 225)
+    text("space bar for attack", 230, 245)
+    text(" ", 230, 265)
   }
   if (mouseX > 880 && mouseX < 960 && mouseY < 100 && mouseY > 35) {//check these once image up
     stroke(120)
