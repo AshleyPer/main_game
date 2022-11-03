@@ -8,7 +8,5 @@ body {
 #container {
     /* css that effects the container holding main. */
     margin-top:20px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    margin-left: 200px;
 }
