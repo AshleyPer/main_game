@@ -2,8 +2,9 @@
 
 let testAlley, aircon, bgWstuff, bgWOstuff, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
 let ninja = new Ninja(W/2, H - (H/8));
+let enemy1 = new Enemy(-250, H - 50)
 let gameFinish = true;
-let screenState = 0;//changed to main for build, change back to load when done
+let screenState = 0;
 let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
 let ninTest;
 let ninjaLoadingScreen;
@@ -20,6 +21,7 @@ let cloudY = new Array(5);
 
 function preload() {
   ninja.loadNinjaAnimations();
+  enemy1.loadEnemyAnimations();
   loadScenePics();
   ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
   ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
@@ -30,6 +32,7 @@ function setup() {
   createCanvas(W, H);
   buttonSetUp();
   ninja.createNinja();
+  enemy1.createEnemy();
 
   x2 = width;
   cloudX[0] =  random(width, width + 600);
