@@ -1,7 +1,7 @@
 "use strict";
 
-let testAlley;
-let ninja = new Ninja(W / 2 + 200, H / 2 + 200);
+let testAlley, aircon, bgWstuff, bgWOstuff, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
+let ninja = new Ninja(W/2, H - (H/8));
 let gameFinish = true;
 let screenState = 0;//changed to main for build, change back to load when done
 let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
@@ -9,6 +9,10 @@ let ninTest;
 let ninjaLoadingScreen;
 let nls;
 let hero;
+let x1 = 0;
+let x2, cloudX, cloudY;
+let scrollSpeed = 2;
+let clouds = new Array();
 
 
 
@@ -23,9 +27,14 @@ function preload() {
 function setup() {
   createCanvas(W, H);
   buttonSetUp();
-  ninja.createNinja()
+  ninja.createNinja();
+
+  x2 = width;
+  cloudX = width + random(0,width);
+  cloudY = random(0,60);
 
 }
+
 function draw() {
 
   switch (screenState) {

@@ -45,14 +45,26 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
-            this.ninjaSprite.position.x = this.ninjaSprite.position.x - 1
+
+            x1 += scrollSpeed;
+            x2 += scrollSpeed;
+            cloudX += scrollSpeed;
+
+            if(x1 > 0){
+                scrollSpeed = 0;
+                x1 = 0;
+            } 
 
         }
+
         if (keyIsDown(RIGHT_ARROW)) {
-            this.ninjaSprite.position.x = this.ninjaSprite.position.x + 1
+            scrollSpeed = 2;
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();
+            x1 -= scrollSpeed;
+            x2 -= scrollSpeed;
+            cloudX -= scrollSpeed;
         }
     }
 
