@@ -48,7 +48,9 @@ class Ninja {
 
             x1 += scrollSpeed;
             x2 += scrollSpeed;
-            cloudX += scrollSpeed;
+            for(let i = 0; i < clouds.length; i++){
+                cloudX[i] += scrollSpeed;
+            }
 
             if(x1 > 0){
                 scrollSpeed = 0;
@@ -64,7 +66,10 @@ class Ninja {
             this.ninjaSprite.animation.play();
             x1 -= scrollSpeed;
             x2 -= scrollSpeed;
-            cloudX -= scrollSpeed;
+            for(let i = 0; i < clouds.length; i++){
+                cloudX[i] -= scrollSpeed;
+            }
+
         }
     }
 

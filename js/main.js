@@ -10,9 +10,11 @@ let ninjaLoadingScreen;
 let nls;
 let hero;
 let x1 = 0;
-let x2, cloudX, cloudY;
+let x2;
 let scrollSpeed = 2;
-let clouds = new Array();
+let clouds = new Array(5);
+let cloudX = new Array(5);
+let cloudY = new Array(5);
 
 
 
@@ -30,8 +32,16 @@ function setup() {
   ninja.createNinja();
 
   x2 = width;
-  cloudX = width + random(0,width);
-  cloudY = random(0,60);
+  cloudX[0] =  random(width, width + 600);
+  cloudX[1] =  random(width, width + 600);
+  cloudX[2] =  random(width, width + 600);
+  cloudX[3] =  random(width, width + 600);
+  cloudX[4] =  random(width, width + 600);
+  cloudY[0] = random(0,60);
+  cloudY[1] = random(0,60);
+  cloudY[2] = random(0,60);
+  cloudY[3] = random(0,60);
+  cloudY[4] = random(0,60);
 
 }
 
