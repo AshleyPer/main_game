@@ -36,8 +36,8 @@ class Enemy {
    loadEnemyAnimations() {
     // test section - one enemy red ninja - one direction
         
-        this.attackEast = loadAnimation('assets/img/enemies/red_ninja/attack/attack1.png', 'assets/img/enemies/red_ninja/attack/attack6.png');
-        this.runEast = loadAnimation('assets/img/enemies/red_ninja/run/run1.png', 'assets/img/enemies/red_ninja/run/run4.png')
+        this.attackEast = loadAnimation('assets/img/enemies/tier1_red_guy/attack/attack1.png', 'assets/img/enemies/tier1_red_guy/attack/attack6.png');
+        this.runEast = loadAnimation('assets/img/enemies/tier1_red_guy/run/run1.png', 'assets/img/enemies/tier1_red_guy/run/run4.png')
       
     }
 

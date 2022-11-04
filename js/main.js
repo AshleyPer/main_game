@@ -27,8 +27,8 @@ function preload() {
   ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
   ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
   hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
-  redN = loadImage('assets/img/enemies/red_ninja/run/run1.png');
-  redN2 = loadImage('assets/img/enemies/red_ninja/attack/attack3.png');
+  redN = loadImage('assets/img/enemies/tier1_red_guy/run/run1.png');
+  redN2 = loadImage('assets/img/enemies/tier1_red_guy/attack/attack3.png');
 }
 
 function setup() {
