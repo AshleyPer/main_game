@@ -303,7 +303,7 @@ function buttonSetUp() {
   mainMenuBn.style("background-color", "blue")//colour tbc
   mainMenuBn.style("color", "white")
   mainMenuBn.mousePressed(mainMenuBnPressed);
-  mainMenuBn.position(1000, 550);
+  mainMenuBn.position(1200, 550);
   mainMenuBn.hide();
 
   gamePlayBn = createButton("Play Game");
@@ -314,7 +314,7 @@ function buttonSetUp() {
   gamePlayBn.style("background-color", "blue")//colour tbc
   gamePlayBn.style("color", "white")
   gamePlayBn.mousePressed(gamePlayBnPressed);//currently to function instead of straight to screen
-  gamePlayBn.position(650, 555);
+  gamePlayBn.position(850, 555);
   gamePlayBn.hide();
 
   exitBn = createButton("EXIT");
@@ -324,7 +324,7 @@ function buttonSetUp() {
   exitBn.style("background-color", "grey")
   exitBn.style("color", "white")
   exitBn.mousePressed(exitBnPressed);
-  exitBn.position(200, 590);
+  exitBn.position(400, 590);
   exitBn.hide();
 
   leaderBoardBn = createButton("Leader Board");
@@ -334,6 +334,6 @@ function buttonSetUp() {
   leaderBoardBn.style("background-color", "blue")
   leaderBoardBn.style("color", "white")
   leaderBoardBn.mousePressed(leaderBdBnPressed);
-  leaderBoardBn.position(1080, 580);
+  leaderBoardBn.position(1280, 580);
   leaderBoardBn.hide();
 }
