@@ -2,9 +2,17 @@
 
 let testAlley, aircon, bgWstuff, bgWOstuff, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
 let ninja = new Ninja(W/2, H - (H/8));
-let enemy1 = new Enemy(-250, H - 50)
+let enemy1 = new Enemy(-250, H - 50);//tier 1 enemy
+let enemy2= new Enemy(-750, H - 50);//tier 2 enemy - spawn after teir 1 death?
+let enemy3 = new Enemy(-1250, H - 50);//tier 3 enemy
+let enemyB = new Enemy(-1850, H - 50);//boss enemy
+let enemyHit1 = 0;
+let enemyHit2 = 0;
+let enemyHit3 = 0;
+let enemyHitB = 0;
+
 let gameFinish = true;
-let screenState = 0;
+let screenState = 1;
 let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
 let ninTest;
 let ninjaLoadingScreen;
@@ -23,18 +31,11 @@ let cloudY = new Array(5);
 function preload() {
   ninja.loadNinjaAnimations();
   enemy1.loadEnemyAnimations();
+  enemy2.loadEnemyAnimations();
+  enemy3.loadEnemyAnimations();
+  enemyB.loadEnemyAnimations();
   loadScenePics();
-  ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
-  ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
-  hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
-  E1a = loadImage('assets/img/enemies/tier1_red_guy/run/run1.png');
-  E1b = loadImage('assets/img/enemies/tier1_red_guy/attack/attack3.png');
-  E2a = loadImage('assets/img/enemies/tier2_red_ninja/run/run1.png');
-  E2b = loadImage('assets/img/enemies/tier2_red_ninja/attack/attack3.png');
-  E3a = loadImage('assets/img/enemies/tier3_red_orange_ninja/run/run1.png');
-  E3b = loadImage('assets/img/enemies/tier3_red_orange_ninja/attack/attack3.png');
-  Bea = loadImage('assets/img/enemies/boss/run/run2.png');
-  Beb = loadImage('assets/img/enemies/boss/run/run3.png');
+  loadMainMenuImages();
 }
 
 function setup() {
@@ -59,7 +60,10 @@ function setup() {
   canvas.style.border = 'solid'
   canvas.style.borderColor = 'black'
   ninja.createNinja();
-  enemy1.createEnemy();
+  enemy1.createEnemy1();
+  enemy2.createEnemy2();
+  enemy3.createEnemy3();
+  enemyB.createEnemyB();
 
   x2 = width;
   cloudX[0] =  random(width, width + 600);
@@ -95,7 +99,9 @@ function draw() {
       break;
   }
   ninja.checkNinjaStatus();
+  
 }
+
 
 function drawLoading() {
   hideAllBns();
@@ -124,6 +130,7 @@ function drawLoading() {
 }
 
 function drawMainMenu() {
+  hideAllBns();
   background(80)
   gamePlayBn.show();
   exitBn.show();
@@ -157,7 +164,50 @@ function drawGameplay() {
 
   ninja.attackAnimation();
   ninja.move();
+  ninja.ninjaSprite.collide(enemy1.enemySprite,enemy1Fight);//start of fighting code
+  ninja.ninjaSprite.collide(enemy2.enemySprite,enemy2Fight);
+  ninja.ninjaSprite.collide(enemy3.enemySprite,enemy3Fight);
+  ninja.ninjaSprite.collide(enemyB.enemySprite,enemyBFight);
 
+}
+
+function enemy1Fight(){//basic start function for fighting
+  enemy1.attackAnimation1();
+  if(enemyHit1<20){
+    enemyHit1++;
+  }
+  else if(enemyHit1 >=20){
+    enemy1.enemySprite.remove();
+  }
+  
+}
+function enemy2Fight(){
+  enemy2.attackAnimation2();//very breif at present as its in collision
+  if(enemyHit2<50){
+    enemyHit2++;
+  }
+  else if(enemyHit2 >=50){
+    enemy2.enemySprite.remove();
+  }
+  
+}
+function enemy3Fight(){
+  enemy3.attackAnimation3();
+  if(enemyHit3<80){
+    enemyHit3++;
+  }
+  else if(enemyHit3>=80){
+    enemy3.enemySprite.remove();
+  }
+}
+function enemyBFight(){
+  enemyB.attackAnimationB();
+  if(enemyHitB<120){
+    enemyHitB++;
+  }
+  else if(enemyHitB >=120){
+    enemyB.enemySprite.remove();
+  }
 }
 
 function drawGameover() {
@@ -302,6 +352,20 @@ function characterPopUps() {//test code maybe use a function/class with paramete
   }
   
 
+}
+
+function loadMainMenuImages(){
+  ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
+  ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
+  hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
+  E1a = loadImage('assets/img/enemies/tier1_red_guy/run/run1.png');
+  E1b = loadImage('assets/img/enemies/tier1_red_guy/attack/attack3.png');
+  E2a = loadImage('assets/img/enemies/tier2_red_ninja/run/run1.png');
+  E2b = loadImage('assets/img/enemies/tier2_red_ninja/attack/attack3.png');
+  E3a = loadImage('assets/img/enemies/tier3_red_orange_ninja/run/run1.png');
+  E3b = loadImage('assets/img/enemies/tier3_red_orange_ninja/attack/attack3.png');
+  Bea = loadImage('assets/img/enemies/boss/run/run2.png');
+  Beb = loadImage('assets/img/enemies/boss/run/run3.png');
 }
 
 function hideAllBns() {
