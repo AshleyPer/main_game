@@ -39,7 +39,25 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
-  buttonSetUp();
+  let div = document.createElement('div');
+  document.body.appendChild(div)
+  div.id='div'
+  let thediv = document.getElementById('div')
+  //thediv.innerHTML += buttonSetUp()
+  const list = document.getElementsByTagName("button");
+  console.log(list)
+  buttonSetUp()
+  setOnHover(mainMenuBn)
+  setOnHover(gamePlayBn)
+  setOnHover(exitBn)
+  setOnHover(leaderBoardBn)
+
+  let canvas = document.getElementById('defaultCanvas0');
+  //canvas.style.boxShadow = '0px 30px 20px black'
+  canvas.style.boxShadow = '0px 10px 30px white, 10px 20px 40px grey, 30px 50px 30px black'
+  canvas.style.borderRadius = '25px'
+  canvas.style.border = 'solid'
+  canvas.style.borderColor = 'black'
   ninja.createNinja();
   enemy1.createEnemy();
 
@@ -127,7 +145,7 @@ function drawMainMenu() {
 
  //text(mouseX + "," + mouseY, mouseX, mouseY);
 
-
+  console.log(window.innerWidth)
 }
 
 function drawGameplay() {
@@ -303,19 +321,23 @@ function buttonSetUp() {
   mainMenuBn.style("background-color", "blue")//colour tbc
   mainMenuBn.style("color", "white")
   mainMenuBn.mousePressed(mainMenuBnPressed);
-  mainMenuBn.position(1000, 550);
-  mainMenuBn.hide();
+  mainMenuBn.position(window.innerWidth / 2 - 50, H - 20);
+
 
   gamePlayBn = createButton("Play Game");
-  gamePlayBn.style("width", "130px");
+  gamePlayBn.style("width", "130px"); 
   gamePlayBn.style("font-size", "20px");
   gamePlayBn.style("border-radius", "20px")
   gamePlayBn.style("height", "45px");
   gamePlayBn.style("background-color", "blue")//colour tbc
   gamePlayBn.style("color", "white")
   gamePlayBn.mousePressed(gamePlayBnPressed);//currently to function instead of straight to screen
-  gamePlayBn.position(650, 555);
+  gamePlayBn.style("margin-left", "auto")
+  gamePlayBn.style("margin-right", "auto")
+  gamePlayBn.style("top", "-500px")
+  gamePlayBn.style("box-shadow", "5px 10px 15px black")
   gamePlayBn.hide();
+  gamePlayBn.position(window.innerWidth / 2 - 60, H - 35)
 
   exitBn = createButton("EXIT");
   exitBn.style("width", "80px");
@@ -323,8 +345,10 @@ function buttonSetUp() {
   exitBn.style("height", "25px");
   exitBn.style("background-color", "grey")
   exitBn.style("color", "white")
+  exitBn.style("margin", "auto")
+  exitBn.style("box-shadow", "5px 10px 15px black")
   exitBn.mousePressed(exitBnPressed);
-  exitBn.position(200, 590);
+  exitBn.position(window.innerWidth / 2 - 450, H - 15);
   exitBn.hide();
 
   leaderBoardBn = createButton("Leader Board");
@@ -333,7 +357,14 @@ function buttonSetUp() {
   leaderBoardBn.style("height", "35px");
   leaderBoardBn.style("background-color", "blue")
   leaderBoardBn.style("color", "white")
+  leaderBoardBn.style("box-shadow", "5px 10px 15px black")
   leaderBoardBn.mousePressed(leaderBdBnPressed);
   leaderBoardBn.position(1080, 580);
+  leaderBoardBn.position(window.innerWidth / 2 + 350, H - 25);
   leaderBoardBn.hide();
+
+}
+
+function setOnHover(button){
+  button.mouseOver(()=>{button.style('cursor', 'pointer');})
 }
