@@ -348,7 +348,7 @@ function buttonSetUp() {
   exitBn.style("margin", "auto")
   exitBn.style("box-shadow", "5px 10px 15px black")
   exitBn.mousePressed(exitBnPressed);
-  exitBn.position(window.innerWidth / 2 - 450, H - 15);
+  exitBn.position(window.innerWidth / 4 - 450, H - 15);
   exitBn.hide();
 
   leaderBoardBn = createButton("Leader Board");
