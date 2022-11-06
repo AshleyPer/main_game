@@ -13,7 +13,6 @@ let enemyHitB = 0;
 
 let gameFinish = true;
 let screenState = 1;
-let mainMenuBn, gamePlayBn, exitBn, leaderBoardBn;//buttons
 let ninTest;
 let ninjaLoadingScreen;
 let nls;
@@ -26,8 +25,6 @@ let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
 
-
-
 function preload() {
   ninja.loadNinjaAnimations();
   enemy1.loadEnemyAnimations();
@@ -38,28 +35,25 @@ function preload() {
   loadMainMenuImages();
 }
 
+
 function setup() {
   createCanvas(W, H);
-  let div = document.createElement('div');
-  document.body.appendChild(div)
-  div.id='div'
-  let thediv = document.getElementById('div')
-  //thediv.innerHTML += buttonSetUp()
-  const list = document.getElementsByTagName("button");
-  console.log(list)
-  buttonSetUp()
-  setOnHover(mainMenuBn)
-  setOnHover(gamePlayBn)
-  setOnHover(exitBn)
-  setOnHover(leaderBoardBn)
 
+  //create the buttons
+  mainMenuBn.buttonSetUp(mainMenuBnPressed)
+  gamePlayBn.buttonSetUp(gamePlayBnPressed)
+  exitBn.buttonSetUp(exitBnPressed)
+  leaderBoardBn.buttonSetUp(leaderBdBnPressed)
+
+  //giving the canvas some styling, this is the box that contains our game
   let canvas = document.getElementById('defaultCanvas0');
-  //canvas.style.boxShadow = '0px 30px 20px black'
   canvas.style.boxShadow = '0px 10px 30px white, 10px 20px 40px grey, 30px 50px 30px black'
   canvas.style.borderRadius = '25px'
   canvas.style.border = 'solid'
   canvas.style.borderColor = 'black'
+
   ninja.createNinja();
+
   enemy1.createEnemy1();
   enemy2.createEnemy2();
   enemy3.createEnemy3();
@@ -76,8 +70,8 @@ function setup() {
   cloudY[2] = random(0,60);
   cloudY[3] = random(0,60);
   cloudY[4] = random(0,60);
-
 }
+
 
 function draw() {
 
@@ -102,7 +96,7 @@ function draw() {
   
 }
 
-
+//draw the loading scene/screen
 function drawLoading() {
   hideAllBns();
   background(20)
@@ -126,35 +120,11 @@ function drawLoading() {
     screenState = 1;
   }
 
-
 }
 
-function drawMainMenu() {
-  hideAllBns();
-  background(80)
-  gamePlayBn.show();
-  exitBn.show();
-  leaderBoardBn.show();
-  //below is all testing code 
-  fill(150);
-  textSize(25);
-  textAlign(CENTER);
-  stroke(150);
-  text("Main Menu", width / 2, height / 2 - 100);
-  text("Under Construction", width / 2, height / 2 - 50);
-  
-  textSize(16)
-  text("Hover Mouse over Characters for Specs", width / 2 - 340, height / 2 + 220);
- 
-  characterImages();
+//functions to draw the different scenes
 
-  characterPopUps();
-
- //text(mouseX + "," + mouseY, mouseX, mouseY);
-
-  console.log(window.innerWidth)
-}
-
+//draw the gameplay scene/screen
 function drawGameplay() {
   background("grey");
   hideAllBns();
@@ -171,6 +141,57 @@ function drawGameplay() {
 
 }
 
+//game over scene/screen
+function drawGameover() {
+  hideAllBns();
+  gameFinish = true;
+  background(0, 255, 0)
+  textSize(30);
+  textAlign(CENTER);
+  stroke(0);
+  text("Game Over", width / 2, height / 2 - 100);
+  text("Under Construction", width / 2, height / 2 - 50);
+}
+
+//leaderboard scene/screen
+function drawLeaderBoard() {
+  background(0, 0, 255)
+  mainMenuBn.showButton();
+  textSize(40);
+  textAlign(CENTER);
+  stroke(0);
+  text("Leader Board", width / 2, height / 2 - 100);
+  text("Under Construction", width / 2, height / 2 - 50);
+  text("may or may not be used", width / 2, height / 2);
+}
+
+
+//draw the draw main menu scene/screen
+function drawMainMenu() {
+  hideAllBns();
+  background(80)
+  gamePlayBn.showButton();
+  exitBn.showButton();
+  leaderBoardBn.showButton();
+  //below is all testing code 
+  fill(150);
+  textSize(25);
+  textAlign(CENTER);
+  stroke(150);
+  text("Main Menu", width / 2, height / 2 - 100);
+  text("Under Construction", width / 2, height / 2 - 50);
+  
+  textSize(16)
+  text("Hover Mouse over Characters for Specs", width / 2 - 340, height / 2 + 220);
+ 
+  characterImages();
+
+  characterPopUps();
+
+}
+
+
+//the functions for the enemies fighting
 function enemy1Fight(){//basic start function for fighting
   enemy1.attackAnimation1();
   if (ninja.ninjaAttackOn == true){
@@ -182,6 +203,7 @@ function enemy1Fight(){//basic start function for fighting
     }
   }
 }
+
 function enemy2Fight(){
   enemy2.attackAnimation2();//very breif at present as its in collision
   if (ninja.ninjaAttackOn == true){
@@ -193,6 +215,7 @@ function enemy2Fight(){
     }
   }
 }
+
 function enemy3Fight(){
   enemy3.attackAnimation3();
 
@@ -205,6 +228,7 @@ function enemy3Fight(){
   }
   }
 }
+
 function enemyBFight(){
   enemyB.attackAnimationB();
   if (ninja.ninjaAttackOn == true){
@@ -217,29 +241,18 @@ function enemyBFight(){
   }
 }
 
-function drawGameover() {
-  hideAllBns();
-  gameFinish = true;
-  background(0, 255, 0)
-  textSize(30);
-  textAlign(CENTER);
-  stroke(0);
-  text("Game Over", width / 2, height / 2 - 100);
-  text("Under Construction", width / 2, height / 2 - 50);
+
+
+
+//functions for the buttons
+function hideAllBns() {
+  mainMenuBn.hideButton();
+  gamePlayBn.hideButton();
+  leaderBoardBn.hideButton();
+  exitBn.hideButton();
 }
 
-function drawLeaderBoard() {
-  background(0, 0, 255)
-  mainMenuBn.show();
-  textSize(40);
-  textAlign(CENTER);
-  stroke(0);
-  text("Leader Board", width / 2, height / 2 - 100);
-  text("Under Construction", width / 2, height / 2 - 50);
-  text("may or may not be used", width / 2, height / 2);
-
-}
-
+//the button clicked functions
 function mainMenuBnPressed() {//change screen and reset any variables, sound etc
   gameFinish = true;
   hideAllBns();
@@ -248,7 +261,6 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 }
 
 function gamePlayBnPressed() {
-
   gameFinish = false;
   screenState = 2;
 }
@@ -261,7 +273,23 @@ function leaderBdBnPressed() {
 
 function exitBnPressed() {//takes you where? - may not use yet
   gameFinish = true;
+}
 
+
+//The code to set the main menu images and things
+
+function loadMainMenuImages(){
+  ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
+  ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
+  hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
+  E1a = loadImage('assets/img/enemies/tier1_red_guy/run/run1.png');
+  E1b = loadImage('assets/img/enemies/tier1_red_guy/attack/attack3.png');
+  E2a = loadImage('assets/img/enemies/tier2_red_ninja/run/run1.png');
+  E2b = loadImage('assets/img/enemies/tier2_red_ninja/attack/attack3.png');
+  E3a = loadImage('assets/img/enemies/tier3_red_orange_ninja/run/run1.png');
+  E3b = loadImage('assets/img/enemies/tier3_red_orange_ninja/attack/attack3.png');
+  Bea = loadImage('assets/img/enemies/boss/run/run2.png');
+  Beb = loadImage('assets/img/enemies/boss/run/run3.png');
 }
 
 function characterImages() {
@@ -274,9 +302,9 @@ function characterImages() {
   image(E2b,890,310);
   E1b.resize(0,60);
   image(E1b,890,430);
-  
 }
 
+//function for the on hover handling in the main menu for the character images
 function characterPopUps() {//test code maybe use a function/class with parameters - could use a text file for text
   rectMode(CENTER);
   fill(100);
@@ -355,87 +383,5 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     text("  Name:", 800, 450);//add specs
     text("  Weapon: Fists", 800, 470);
     text("  Strikes to Kill:", 800, 490);
-
   }
-  
-
-}
-
-function loadMainMenuImages(){
-  ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
-  ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
-  hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
-  E1a = loadImage('assets/img/enemies/tier1_red_guy/run/run1.png');
-  E1b = loadImage('assets/img/enemies/tier1_red_guy/attack/attack3.png');
-  E2a = loadImage('assets/img/enemies/tier2_red_ninja/run/run1.png');
-  E2b = loadImage('assets/img/enemies/tier2_red_ninja/attack/attack3.png');
-  E3a = loadImage('assets/img/enemies/tier3_red_orange_ninja/run/run1.png');
-  E3b = loadImage('assets/img/enemies/tier3_red_orange_ninja/attack/attack3.png');
-  Bea = loadImage('assets/img/enemies/boss/run/run2.png');
-  Beb = loadImage('assets/img/enemies/boss/run/run3.png');
-}
-
-function hideAllBns() {
-  mainMenuBn.hide();
-  gamePlayBn.hide();
-  leaderBoardBn.hide();
-  exitBn.hide();
-}
-
-function buttonSetUp() {
-
-  mainMenuBn = createButton("Main Menu");
-  mainMenuBn.style("width", "130px");
-  mainMenuBn.style("font-size", "20px");
-  mainMenuBn.style("border-radius", "20px")
-  mainMenuBn.style("height", "35px");
-  mainMenuBn.style("background-color", "blue")//colour tbc
-  mainMenuBn.style("color", "white")
-  mainMenuBn.mousePressed(mainMenuBnPressed);
-  mainMenuBn.position(window.innerWidth / 2 - 50, H - 20);
-
-
-  gamePlayBn = createButton("Play Game");
-  gamePlayBn.style("width", "130px"); 
-  gamePlayBn.style("font-size", "20px");
-  gamePlayBn.style("border-radius", "20px")
-  gamePlayBn.style("height", "45px");
-  gamePlayBn.style("background-color", "blue")//colour tbc
-  gamePlayBn.style("color", "white")
-  gamePlayBn.mousePressed(gamePlayBnPressed);//currently to function instead of straight to screen
-  gamePlayBn.style("margin-left", "auto")
-  gamePlayBn.style("margin-right", "auto")
-  gamePlayBn.style("top", "-500px")
-  gamePlayBn.style("box-shadow", "5px 10px 15px black")
-  gamePlayBn.hide();
-  gamePlayBn.position(window.innerWidth / 2 - 60, H - 35)
-
-  exitBn = createButton("EXIT");
-  exitBn.style("width", "80px");
-  exitBn.style("border-radius", "20px")
-  exitBn.style("height", "25px");
-  exitBn.style("background-color", "grey")
-  exitBn.style("color", "white")
-  exitBn.style("margin", "auto")
-  exitBn.style("box-shadow", "5px 10px 15px black")
-  exitBn.mousePressed(exitBnPressed);
-  exitBn.position(window.innerWidth / 2 - 450, H - 15);
-  exitBn.hide();
-
-  leaderBoardBn = createButton("Leader Board");
-  leaderBoardBn.style("width", "100px");
-  leaderBoardBn.style("border-radius", "20px")
-  leaderBoardBn.style("height", "35px");
-  leaderBoardBn.style("background-color", "blue")
-  leaderBoardBn.style("color", "white")
-  leaderBoardBn.style("box-shadow", "5px 10px 15px black")
-  leaderBoardBn.mousePressed(leaderBdBnPressed);
-  leaderBoardBn.position(1080, 580);
-  leaderBoardBn.position(window.innerWidth / 2 + 350, H - 25);
-  leaderBoardBn.hide();
-
-}
-
-function setOnHover(button){
-  button.mouseOver(()=>{button.style('cursor', 'pointer');})
 }
