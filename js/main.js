@@ -173,40 +173,47 @@ function drawGameplay() {
 
 function enemy1Fight(){//basic start function for fighting
   enemy1.attackAnimation1();
-  if(enemyHit1<20){
-    enemyHit1++;
+  if (ninja.ninjaAttackOn == true){
+    if(enemyHit1<20){
+      enemyHit1++;
+    }
+    else if(enemyHit1 >=20){
+      enemy1.enemySprite.remove();
+    }
   }
-  else if(enemyHit1 >=20){
-    enemy1.enemySprite.remove();
-  }
-  
 }
 function enemy2Fight(){
   enemy2.attackAnimation2();//very breif at present as its in collision
-  if(enemyHit2<50){
-    enemyHit2++;
+  if (ninja.ninjaAttackOn == true){
+    if(enemyHit2<50){
+      enemyHit2++;
+    }
+    else if(enemyHit2 >=50){
+      enemy2.enemySprite.remove();
+    }
   }
-  else if(enemyHit2 >=50){
-    enemy2.enemySprite.remove();
-  }
-  
 }
 function enemy3Fight(){
   enemy3.attackAnimation3();
-  if(enemyHit3<80){
-    enemyHit3++;
+
+  if (ninja.ninjaAttackOn == true){
+    if(enemyHit3<80){
+      enemyHit3++;
+    }
+    else if(enemyHit3>=80){
+      enemy3.enemySprite.remove();
   }
-  else if(enemyHit3>=80){
-    enemy3.enemySprite.remove();
   }
 }
 function enemyBFight(){
   enemyB.attackAnimationB();
-  if(enemyHitB<120){
-    enemyHitB++;
-  }
-  else if(enemyHitB >=120){
-    enemyB.enemySprite.remove();
+  if (ninja.ninjaAttackOn == true){
+    if(enemyHitB<120){
+      enemyHitB++;
+    }
+    else if(enemyHitB >=120){
+      enemyB.enemySprite.remove();
+    }
   }
 }
 
