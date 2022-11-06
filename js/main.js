@@ -2,10 +2,10 @@
 
 let testAlley, aircon, bgWstuff, bgWOstuff, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
 let ninja = new Ninja(W/2, H - (H/8));
-let enemy1 = new Enemy(-250, H - 50);//tier 1 enemy
-let enemy2= new Enemy(-750, H - 50);//tier 2 enemy - spawn after teir 1 death?
-let enemy3 = new Enemy(-1250, H - 50);//tier 3 enemy
-let enemyB = new Enemy(-1850, H - 50);//boss enemy
+let enemy1 = new Enemy(-250, H - (H/8));//tier 1 enemy
+let enemy2= new Enemy(-750, H - (H/8));//tier 2 enemy - spawn after teir 1 death?
+let enemy3 = new Enemy(-1250, H - (H/8));//tier 3 enemy
+let enemyB = new Enemy(-1850, H - 100);//boss enemy
 let enemyHit1 = 0;
 let enemyHit2 = 0;
 let enemyHit3 = 0;
@@ -72,6 +72,7 @@ function setup() {
   cloudY[2] = random(0,60);
   cloudY[3] = random(0,60);
   cloudY[4] = random(0,60);
+
 }
 
 
@@ -135,12 +136,26 @@ function drawGameplay() {
   drawSprites();
 
   ninja.attackAnimation();
-  ninja.move();
-  ninja.ninjaSprite.collide(enemy1.enemySprite,enemy1Fight);//start of fighting code
-  ninja.ninjaSprite.collide(enemy2.enemySprite,enemy2Fight);
-  ninja.ninjaSprite.collide(enemy3.enemySprite,enemy3Fight);
-  ninja.ninjaSprite.collide(enemyB.enemySprite,enemyBFight);
 
+  ninja.move();
+  //ninja.attackCollide(enemy1, enemy1Fight);
+  if(ninja.ninjaAttack){
+    ninja.ninjaAttack.collide(enemy1.enemySprite,enemy1Fight);//start of fighting code
+    ninja.ninjaAttack.collide(enemy2.enemySprite,enemy2Fight);
+    ninja.ninjaAttack.collide(enemy3.enemySprite,enemy3Fight);
+    ninja.ninjaAttack.collide(enemyB.enemySprite,enemyBFight);
+  }
+
+  ninja.ninjaSprite.bounce(enemy1.enemySprite, bounceBack)
+  ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack)
+  ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack)
+  ninja.ninjaSprite.bounce(enemyB.enemySprite, bounceBack)
+  //enemy1.collide()
+
+}
+
+function bounceBack(theNinja, theEnemy){
+  theEnemy.position.x = theEnemy.position.x - 5
 }
 
 //game over scene/screen

@@ -1,5 +1,3 @@
-
-
 class Ninja {
     constructor(positionX, positionY) {
         this.positionX = positionX;
@@ -49,9 +47,12 @@ class Ninja {
        // console.log(this.ninjaSprite.getAnimationLabel());
         this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
+        this.ninjaSprite.immovable = true;
         //this.attackEast.looping = false;
     }
 
+    //create a sprite for the collision with the sword
+    //it temporarily is not invisible
     createAttackCollision(direaction) {
         if(direaction === 'east'){
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
@@ -61,10 +62,10 @@ class Ninja {
             this.ninjaAttack.setCollider("rectangle", -10, 0, 30, 60)
         }
         this.ninjaAttack.debug = true;
+        this.ninjaAttack.immovable = true;
     }
 
     move() {
-        console.log(this.ninjaPosition)
         if (keyIsDown(LEFT_ARROW)) {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;

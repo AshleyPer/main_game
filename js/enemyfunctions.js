@@ -37,7 +37,8 @@ class Enemy {
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(0.5,0);
-
+        let enemyPosition = this.enemySprite.position;
+        this.enemyPosition = enemyPosition;
     }
 
     createEnemy2() {
@@ -48,7 +49,8 @@ class Enemy {
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(0.5,0);
-
+        let enemyPosition = this.enemySprite.position;
+        this.enemyPosition = enemyPosition;
     }
     createEnemy3() {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
@@ -58,6 +60,8 @@ class Enemy {
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(0.5,0);
+        let enemyPosition = this.enemySprite.position;
+        this.enemyPosition = enemyPosition;
 
     }
     createEnemyB() {
@@ -68,6 +72,8 @@ class Enemy {
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(0.5,0);
+        let enemyPosition = this.enemySprite.position;
+        this.enemyPosition = enemyPosition;
 
     }
     move() {
