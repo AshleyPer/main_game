@@ -11,18 +11,29 @@ class Ninja {
         this.ninjaDirectionEast = true;
         this.runWest;
         this.runEast;
-
+        this.ninjaAttack;
     }
-
 
     loadNinjaAnimations() {
         this.idleEast = loadAnimation('assets/img/ninja_player/idle/idle_east/idle_1.png', 'assets/img/ninja_player/idle/idle_east/idle_2.png', 'assets/img/ninja_player/idle/idle_east/idle_3.png', 'assets/img/ninja_player/idle/idle_east/idle_4.png')
-        this.attackEast = loadAnimation('assets/img/ninja_player/attack/attack_east/attack_1.png', 'assets/img/ninja_player/attack/attack_east/attack_6.png');
+        this.idleEast.frameDelay = 15;
+
         this.idleWest = loadAnimation('assets/img/ninja_player/idle/idle_west/idle_1.png', 'assets/img/ninja_player/idle/idle_west/idle_2.png', 'assets/img/ninja_player/idle/idle_west/idle_3.png', 'assets/img/ninja_player/idle/idle_west/idle_4.png')
+        this.idleWest.frameDelay = 15;
+        
+        //attack animations
         this.attackWest = loadAnimation('assets/img/ninja_player/attack/attack_west/attack_1.png', 'assets/img/ninja_player/attack/attack_west/attack_6.png');
+        this.attackWest.frameDelay = 6;
+
+        this.attackEast = loadAnimation('assets/img/ninja_player/attack/attack_east/attack_1.png', 'assets/img/ninja_player/attack/attack_east/attack_6.png');
+        this.attackEast.frameDelay = 6;
+
+        //run animations
         this.runWest = loadAnimation('assets/img/ninja_player/run/run_west/ninja_1.png', 'assets/img/ninja_player/run/run_west/ninja_4.png')
+        this.runWest.frameDelay = 10;
+        
         this.runEast = loadAnimation('assets/img/ninja_player/run/run_east/ninja_1.png', 'assets/img/ninja_player/run/run_east/ninja_4.png');
-        // this.attackEast.frameCount = 1;
+        this.runEast.frameDelay = 10;
     }
 
     createNinja() {
@@ -33,14 +44,27 @@ class Ninja {
         this.ninjaSprite.addAnimation('attackWest', this.attackWest);
         this.ninjaSprite.addAnimation('runWest', this.runWest);
         this.ninjaSprite.addAnimation('runEast', this.runEast);
+        let ninjaPosition = this.ninjaSprite.position;
+        this.ninjaPosition = ninjaPosition;
        // console.log(this.ninjaSprite.getAnimationLabel());
         this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         //this.attackEast.looping = false;
-
-
     }
+
+    createAttackCollision(direaction) {
+        if(direaction === 'east'){
+            this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
+            this.ninjaAttack.setCollider("rectangle", 10, 0, 30, 60)
+        }else{
+            this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
+            this.ninjaAttack.setCollider("rectangle", -10, 0, 30, 60)
+        }
+        this.ninjaAttack.debug = true;
+    }
+
     move() {
+        console.log(this.ninjaPosition)
         if (keyIsDown(LEFT_ARROW)) {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
@@ -79,10 +103,12 @@ class Ninja {
             if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('attackEast');
                 this.ninjaSprite.animation.play();
+                this.createAttackCollision('east')
             }
             if (this.ninjaDirectionEast == false) {
                 this.ninjaSprite.changeAnimation('attackWest');
                 this.ninjaSprite.animation.play();
+                this.createAttackCollision('west')
             }
             this.ninjaAttackOn = true;
 
@@ -125,6 +151,10 @@ class Ninja {
             this.ninjaAttackOn = false;
             this.ninjaSprite.animation.stop();
             this.ninjaSprite.animation.rewind();
+            if(this.ninjaAttack){
+                this.ninjaAttack.remove();
+            }
+    
             if(this.ninjaDirectionEast){
                 this.ninjaSprite.changeAnimation('idleEast');
                 this.ninjaSprite.animation.play('idleEast');

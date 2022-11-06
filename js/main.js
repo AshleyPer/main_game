@@ -52,8 +52,10 @@ function setup() {
   canvas.style.border = 'solid'
   canvas.style.borderColor = 'black'
 
+  //create the ninja
   ninja.createNinja();
 
+  //create the enemies
   enemy1.createEnemy1();
   enemy2.createEnemy2();
   enemy3.createEnemy3();
