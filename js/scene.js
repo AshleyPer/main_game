@@ -29,9 +29,10 @@ function testScene() {
 
     for(let i = 0; i < clouds.length; i++){
         image(clouds[i], cloudX[i], cloudY[i]);
+        cloudX[i] -= scrollSpeed/4;  
         if(cloudX[i] < -20){
             cloudX[i] = width;
-        }       
+        } 
     }
 
 

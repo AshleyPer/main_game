@@ -1,15 +1,17 @@
 "use strict";
 
 let testAlley, aircon, bgWstuff, bgWOstuff, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
-let ninja = new Ninja(W/2, H - (H/8));
-let enemy1 = new Enemy(-250, H - (H/8));//tier 1 enemy
-let enemy2= new Enemy(-750, H - (H/8));//tier 2 enemy - spawn after teir 1 death?
-let enemy3 = new Enemy(-1250, H - (H/8));//tier 3 enemy
-let enemyB = new Enemy(-1850, H - 100);//boss enemy
+let ninja = new Ninja(W/2, H - 45);
+let enemy1 = new Enemy(-250, H - 45);//tier 1 enemy
+let enemy2= new Enemy(-750, H - 45);//tier 2 enemy - spawn after teir 1 death?
+let enemy3 = new Enemy(-1250, H - 45);//tier 3 enemy
+let enemyB = new Enemy(-1850, H - 45);//boss enemy
 let enemyHit1 = 0;
 let enemyHit2 = 0;
 let enemyHit3 = 0;
 let enemyHitB = 0;
+let titleheading;
+let gameoverTitle;
 
 let gameFinish = true;
 let screenState = 1;
@@ -62,11 +64,11 @@ function setup() {
   enemyB.createEnemyB();
 
   x2 = width;
-  cloudX[0] =  random(width, width + 600);
-  cloudX[1] =  random(width, width + 600);
-  cloudX[2] =  random(width, width + 600);
-  cloudX[3] =  random(width, width + 600);
-  cloudX[4] =  random(width, width + 600);
+  cloudX[0] = random(width, width + 600);
+  cloudX[1] = random(width, width + 600);
+  cloudX[2] = random(width, width + 600);
+  cloudX[3] = random(width, width + 600);
+  cloudX[4] = random(width, width + 600);
   cloudY[0] = random(0,60);
   cloudY[1] = random(0,60);
   cloudY[2] = random(0,60);
@@ -133,6 +135,7 @@ function drawGameplay() {
   hideAllBns();
   testScene();
 
+
   drawSprites();
 
   ninja.attackAnimation();
@@ -161,13 +164,11 @@ function bounceBack(theNinja, theEnemy){
 //game over scene/screen
 function drawGameover() {
   hideAllBns();
+  mainMenuBn.showButton();
   gameFinish = true;
-  background(0, 255, 0)
-  textSize(30);
-  textAlign(CENTER);
-  stroke(0);
-  text("Game Over", width / 2, height / 2 - 100);
-  text("Under Construction", width / 2, height / 2 - 50);
+  background(0);
+  image(gameoverTitle, 0,0);
+
 }
 
 //leaderboard scene/screen
@@ -197,7 +198,12 @@ function drawMainMenu() {
   stroke(150);
   text("Main Menu", width / 2, height / 2 - 100);
   text("Under Construction", width / 2, height / 2 - 50);
-  
+
+  push();
+  imageMode(CENTER);
+  image(titleheading, width / 2, height / 2 - 100);
+  pop();
+
   textSize(16)
   text("Hover Mouse over Characters for Specs", width / 2 - 340, height / 2 + 220);
  
@@ -307,6 +313,8 @@ function loadMainMenuImages(){
   E3b = loadImage('assets/img/enemies/tier3_red_orange_ninja/attack/attack3.png');
   Bea = loadImage('assets/img/enemies/boss/run/run2.png');
   Beb = loadImage('assets/img/enemies/boss/run/run3.png');
+  titleheading = loadImage('assets/img/gamejam_title.png');
+  gameoverTitle = loadImage('assets/img/gamejam_gameover.png');
 }
 
 function characterImages() {
@@ -385,7 +393,7 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     textSize(12);
     text("Name:", 800, 320);
     text("Weapon: ", 800, 340);// add specs
-    text("Strokes to kill: ", 800, 360);
+    text("Strikes to kill: ", 800, 360);
 
   }
   if (mouseX > 890 && mouseX < 930 && mouseY < 490 && mouseY > 430) {//check these once image up
