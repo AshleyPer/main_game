@@ -27,6 +27,8 @@ let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
 
+let font;
+
 function preload() {
   ninja.loadNinjaAnimations();
   enemy1.loadEnemyAnimations();
@@ -40,6 +42,9 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
+
+  //add a font
+  font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
 
   //create the buttons
   mainMenuBn.buttonSetUp(mainMenuBnPressed)
@@ -192,21 +197,28 @@ function drawMainMenu() {
   exitBn.showButton();
   leaderBoardBn.showButton();
   //below is all testing code 
-  fill(150);
+  fill(255);
+  textFont(font);
   textSize(25);
   textAlign(CENTER);
-  stroke(150);
-  text("Main Menu", width / 2, height / 2 - 100);
-  text("Under Construction", width / 2, height / 2 - 50);
+  strokeWeight(3);
+  stroke(0);
+  //text("Main Menu", width / 2, height / 2 - 100);
+  //text("Under Construction", width / 2, height / 2 - 50);
 
   push();
   imageMode(CENTER);
   image(titleheading, width / 2, height / 2 - 100);
   pop();
 
-  textSize(16)
-  text("Hover Mouse over Characters for Specs", width / 2 - 340, height / 2 + 220);
+  textSize(20)
+  text("Hover Over The Ninja for Specs", width / 2 - 340, height / 2 + 220);
  
+  textSize(20)
+  text("Hover Over The Enemies for Specs", width - 170, height / 2 + 220);
+  stroke(150);
+  strokeWeight(1);
+  textFont('Georgia');
   characterImages();
 
   characterPopUps();
@@ -318,15 +330,15 @@ function loadMainMenuImages(){
 }
 
 function characterImages() {
-  image(ninTest, 60, 170);
+  image(ninTest, 60, 190);
   Bea.resize(0,60);
-  image(Bea,885,60);
+  image(Bea,885,40);
   E3b.resize(0,60);
-  image(E3b,890,190);
+  image(E3b,890,160);
   E2b.resize(0,60);
-  image(E2b,890,310);
+  image(E2b,890,280);
   E1b.resize(0,60);
-  image(E1b,890,430);
+  image(E1b,890,400);
 }
 
 //function for the on hover handling in the main menu for the character images
@@ -356,15 +368,15 @@ function characterPopUps() {//test code maybe use a function/class with paramete
   if (mouseX > 890 && mouseX < 950 && mouseY < 135 && mouseY > 50) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 95, 120, 80, 30);
+    rect(800, 75, 150, 80, 30);
     Beb.resize(0,30);
-    image(Beb,740,80);
+    image(Beb,730,60);
     noStroke();
     fill(0);
     textSize(12);
-    text("Boss Enemy", 800, 80);
-    text("Weapon:", 800, 100);// add specs
-    text("Strikes to Kill:", 800, 120);
+    text("Boss Enemy", 800, 60);
+    text("Weapon:", 800, 80);// add specs
+    text("Strikes to Kill:", 800, 100);
     //text("....", 800,110);
 
   }
@@ -372,41 +384,41 @@ function characterPopUps() {//test code maybe use a function/class with paramete
   if (mouseX > 890 && mouseX < 930 && mouseY < 250 && mouseY > 190) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 220, 120, 80, 30);
+    rect(800, 200, 140, 80, 30);
     E3a.resize(0,30);
-    image(E3a,750,200);
+    image(E3a,740,180);
     noStroke();
     fill(0);
     textSize(12);
-    text("Name:", 800, 200);
-    text("Weapon:", 800, 220);//add specs
-    text("Strikes to kill:", 800, 240);
+    text("Name:", 800, 180);
+    text("Weapon:", 800, 200);//add specs
+    text("Strikes to kill:", 800, 220);
   }
   if (mouseX > 890 && mouseX < 930 && mouseY < 350 && mouseY > 285) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 340, 120, 80, 30);
+    rect(800, 320, 140, 80, 30);
     E2a.resize(0,30);
-    image(E2a,750,320);
+    image(E2a,740,300);
     noStroke();
     fill(0);
     textSize(12);
-    text("Name:", 800, 320);
-    text("Weapon: ", 800, 340);// add specs
-    text("Strikes to kill: ", 800, 360);
+    text("Name:", 800, 300);
+    text("Weapon: ", 800, 320);// add specs
+    text("Strikes to kill: ", 800, 340);
 
   }
   if (mouseX > 890 && mouseX < 930 && mouseY < 490 && mouseY > 430) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 465, 120, 80, 30);
+    rect(800, 440, 140, 80, 30);
     E1a.resize(0,30);
-    image(E1a,750,450);
+    image(E1a,740,420);
     noStroke();
     fill(0);
     textSize(12);
-    text("  Name:", 800, 450);//add specs
-    text("  Weapon: Fists", 800, 470);
-    text("  Strikes to Kill:", 800, 490);
+    text("  Name:", 800, 425);//add specs
+    text("  Weapon: Fists", 800, 445);
+    text("  Strikes to Kill:", 800, 465);
   }
 }
