@@ -3,10 +3,10 @@ class Enemy {
         this.positionX = positionX;
         this.positionY = positionY;
         this.enemySprite;
-        
+
     }
 
-   loadEnemyAnimations() {// all animations?
+    loadEnemyAnimations() {// all animations?
 
         this.enemy1Attack = loadAnimation('assets/img/enemies/tier1_red_guy/attack/attack1.png', 'assets/img/enemies/tier1_red_guy/attack/attack6.png');
 
@@ -33,10 +33,11 @@ class Enemy {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEast1', this.enemy1Run);
         this.enemySprite.addAnimation('attackEast1', this.enemy1Attack);
-       
+
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5,0);
+        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
     }
@@ -45,10 +46,11 @@ class Enemy {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEast2', this.enemy2Run);
         this.enemySprite.addAnimation('attackEast2', this.enemy2Attack);
-       
+
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5,0);
+        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
     }
@@ -56,10 +58,11 @@ class Enemy {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEast3', this.enemy3Run);
         this.enemySprite.addAnimation('attackEast3', this.enemy3Attack);
-       
+
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5,0);
+        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
 
@@ -71,42 +74,40 @@ class Enemy {
         this.enemySprite.addAnimation('deathB', this.enemyBossDeath);
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5,0);
+        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
 
     }
-    move() {
 
 
-        //due to interaction with scenery or player
-       
-      
+    attackAnimation1(enemy, target) {
+        // if the enemy collides with player - change animation(attackAnimation) with conditions
+        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
+        this.enemySprite.changeAnimation('attackEast1');
+        target.hp -= 1;
+
     }
-    
-    attackAnimation1() {
-       // if the enemy collides with player - change animation(attackAnimation) with conditions
-      // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-    this.enemySprite.changeAnimation('attackEast1');
-   
+    attackAnimation2(enemy, target) {
+        // if the enemy collides with player - change animation(attackAnimation) with conditions
+        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
+        this.enemySprite.changeAnimation('attackEast2');
+        target.hp -= 2;
     }
-    attackAnimation2() {
+    attackAnimation3(enemy, target) {
         // if the enemy collides with player - change animation(attackAnimation) with conditions
-       // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-     this.enemySprite.changeAnimation('attackEast2');
-    
-     }
-     attackAnimation3() {
+        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
+        this.enemySprite.changeAnimation('attackEast3');
+        target.hp -= 3;
+
+    }
+    attackAnimationB(enemy, target) {
         // if the enemy collides with player - change animation(attackAnimation) with conditions
-       // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-     this.enemySprite.changeAnimation('attackEast3');
-     
-     }
-     attackAnimationB() {
-        // if the enemy collides with player - change animation(attackAnimation) with conditions
-       // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-     this.enemySprite.changeAnimation('attackEastB');
-     
-     }
+        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
+        this.enemySprite.changeAnimation('attackEastB');
+        target.hp -= 5;
+
+    }
 
 }

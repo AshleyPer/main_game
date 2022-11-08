@@ -1,11 +1,11 @@
 "use strict";
 
-let testAlley, aircon, bgWstuff, bgWOstuff, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
+let testAlley, aircon, bgWstuff, bgWOstuff, bgWcity, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
 let ninja = new Ninja(W/2, H - 45);
-let enemy1 = new Enemy(-250, H - 45);//tier 1 enemy
-let enemy2= new Enemy(-750, H - 45);//tier 2 enemy - spawn after teir 1 death?
-let enemy3 = new Enemy(-1250, H - 45);//tier 3 enemy
-let enemyB = new Enemy(-1850, H - 45);//boss enemy
+let enemy1 = new Enemy(W + 250, H - 45);//tier 1 enemy
+let enemy2= new Enemy(W + 750, H - 45);//tier 2 enemy - spawn after teir 1 death?
+let enemy3 = new Enemy(W + 1250, H - 45);//tier 3 enemy
+let enemyB = new Enemy(W + 1850, H - 45);//boss enemy
 let enemyHit1 = 0;
 let enemyHit2 = 0;
 let enemyHit3 = 0;
@@ -154,6 +154,14 @@ function drawGameplay() {
     ninja.ninjaAttack.collide(enemyB.enemySprite,enemyBFight);
   }
 
+  enemy1.enemySprite.collide(ninja.ninjaSprite, enemy1.attackAnimation1);
+  enemy2.enemySprite.collide(ninja.ninjaSprite, enemy2.attackAnimation2);
+  enemy3.enemySprite.collide(ninja.ninjaSprite, enemy3.attackAnimation3);
+  enemyB.enemySprite.collide(ninja.ninjaSprite, enemyB.attackAnimationB);
+
+  
+  
+
   ninja.ninjaSprite.bounce(enemy1.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack)
@@ -163,7 +171,7 @@ function drawGameplay() {
 }
 
 function bounceBack(theNinja, theEnemy){
-  theEnemy.position.x = theEnemy.position.x - 5
+  theEnemy.position.x = theEnemy.position.x + 5
 }
 
 //game over scene/screen
@@ -208,7 +216,7 @@ function drawMainMenu() {
 
   push();
   imageMode(CENTER);
-  image(titleheading, width / 2, height / 2 - 100);
+  image(titleheading, width / 2, height / 2 + 10, W, H - 20);
   pop();
 
   textSize(20)
