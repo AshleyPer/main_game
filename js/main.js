@@ -103,6 +103,7 @@ function draw() {
       break;
   }
   ninja.checkNinjaStatus();
+
   
 }
 
@@ -300,6 +301,7 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
   gameFinish = true;
   hideAllBns();
   screenState = 1;
+
 
 }
 

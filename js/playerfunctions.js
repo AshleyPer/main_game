@@ -74,14 +74,13 @@ class Ninja {
 
             x1 += scrollSpeed;
             x2 += scrollSpeed;
-
         }
 
         if (keyIsDown(RIGHT_ARROW)) {
-            scrollSpeed = 2;
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();
+
             x1 -= scrollSpeed;
             x2 -= scrollSpeed;
         }
@@ -161,6 +160,7 @@ class Ninja {
 
         if(this.ninjaSprite.hp <= 0){
             screenState = 3;
+            ninja.ninjaSprite.hp = 20; //stops the game over screen from constantly looping
         }
     }
 

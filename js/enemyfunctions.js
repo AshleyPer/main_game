@@ -83,31 +83,37 @@ class Enemy {
 
 
     attackAnimation1(enemy, target) {
-        // if the enemy collides with player - change animation(attackAnimation) with conditions
-        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-        this.enemySprite.changeAnimation('attackEast1');
-        target.hp -= 1;
+        // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
+
+        if(ninja.ninjaAttackOn === false){ //stops enemies from trying to remove hp from sword attack sprite
+            enemy.changeAnimation('attackEast1');
+            target.hp -= 1;
+        }
 
     }
     attackAnimation2(enemy, target) {
-        // if the enemy collides with player - change animation(attackAnimation) with conditions
-        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-        this.enemySprite.changeAnimation('attackEast2');
-        target.hp -= 2;
+        // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
+        
+        if(ninja.ninjaAttackOn === false){
+            enemy.changeAnimation('attackEast2');
+            target.hp -= 2;
+        }
     }
     attackAnimation3(enemy, target) {
-        // if the enemy collides with player - change animation(attackAnimation) with conditions
-        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-        this.enemySprite.changeAnimation('attackEast3');
-        target.hp -= 3;
-
+        // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
+       
+        if(ninja.ninjaAttackOn === false){
+            enemy.changeAnimation('attackEast3');
+            target.hp -= 3;
+        }
     }
     attackAnimationB(enemy, target) {
-        // if the enemy collides with player - change animation(attackAnimation) with conditions
-        // if (dist(this.enemySprite.position.x, this.enemySprite.position.y, ninja.position.x,
-        this.enemySprite.changeAnimation('attackEastB');
-        target.hp -= 5;
-
+        // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
+        
+        if(ninja.ninjaAttackOn === false){
+            enemy.changeAnimation('attackEastB');
+            target.hp -= 5;
+        }
     }
 
 }
