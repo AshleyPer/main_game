@@ -13,6 +13,7 @@ let enemyHit3 = 0;
 let enemyHitB = 0;
 let titleheading;
 let gameoverTitle;
+let score = 0;
 
 let gameFinish = true;
 let screenState = 1;
@@ -23,7 +24,7 @@ let hero, E1a, E1b,E2a, E2b,E3a, E3b, Bea, Beb;//spec pics
 
 let x1 = 0;
 let x2;
-let scrollSpeed = 1.5;//change back to 2
+let scrollSpeed = 2;//change back to 2
 let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
@@ -171,8 +172,17 @@ function drawGameplay() {
   ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemyB.enemySprite, bounceBack)
-  
 
+
+
+  // text for score, needs styling    
+  noStroke()
+  fill(255,150)
+  textSize(30)
+  text("Score: " + score, 50, 50)
+  //temp text for ninja health - remove when health bar running
+  textSize(20)
+  text("Ninja Health: " + ninja.ninjaSprite.hp , 820,50)
 
 }
 
@@ -189,7 +199,7 @@ function resetGame(){//a function to call when return to main menu after game ov
   //reset score
   //reset sound
   //reset background
-
+  //reset clouds?        
   ninja.ninjaSprite.position.x = W/2;//update these when staring positions finalised
   ninja.ninjaSprite.position.y = H-45; 
 
@@ -206,6 +216,7 @@ function resetGame(){//a function to call when return to main menu after game ov
   enemyHit3 = 0;
   enemyHitB = 0;
   ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
+  score = 0;
   ninja.ninjaAttackOn = false;
   enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
   enemy2.enemySprite.changeAnimation('runEast2');
@@ -213,17 +224,18 @@ function resetGame(){//a function to call when return to main menu after game ov
   enemyB.enemySprite.changeAnimation('runEastB');
   
   x1 = 0;
-  x2 = W;
+  x2 = width;
     
 }
 
 //game over scene/screen
-function drawGameover() {
+function drawGameover() {//add score to game over screen?
   hideAllBns();
   mainMenuBn.showButton();
   gameFinish = true;
   background(0);
   image(gameoverTitle, 0,0);
+
 
 }
 
@@ -285,6 +297,8 @@ function enemy1Fight(){//basic start function for fighting
       }
       else if(enemyHit1 >=20){
         enemy1.enemySprite.position.y = -100;
+        score +=5;
+        //spawn another tier 1?
       }
     }
   
@@ -298,6 +312,7 @@ function enemy2Fight(){
     }
     else if(enemyHit2 >=50){
       enemy2.enemySprite.position.y = -100;
+      score += 10
     }
   }
 }
@@ -311,6 +326,9 @@ function enemy3Fight(){
     }
     else if(enemyHit3>=80){
       enemy3.enemySprite.position.y = -100;
+      score+=15
+      //spawn another tier 3?
+      //spawn boss
   }
   }
 }
@@ -323,6 +341,7 @@ function enemyBFight(){
     }
     else if(enemyHitB >=120){
       enemyB.enemySprite.position.y = -100;
+      score +=25;
     }
   }
 }
