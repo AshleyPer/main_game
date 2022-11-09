@@ -297,7 +297,7 @@ function enemy2Fight(){
       enemyHit2++;
     }
     else if(enemyHit2 >=50){
-      enemy2.enemySprite.remove();
+      enemy2.enemySprite.position.y = -100;
     }
   }
 }
@@ -310,7 +310,7 @@ function enemy3Fight(){
       enemyHit3++;
     }
     else if(enemyHit3>=80){
-      enemy3.enemySprite.remove();
+      enemy3.enemySprite.position.y = -100;
   }
   }
 }
@@ -322,7 +322,7 @@ function enemyBFight(){
       enemyHitB++;
     }
     else if(enemyHitB >=120){
-      enemyB.enemySprite.remove();
+      enemyB.enemySprite.position.y = -100;
     }
   }
 }
