@@ -48,7 +48,7 @@ class Ninja {
         this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         this.ninjaSprite.immovable = true;
-        this.ninjaSprite.hp = 20;
+        this.ninjaSprite.hp = 50;
         //this.attackEast.looping = false;
     }
 
@@ -71,18 +71,29 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
+            this.ninjaSprite.position.x --
 
             x1 += scrollSpeed;
             x2 += scrollSpeed;
+            enemy1.enemySprite.position.x += scrollSpeed
+           enemy2.enemySprite.position.x += scrollSpeed
+           enemy3.enemySprite.position.x += scrollSpeed
+           enemyB.enemySprite.position.x += scrollSpeed
+            
         }
 
         if (keyIsDown(RIGHT_ARROW)) {
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();
+            this.ninjaSprite.position.x ++;
 
             x1 -= scrollSpeed;
-            x2 -= scrollSpeed;
+           x2 -= scrollSpeed;
+           enemy1.enemySprite.position.x -= scrollSpeed
+           enemy2.enemySprite.position.x -= scrollSpeed
+           enemy3.enemySprite.position.x -= scrollSpeed
+           enemyB.enemySprite.position.x -= scrollSpeed
         }
     }
 

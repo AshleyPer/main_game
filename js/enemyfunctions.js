@@ -3,10 +3,11 @@ class Enemy {
         this.positionX = positionX;
         this.positionY = positionY;
         this.enemySprite;
+        this.attackOn = false;//not in use
 
     }
 
-    loadEnemyAnimations() {// all animations?
+    loadEnemyAnimations() {
 
         this.enemy1Attack = loadAnimation('assets/img/enemies/tier1_red_guy/attack/attack1.png', 'assets/img/enemies/tier1_red_guy/attack/attack6.png');
 
@@ -36,7 +37,7 @@ class Enemy {
 
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
@@ -49,7 +50,7 @@ class Enemy {
 
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
@@ -61,7 +62,7 @@ class Enemy {
 
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
@@ -74,7 +75,7 @@ class Enemy {
         this.enemySprite.addAnimation('deathB', this.enemyBossDeath);
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(0.5, 180);
+        this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
@@ -82,14 +83,18 @@ class Enemy {
     }
 
 
+
+
     attackAnimation1(enemy, target) {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
-
+        
         if(ninja.ninjaAttackOn === false){ //stops enemies from trying to remove hp from sword attack sprite
             enemy.changeAnimation('attackEast1');
             target.hp -= 1;
+            this.attackOn = true;//boolean not currently in use
+            
         }
-
+        this.attackOn =false;//not in use
     }
     attackAnimation2(enemy, target) {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
@@ -113,6 +118,7 @@ class Enemy {
         if(ninja.ninjaAttackOn === false){
             enemy.changeAnimation('attackEastB');
             target.hp -= 5;
+
         }
     }
 

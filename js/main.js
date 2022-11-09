@@ -2,6 +2,7 @@
 
 let testAlley, aircon, bgWstuff, bgWOstuff, bgWcity, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
 let ninja = new Ninja(W/2, H - 45);
+//starting positions for enemies tbc - also use for reset game
 let enemy1 = new Enemy(W + 250, H - 45);//tier 1 enemy
 let enemy2= new Enemy(W + 750, H - 45);//tier 2 enemy - spawn after teir 1 death?
 let enemy3 = new Enemy(W + 1250, H - 45);//tier 3 enemy
@@ -22,7 +23,7 @@ let hero, E1a, E1b,E2a, E2b,E3a, E3b, Bea, Beb;//spec pics
 
 let x1 = 0;
 let x2;
-let scrollSpeed = 2;
+let scrollSpeed = 1.5;//change back to 2
 let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
@@ -137,11 +138,14 @@ function drawLoading() {
 
 //draw the gameplay scene/screen
 function drawGameplay() {
+  gameFinish = false;
+  
   background("grey");
+
   hideAllBns();
+ 
   testScene();
-
-
+ 
   drawSprites();
 
   ninja.attackAnimation();
@@ -167,12 +171,50 @@ function drawGameplay() {
   ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemyB.enemySprite, bounceBack)
-  //enemy1.collide()
+  
+
 
 }
 
 function bounceBack(theNinja, theEnemy){
   theEnemy.position.x = theEnemy.position.x + 5
+}
+
+//move rest function down when complete
+function resetGame(){//a function to call when return to main menu after game over, or game win
+  //reset enemy positions
+  //reset ninja position
+  //reset health enemy
+  //reset health ninja
+  //reset score
+  //reset sound
+  //reset background
+
+  ninja.ninjaSprite.position.x = W/2;//update these when staring positions finalised
+  ninja.ninjaSprite.position.y = H-45; 
+
+  enemy1.enemySprite.position.x = W +250;//reset enemy positions - update when finalised
+  enemy1.enemySprite.position.y = H-45;
+  enemy2.enemySprite.position.x = W +750;
+  enemy2.enemySprite.position.y = H-45;
+  enemy3.enemySprite.position.x = W +1250;
+  enemy3.enemySprite.position.y = H-45
+  enemyB.enemySprite.position.x = W +1850;
+  enemyB.enemySprite.position.y = H-45
+  enemyHit1 = 0;//reset enemy health
+  enemyHit2 = 0;
+  enemyHit3 = 0;
+  enemyHitB = 0;
+  ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
+  ninja.ninjaAttackOn = false;
+  enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
+  enemy2.enemySprite.changeAnimation('runEast2');
+  enemy3.enemySprite.changeAnimation('runEast3');
+  enemyB.enemySprite.changeAnimation('runEastB');
+  
+  x1 = 0;
+  x2 = W;
+    
 }
 
 //game over scene/screen
@@ -212,8 +254,6 @@ function drawMainMenu() {
   textAlign(CENTER);
   strokeWeight(3);
   stroke(0);
-  //text("Main Menu", width / 2, height / 2 - 100);
-  //text("Under Construction", width / 2, height / 2 - 50);
 
   push();
   imageMode(CENTER);
@@ -237,19 +277,21 @@ function drawMainMenu() {
 
 //the functions for the enemies fighting
 function enemy1Fight(){//basic start function for fighting
-  enemy1.attackAnimation1();
-  if (ninja.ninjaAttackOn == true){
-    if(enemyHit1<20){
-      enemyHit1++;
+  
+    enemy1.attackAnimation1();
+    if (ninja.ninjaAttackOn == true){
+      if(enemyHit1<20){
+        enemyHit1++;
+      }
+      else if(enemyHit1 >=20){
+        enemy1.enemySprite.position.y = -100;
+      }
     }
-    else if(enemyHit1 >=20){
-      enemy1.enemySprite.remove();
-    }
-  }
+  
 }
 
 function enemy2Fight(){
-  enemy2.attackAnimation2();//very breif at present as its in collision
+  enemy2.attackAnimation2();//very brief at present as its in collision
   if (ninja.ninjaAttackOn == true){
     if(enemyHit2<50){
       enemyHit2++;
@@ -308,6 +350,10 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 function gamePlayBnPressed() {
   gameFinish = false;
   screenState = 2;
+  resetGame();
+
+
+ 
 }
 
 function leaderBdBnPressed() {
