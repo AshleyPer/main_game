@@ -88,12 +88,12 @@ class Enemy {
     attackAnimation1(enemy, target) {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         
-        if(ninja.ninjaAttackOn === false){ //stops enemies from trying to remove hp from sword attack sprite
+        // if(ninja.ninjaAttackOn === false){ //stops enemies from trying to remove hp from sword attack sprite
             enemy.changeAnimation('attackEast1');
-            target.hp -= 1;
+            ninja.ninjaSprite.hp -= 1;
             this.attackOn = true;//boolean not currently in use
             
-        }
+        // }
         this.attackOn =false;//not in use
     }
     attackAnimation2(enemy, target) {

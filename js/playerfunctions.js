@@ -54,8 +54,8 @@ class Ninja {
 
     //create a sprite for the collision with the sword
     //it temporarily is not invisible
-    createAttackCollision(direaction) {
-        if (direaction === 'east') {
+    createAttackCollision(direction) {
+        if (direction === 'east') {
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", 10, 0, 30, 60)
         } else {
@@ -71,61 +71,66 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
-            this.ninjaSprite.position.x --
+            this.ninjaSprite.position.x--
 
             x1 += scrollSpeed;
             x2 += scrollSpeed;
             enemy1.enemySprite.position.x += scrollSpeed
-           enemy2.enemySprite.position.x += scrollSpeed
-           enemy3.enemySprite.position.x += scrollSpeed
-           enemyB.enemySprite.position.x += scrollSpeed
-            
+            enemy2.enemySprite.position.x += scrollSpeed
+            enemy3.enemySprite.position.x += scrollSpeed
+            enemyB.enemySprite.position.x += scrollSpeed
+
         }
 
         if (keyIsDown(RIGHT_ARROW)) {
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();
-            this.ninjaSprite.position.x ++;
+            this.ninjaSprite.position.x++;
 
             x1 -= scrollSpeed;
-           x2 -= scrollSpeed;
-           enemy1.enemySprite.position.x -= scrollSpeed
-           enemy2.enemySprite.position.x -= scrollSpeed
-           enemy3.enemySprite.position.x -= scrollSpeed
-           enemyB.enemySprite.position.x -= scrollSpeed
+            x2 -= scrollSpeed;
+            enemy1.enemySprite.position.x -= scrollSpeed
+            enemy2.enemySprite.position.x -= scrollSpeed
+            enemy3.enemySprite.position.x -= scrollSpeed
+            enemyB.enemySprite.position.x -= scrollSpeed
         }
     }
 
     attackAnimation() {
-
-        if (keyIsDown(32) && this.ninjaAttackOn === false) {
+        console.log('ms pre', millis());
+        console.log('time pre', time);
+        console.log('-------------------');
+        if (keyIsDown(32) ) {
             if (this.ninjaDirectionEast == true) {
-                this.ninjaSprite.changeAnimation('attackEast');
-                this.ninjaSprite.animation.play();
-                this.createAttackCollision('east')
+                    this.ninjaSprite.changeAnimation('attackEast');
+                    this.ninjaSprite.animation.play();
+                    console.log('ms before if', millis());
+                    console.log('time before if', time);
+                    console.log('-------------------');
+                    if(millis() - time >= wait){
+                        console.log('ms in if', millis());
+                        console.log('time in if', time);
+                        console.log('-------------------');
+                        this.createAttackCollision('east');
+                        time = millis();
+                        console.log('ms post', millis());
+                        console.log('time post', time);
+                        console.log('-------------------');
+                    }
             }
+
             if (this.ninjaDirectionEast == false) {
-                this.ninjaSprite.changeAnimation('attackWest');
-                this.ninjaSprite.animation.play();
-                this.createAttackCollision('west')
+                    this.ninjaSprite.changeAnimation('attackWest');
+                    this.ninjaSprite.animation.play();
+                    if(millis() - time >= wait){
+                        this.createAttackCollision('west');
+                        time = millis();
+                    }
             }
             this.ninjaAttackOn = true;
 
         }
-
-        /*
-        if(this.ninjaAttackOn = true && frameCount % 24 == 0){
-            if (this.ninjaDirectionEast == true) {
-                this.ninjaSprite.changeAnimation('idleEast');
-            }
-            else if (this.ninjaDirectionEast == false) {
-                this.ninjaSprite.changeAnimation('idleWest');
-            }
-            this.ninjaAttackOn = false;
-
-        }*/
-
     }
 
     isBusy() {
@@ -169,7 +174,7 @@ class Ninja {
 
         }
 
-        if(this.ninjaSprite.hp <= 0){
+        if (this.ninjaSprite.hp <= 0) {
             screenState = 3;
             ninja.ninjaSprite.hp = 20; //stops the game over screen from constantly looping
         }

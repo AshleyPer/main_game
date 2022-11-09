@@ -14,6 +14,8 @@ let enemyHitB = 0;
 let titleheading;
 let gameoverTitle;
 let score = 0;
+let time;
+let wait = 500;
 
 let gameFinish = true;
 let screenState = 1;
@@ -44,10 +46,10 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
+  time = millis();
 
   //add a font
   font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
-
   //create the buttons
   mainMenuBn.buttonSetUp(mainMenuBnPressed)
   gamePlayBn.buttonSetUp(gamePlayBnPressed)
