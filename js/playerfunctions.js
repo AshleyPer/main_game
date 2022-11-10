@@ -45,7 +45,8 @@ class Ninja {
         let ninjaPosition = this.ninjaSprite.position;
         this.ninjaPosition = ninjaPosition;
         // console.log(this.ninjaSprite.getAnimationLabel());
-        this.ninjaSprite.debug = true;
+        this.ninjaSprite.setCollider("rectangle",0,0,10,20 );
+        //this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         this.ninjaSprite.immovable = true;
         this.ninjaSprite.hp = 50;
@@ -57,13 +58,16 @@ class Ninja {
     createAttackCollision(direction) {
         if (direction === 'east') {
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
-            this.ninjaAttack.setCollider("rectangle", 10, 0, 30, 60)
+            this.ninjaAttack.setCollider("rectangle", 10, 0, 30, 60);
+            
         } else {
             this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
-            this.ninjaAttack.setCollider("rectangle", -10, 0, 30, 60)
+            this.ninjaAttack.setCollider("rectangle", -10, 0, 30, 60);
         }
-        this.ninjaAttack.debug = true;
+        this.ninjaAttack.setCollider("rectangle", 0,0,7,5)
+        //this.ninjaAttack.debug = true;
         this.ninjaAttack.immovable = true;
+        this.ninjaAttack.visible = false;
     }
 
     move() {
@@ -118,6 +122,9 @@ class Ninja {
                         console.log('time post', time);
                         console.log('-------------------');
                     }
+                   //if(keyIsDown(RIGHT_ARROW)){// not needed?
+                      // this.ninjaSprite.position.x ++;
+                   // }
             }
 
             if (this.ninjaDirectionEast == false) {

@@ -4,6 +4,7 @@ class Enemy {
         this.positionY = positionY;
         this.enemySprite;
         this.attackOn = false;//not in use
+        
 
     }
 
@@ -34,90 +35,105 @@ class Enemy {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEast1', this.enemy1Run);
         this.enemySprite.addAnimation('attackEast1', this.enemy1Attack);
-
-        this.enemySprite.debug = true;
+        this.enemySprite.setCollider("rectangle",0,0,10,22 );
+       // this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
+        this.enemySprite.hp = 20
     }
 
     createEnemy2() {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEast2', this.enemy2Run);
         this.enemySprite.addAnimation('attackEast2', this.enemy2Attack);
-
-        this.enemySprite.debug = true;
+        this.enemySprite.setCollider("rectangle",0,0,12,22 );
+        //this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
+        this.enemySprite.hp = 30
     }
     createEnemy3() {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEast3', this.enemy3Run);
         this.enemySprite.addAnimation('attackEast3', this.enemy3Attack);
-
+        this.enemySprite.setCollider("rectangle",0,0,12,24 );
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
-
+        this.enemySprite.hp = 40
     }
     createEnemyB() {
         this.enemySprite = createSprite(this.positionX, this.positionY, 40);
         this.enemySprite.addAnimation('runEastB', this.enemyBossRun);
         this.enemySprite.addAnimation('attackEastB', this.enemyBossAttack);
         this.enemySprite.addAnimation('deathB', this.enemyBossDeath);
+        this.enemySprite.setCollider("rectangle",0,0,17,30 );
         this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
         this.enemySprite.setSpeed(1, 180);
         this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
-
+        this.enemySprite.hp = 50
     }
 
 
 
 
-    attackAnimation1(enemy, target) {
+    attackAnimation1() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         
-        // if(ninja.ninjaAttackOn === false){ //stops enemies from trying to remove hp from sword attack sprite
-            enemy.changeAnimation('attackEast1');
-            ninja.ninjaSprite.hp -= 1;
-            this.attackOn = true;//boolean not currently in use
-            
-        // }
-        this.attackOn =false;//not in use
+        if(ninja.ninjaAttackOn === false){ //stops enemies from trying to remove hp from sword attack sprite
+            enemy1.enemySprite.changeAnimation('attackEast1');
+           ninja.ninjaSprite.hp -= 1;
+           ninja.ninjaAttackOn = true
+        }
+        //THIS WAS AN ATTEMP TO MOVE THE HEALTH OF ENEMIES TO A CLASS
+        /*
+        if (ninja.ninjaAttackOn == true){
+            if(enemy1.enemySprite.hp >0){
+                enemy1.enemySprite.hp--;
+            }
+            else if(enemy1.enemySprite.hp <=0){
+                enemy1.enemySprite.position.y = -100;
+                score +=5;
+            }
+        }
+        */
+     
     }
-    attackAnimation2(enemy, target) {
+    attackAnimation2() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         
         if(ninja.ninjaAttackOn === false){
-            enemy.changeAnimation('attackEast2');
-            target.hp -= 2;
+            enemy2.enemySprite.changeAnimation('attackEast2');
+            ninja.ninjaSprite.hp -= 1;
+            
         }
     }
-    attackAnimation3(enemy, target) {
+    attackAnimation3() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
        
         if(ninja.ninjaAttackOn === false){
-            enemy.changeAnimation('attackEast3');
-            target.hp -= 3;
+            enemy3.enemySprite.changeAnimation('attackEast3');
+            ninja.ninjaSprite.hp -= 2;
         }
     }
-    attackAnimationB(enemy, target) {
+    attackAnimationB() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         
         if(ninja.ninjaAttackOn === false){
-            enemy.changeAnimation('attackEastB');
-            target.hp -= 5;
+            enemyB.enemySprite.changeAnimation('attackEastB');
+            ninja.ninjaSprite.hp -= 3;
 
         }
     }

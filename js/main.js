@@ -151,11 +151,14 @@ function drawGameplay() {
  
   drawSprites();
 
+  ninja.move();
+
   ninja.attackAnimation();
 
-  ninja.move();
+  
   //ninja.attackCollide(enemy1, enemy1Fight);
   if(ninja.ninjaAttack){
+    //ninja.ninjaAttack.collide(enemy1.enemySprite,enemy1.attackAnimation1) this was from testing the move of the code
     ninja.ninjaAttack.collide(enemy1.enemySprite,enemy1Fight);//start of fighting code
     ninja.ninjaAttack.collide(enemy2.enemySprite,enemy2Fight);
     ninja.ninjaAttack.collide(enemy3.enemySprite,enemy3Fight);
@@ -185,6 +188,10 @@ function drawGameplay() {
   //temp text for ninja health - remove when health bar running
   textSize(20)
   text("Ninja Health: " + ninja.ninjaSprite.hp , 820,50)
+  text("enemy Health 1 : " + enemy1.enemySprite.hp , 820,80)
+  text("enemy Health 2 : " + enemy2.enemySprite.hp , 820,100)
+  text("enemy Health 3 : " + enemy3.enemySprite.hp , 820,120)
+  text("enemy Health B : " + enemyB.enemySprite.hp , 820,140)
 
 }
 
@@ -192,43 +199,7 @@ function bounceBack(theNinja, theEnemy){
   theEnemy.position.x = theEnemy.position.x + 5
 }
 
-//move rest function down when complete
-function resetGame(){//a function to call when return to main menu after game over, or game win
-  //reset enemy positions
-  //reset ninja position
-  //reset health enemy
-  //reset health ninja
-  //reset score
-  //reset sound
-  //reset background
-  //reset clouds?        
-  ninja.ninjaSprite.position.x = W/2;//update these when staring positions finalised
-  ninja.ninjaSprite.position.y = H-45; 
 
-  enemy1.enemySprite.position.x = W +250;//reset enemy positions - update when finalised
-  enemy1.enemySprite.position.y = H-45;
-  enemy2.enemySprite.position.x = W +750;
-  enemy2.enemySprite.position.y = H-45;
-  enemy3.enemySprite.position.x = W +1250;
-  enemy3.enemySprite.position.y = H-45
-  enemyB.enemySprite.position.x = W +1850;
-  enemyB.enemySprite.position.y = H-45
-  enemyHit1 = 0;//reset enemy health
-  enemyHit2 = 0;
-  enemyHit3 = 0;
-  enemyHitB = 0;
-  ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
-  score = 0;
-  ninja.ninjaAttackOn = false;
-  enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
-  enemy2.enemySprite.changeAnimation('runEast2');
-  enemy3.enemySprite.changeAnimation('runEast3');
-  enemyB.enemySprite.changeAnimation('runEastB');
-  
-  x1 = 0;
-  x2 = width;
-    
-}
 
 //game over scene/screen
 function drawGameover() {//add score to game over screen?
@@ -288,31 +259,34 @@ function drawMainMenu() {
 
 }
 
+//CHANGED THE NAMES OF THE ENEMY HEALTH TO MATCH PLAYER
+  //TRIED TO MOVE TO A CLASS AND THEN CAN REMOVE THE FIGHT FUNCTIONS - BUT HAVENT BEEN SUCCESFUL YET
+  //TRIED TO MOVE IT IN WOTH THE ATTACK METHOD IN THE ENEMY CLASS
+    //IT WORKED BU THE HEALTH DECLINED TOO QUICKLY
 
 //the functions for the enemies fighting
 function enemy1Fight(){//basic start function for fighting
   
-    enemy1.attackAnimation1();
-    if (ninja.ninjaAttackOn == true){
-      if(enemyHit1<20){
-        enemyHit1++;
-      }
-      else if(enemyHit1 >=20){
-        enemy1.enemySprite.position.y = -100;
-        score +=5;
-        //spawn another tier 1?
-      }
+   enemy1.attackAnimation1();
+   if (ninja.ninjaAttackOn == true){
+    if(enemy1.enemySprite.hp >0){
+      enemy1.enemySprite.hp --;
     }
+    else if(enemy1.enemySprite.hp <=0){
+      enemy1.enemySprite.position.y = -100;
+      score += 5
+    }
+  }
   
 }
 
 function enemy2Fight(){
   enemy2.attackAnimation2();//very brief at present as its in collision
   if (ninja.ninjaAttackOn == true){
-    if(enemyHit2<50){
-      enemyHit2++;
+    if(enemy2.enemySprite.hp >0){
+      enemy2.enemySprite.hp --;
     }
-    else if(enemyHit2 >=50){
+    else if(enemy2.enemySprite.hp <=0){
       enemy2.enemySprite.position.y = -100;
       score += 10
     }
@@ -323,10 +297,10 @@ function enemy3Fight(){
   enemy3.attackAnimation3();
 
   if (ninja.ninjaAttackOn == true){
-    if(enemyHit3<80){
-      enemyHit3++;
+    if(enemy3.enemySprite.hp >0){
+      enemy3.enemySprite.hp --;
     }
-    else if(enemyHit3>=80){
+    else if(enemy3.enemySprite.hp <= 0){
       enemy3.enemySprite.position.y = -100;
       score+=15
       //spawn another tier 3?
@@ -338,10 +312,10 @@ function enemy3Fight(){
 function enemyBFight(){
   enemyB.attackAnimationB();
   if (ninja.ninjaAttackOn == true){
-    if(enemyHitB<120){
-      enemyHitB++;
+    if(enemyb.enemySprite.hp >0){
+      enemyB.enemySprite.hp --;
     }
-    else if(enemyHitB >=120){
+    else if(enemyB.enemySprite.hp <=0){
       enemyB.enemySprite.position.y = -100;
       score +=25;
     }
@@ -349,7 +323,43 @@ function enemyBFight(){
 }
 
 
+//move rest function down when complete
+function resetGame(){//a function to call when return to main menu after game over, or game win
+  //reset enemy positions
+  //reset ninja position
+  //reset health enemy
+  //reset health ninja
+  //reset score
+  //reset sound
+  //reset background
+  //reset clouds?        
+  ninja.ninjaSprite.position.x = W/2;//update these when staring positions finalised
+  ninja.ninjaSprite.position.y = H-45; 
 
+  enemy1.enemySprite.position.x = W +250;//reset enemy positions - update when finalised
+  enemy1.enemySprite.position.y = H-45;
+  enemy2.enemySprite.position.x = W +750;
+  enemy2.enemySprite.position.y = H-45;
+  enemy3.enemySprite.position.x = W +1250;
+  enemy3.enemySprite.position.y = H-45
+  enemyB.enemySprite.position.x = W +1850;
+  enemyB.enemySprite.position.y = H-45
+  enemy1.enemySprite.hp = 20;//reset enemy health
+  enemy2.enemySprite.hp = 30;
+  enemy3.enemySprite.hp = 40;
+  enemyB.enemySprite.hp = 50;
+  ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
+  score = 0;
+  ninja.ninjaAttackOn = false;
+  enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
+  enemy2.enemySprite.changeAnimation('runEast2');
+  enemy3.enemySprite.changeAnimation('runEast3');
+  enemyB.enemySprite.changeAnimation('runEastB');
+  
+  x1 = 0;
+  x2 = width;
+    
+}
 
 //functions for the buttons
 function hideAllBns() {
