@@ -1,9 +1,10 @@
 class Enemy {
     constructor(positionX, positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+       this.positionX = positionX;
+       this.positionY = positionY;
         this.enemySprite;
         this.attackOn = false;//not in use
+        
         
 
     }
@@ -31,59 +32,128 @@ class Enemy {
         this.enemyBossDeath = loadAnimation('assets/img/enemies/boss/death/boss_death1.png', 'assets/img/enemies/boss/death/boss_death4.png');
     }
 
-    createEnemy1() {
-        this.enemySprite = createSprite(this.positionX, this.positionY, 40);
+    setUpGroups(){
+        this.enemyGroupOne = new Group();
+        this.enemyGroupTwo = new Group();
+        this.enemyGroupThree = new Group();
+    }
+
+    createEnemy1(x,y) {
+        this.enemySprite = createSprite(x, y);
         this.enemySprite.addAnimation('runEast1', this.enemy1Run);
         this.enemySprite.addAnimation('attackEast1', this.enemy1Attack);
         this.enemySprite.setCollider("rectangle",0,0,10,22 );
        // this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(1, 180);
-        this.enemySprite.mirrorX(-1);
-        let enemyPosition = this.enemySprite.position;
-        this.enemyPosition = enemyPosition;
-        this.enemySprite.hp = 20
+        let angle;
+        if (x <0){
+            angle = 0;
+            
+        }
+        else if (x >1000){
+            angle =180;
+            this.enemySprite.mirrorX(-1)
+        }
+        
+            this.enemySprite.rotationToDirection = true;
+        
+        
+        this.enemySprite.setSpeed(1, angle);
+       // this.enemySprite.mirrorX(-1);
+        //let enemyPosition = this.enemySprite.position;
+        
+        
+        this.enemyGroupOne.add(this.enemySprite);
+        //this.enemyPosition = enemyPosition;
+        this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
+        
     }
 
-    createEnemy2() {
-        this.enemySprite = createSprite(this.positionX, this.positionY, 40);
+    createEnemy2(x,y) {
+        this.enemySprite = createSprite(x,y);
         this.enemySprite.addAnimation('runEast2', this.enemy2Run);
         this.enemySprite.addAnimation('attackEast2', this.enemy2Attack);
         this.enemySprite.setCollider("rectangle",0,0,12,22 );
         //this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(1, 180);
-        this.enemySprite.mirrorX(-1);
-        let enemyPosition = this.enemySprite.position;
-        this.enemyPosition = enemyPosition;
-        this.enemySprite.hp = 30
+        let angle;
+        if (x <= -10){
+            angle = 0;
+            
+        }
+        if (x >=1000){
+            angle =180;
+            this.enemySprite.mirrorX(-1)
+        }
+        
+            this.enemySprite.rotationToDirection = true;
+        
+        
+        this.enemySprite.setSpeed(1, angle);
+
+        this.enemyGroupTwo.add(this.enemySprite);
+
+        //this.enemySprite.setSpeed(1, 180);
+      // this.enemySprite.mirrorX(-1);
+       // let enemyPosition = this.enemySprite.position;
+        //this.enemyPosition = enemyPosition;
+        this.enemySprite.hp = 20//any changes here, need to be changed in the ganeReset function in main
     }
-    createEnemy3() {
-        this.enemySprite = createSprite(this.positionX, this.positionY, 40);
+    createEnemy3(x,y) {
+        this.enemySprite = createSprite(x,y);
         this.enemySprite.addAnimation('runEast3', this.enemy3Run);
         this.enemySprite.addAnimation('attackEast3', this.enemy3Attack);
         this.enemySprite.setCollider("rectangle",0,0,12,24 );
-        this.enemySprite.debug = true;
+        //this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(1, 180);
-        this.enemySprite.mirrorX(-1);
+        let angle;
+        if (x <= 0){
+            angle = 0;
+            
+        }
+        if (x >=1000){
+            angle =180;
+            this.enemySprite.mirrorX(-1)
+        }
+        
+            //this.enemySprite.rotationToDirection = true;
+        
+        
+        this.enemySprite.setSpeed(1, angle);
+       // this.enemyGroupThree.add(this.enemySprite);
+        //this.enemySprite.setSpeed(1, 180);
+        //this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
-        this.enemySprite.hp = 40
+        this.enemySprite.hp = 30//any changes here, need to be changed in the ganeReset function in main
     }
-    createEnemyB() {
-        this.enemySprite = createSprite(this.positionX, this.positionY, 40);
+    createEnemyB(x,y) {
+        this.enemySprite = createSprite(x,y);
         this.enemySprite.addAnimation('runEastB', this.enemyBossRun);
         this.enemySprite.addAnimation('attackEastB', this.enemyBossAttack);
         this.enemySprite.addAnimation('deathB', this.enemyBossDeath);
         this.enemySprite.setCollider("rectangle",0,0,17,30 );
-        this.enemySprite.debug = true;
+       // this.enemySprite.debug = true;
         this.enemySprite.scale = 4;
-        this.enemySprite.setSpeed(1, 180);
-        this.enemySprite.mirrorX(-1);
+        let angle;
+        if (x <= -10){
+            angle = 0;
+            
+        }
+        if (x >=1000){
+            angle =180;
+            this.enemySprite.mirrorX(-1)
+        }
+        
+            this.enemySprite.rotationToDirection = true;
+        
+        
+        this.enemySprite.setSpeed(1, angle);
+        //this.enemySprite.setSpeed(1, 180);
+       // this.enemySprite.mirrorX(-1);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
-        this.enemySprite.hp = 50
+        this.enemySprite.hp = 40//any changes here, need to be changed in the ganeReset function in main
     }
 
 
@@ -97,7 +167,7 @@ class Enemy {
            ninja.ninjaSprite.hp -= 1;
            ninja.ninjaAttackOn = true
         }
-        //THIS WAS AN ATTEMP TO MOVE THE HEALTH OF ENEMIES TO A CLASS
+        //THIS WAS AN ATTEMPT TO MOVE THE HEALTH OF ENEMIES TO A CLASS
         /*
         if (ninja.ninjaAttackOn == true){
             if(enemy1.enemySprite.hp >0){

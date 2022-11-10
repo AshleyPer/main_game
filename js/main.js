@@ -1,16 +1,19 @@
 "use strict";
-
+let enemyStartPosX = [-200, 1200]
+let PosY = H-45
 let testAlley, aircon, bgWstuff, bgWOstuff, bgWcity, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
-let ninja = new Ninja(W/2, H - 45);
+let ninja = new Ninja(W/2, H - 45); //CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
 //starting positions for enemies tbc - also use for reset game
-let enemy1 = new Enemy(W + 250, H - 45);//tier 1 enemy
-let enemy2= new Enemy(W + 750, H - 45);//tier 2 enemy - spawn after teir 1 death?
-let enemy3 = new Enemy(W + 1250, H - 45);//tier 3 enemy
-let enemyB = new Enemy(W + 1850, H - 45);//boss enemy
-let enemyHit1 = 0;
-let enemyHit2 = 0;
-let enemyHit3 = 0;
-let enemyHitB = 0;
+  //CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
+  //Changing to random from array create off screen?
+let enemy1 = new Enemy();//tier 1 enemy
+let enemy2= new Enemy();//tier 2 enemy - spawn after teir 1 death?
+let enemy3 = new Enemy();//tier 3 enemy
+let enemyB = new Enemy();//boss enemy
+let countEnemy1 = 0;
+let countEnemy2 = 0;
+let countEnemy3 = 0;
+
 let titleheading;
 let gameoverTitle;
 let score = 0;
@@ -26,7 +29,7 @@ let hero, E1a, E1b,E2a, E2b,E3a, E3b, Bea, Beb;//spec pics
 
 let x1 = 0;
 let x2;
-let scrollSpeed = 2;//change back to 2
+let scrollSpeed = 2;
 let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
@@ -47,6 +50,7 @@ function preload() {
 function setup() {
   createCanvas(W, H);
   time = millis();
+ 
 
   //add a font
   font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
@@ -66,11 +70,30 @@ function setup() {
   //create the ninja
   ninja.createNinja();
 
+  
+
   //create the enemies
-  enemy1.createEnemy1();
-  enemy2.createEnemy2();
-  enemy3.createEnemy3();
-  enemyB.createEnemyB();
+  enemy1.setUpGroups();
+  enemy2.setUpGroups();
+  //enemy3.setUpGroups();
+  
+ enemy1.createEnemy1(random(enemyStartPosX),PosY);
+ countEnemy1++
+
+enemy2.createEnemy2(random(enemyStartPosX),PosY);
+enemy2.enemySprite.remove();
+enemy3.createEnemy3(random(enemyStartPosX),PosY);
+enemy3.enemySprite.remove();
+
+enemyB.createEnemy3(random(enemyStartPosX),PosY);
+enemyB.enemySprite.remove();
+
+
+
+  
+
+ 
+
 
   x2 = width;
   cloudX[0] = random(width, width + 600);
@@ -146,14 +169,21 @@ function drawGameplay() {
   background("grey");
 
   hideAllBns();
+  exitBn.showButton();//new location?
  
   testScene();
+
+  
  
   drawSprites();
+
+  
 
   ninja.move();
 
   ninja.attackAnimation();
+
+  
 
   
   //ninja.attackCollide(enemy1, enemy1Fight);
@@ -192,7 +222,9 @@ function drawGameplay() {
   text("enemy Health 2 : " + enemy2.enemySprite.hp , 820,100)
   text("enemy Health 3 : " + enemy3.enemySprite.hp , 820,120)
   text("enemy Health B : " + enemyB.enemySprite.hp , 820,140)
-
+  text("enemy 1 Count : " + countEnemy1 , 820,160)
+  text("enemy 2 Count : " + countEnemy2 , 820,180)
+ 
 }
 
 function bounceBack(theNinja, theEnemy){
@@ -273,11 +305,20 @@ function enemy1Fight(){//basic start function for fighting
       enemy1.enemySprite.hp --;
     }
     else if(enemy1.enemySprite.hp <=0){
-      enemy1.enemySprite.position.y = -100;
+      enemy1.enemySprite.remove();
+      if(countEnemy1 <4){
+      enemy1.createEnemy1(random(enemyStartPosX), PosY)
+      countEnemy1 ++;
+      }
+      
       score += 5
     }
+   
   }
-  
+  if(enemy1.enemyGroupOne.length == 0 && countEnemy1 > 3){
+    enemy2.createEnemy2(random(enemyStartPosX), PosY);
+    countEnemy2++
+  }
 }
 
 function enemy2Fight(){
@@ -287,9 +328,19 @@ function enemy2Fight(){
       enemy2.enemySprite.hp --;
     }
     else if(enemy2.enemySprite.hp <=0){
-      enemy2.enemySprite.position.y = -100;
+      enemy2.enemySprite.remove();
       score += 10
-    }
+      if(countEnemy2 <3){
+        enemy2.createEnemy2(random(enemyStartPosX), PosY);
+        countEnemy2++
+       
+      }
+    }console.log(enemy2.enemyGroupTwo.length)
+  }
+  if(enemy2.enemyGroupTwo.length == 0 && countEnemy2 == 3){
+    enemy3.createEnemy3(random(enemyStartPosX), PosY);
+    countEnemy3++
+    
   }
 }
 
@@ -301,8 +352,9 @@ function enemy3Fight(){
       enemy3.enemySprite.hp --;
     }
     else if(enemy3.enemySprite.hp <= 0){
-      enemy3.enemySprite.position.y = -100;
+      enemy3.enemySprite.remove();
       score+=15
+      enemyB.createEnemyB(random(enemyStartPosX), PosY);
       //spawn another tier 3?
       //spawn boss
   }
@@ -312,12 +364,16 @@ function enemy3Fight(){
 function enemyBFight(){
   enemyB.attackAnimationB();
   if (ninja.ninjaAttackOn == true){
-    if(enemyb.enemySprite.hp >0){
+    if(enemyB.enemySprite.hp >0){
       enemyB.enemySprite.hp --;
     }
     else if(enemyB.enemySprite.hp <=0){
-      enemyB.enemySprite.position.y = -100;
+      enemyB.enemySprite.remove();
       score +=25;
+      noStroke();
+      fill(255,0,0);
+      textSize(50);
+      text("YOU WIN", W/2,H/2);//REPLACE THIS WITH A PROPER ENDING
     }
   }
 }
@@ -325,6 +381,7 @@ function enemyBFight(){
 
 //move rest function down when complete
 function resetGame(){//a function to call when return to main menu after game over, or game win
+  //NEEDS UPDATING
   //reset enemy positions
   //reset ninja position
   //reset health enemy
@@ -333,21 +390,32 @@ function resetGame(){//a function to call when return to main menu after game ov
   //reset sound
   //reset background
   //reset clouds?        
+  removeAllEnemySprites();
   ninja.ninjaSprite.position.x = W/2;//update these when staring positions finalised
   ninja.ninjaSprite.position.y = H-45; 
+  countEnemy1 = 0;
+  countEnemy2 = 0;
+  countEnemy3 = 0;
+  enemy1.setUpGroups();//this call creates all groups?
+  enemy1.createEnemy1(random(enemyStartPosX), H-45);//put in gameReset which starts
+  countEnemy1 ++;
+ //enemy2.createEnemy2();
+  //enemy3.createEnemy3();
+  //enemyB.createEnemyB();
+ 
 
-  enemy1.enemySprite.position.x = W +250;//reset enemy positions - update when finalised
-  enemy1.enemySprite.position.y = H-45;
-  enemy2.enemySprite.position.x = W +750;
-  enemy2.enemySprite.position.y = H-45;
-  enemy3.enemySprite.position.x = W +1250;
-  enemy3.enemySprite.position.y = H-45
-  enemyB.enemySprite.position.x = W +1850;
-  enemyB.enemySprite.position.y = H-45
-  enemy1.enemySprite.hp = 20;//reset enemy health
-  enemy2.enemySprite.hp = 30;
-  enemy3.enemySprite.hp = 40;
-  enemyB.enemySprite.hp = 50;
+  //enemy1.enemySprite.position.x = random(enemyStartPosX);//reset enemy positions - update when finalised
+  //enemy1.enemySprite.position.y = H-45;
+  //enemy2.enemySprite.position.x = random(enemyStartPosX);
+  //enemy2.enemySprite.position.y = H-45;
+  //enemy3.enemySprite.position.x = random(enemyStartPosX);
+  //enemy3.enemySprite.position.y = H-45
+ //enemyB.enemySprite.position.x = random(enemyStartPosX);
+  //enemyB.enemySprite.position.y = H-45
+  enemy1.enemySprite.hp = 10;//reset enemy health
+  enemy2.enemySprite.hp = 20;
+  enemy3.enemySprite.hp = 30;
+  enemyB.enemySprite.hp = 40;
   ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
   score = 0;
   ninja.ninjaAttackOn = false;
@@ -359,6 +427,11 @@ function resetGame(){//a function to call when return to main menu after game ov
   x1 = 0;
   x2 = width;
     
+}
+
+function removeAllEnemySprites(){
+  enemy1.enemyGroupOne.removeSprites();
+  
 }
 
 //functions for the buttons
@@ -381,7 +454,7 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 function gamePlayBnPressed() {
   gameFinish = false;
   screenState = 2;
-  resetGame();
+  
 
 
  
@@ -395,7 +468,10 @@ function leaderBdBnPressed() {
 
 function exitBnPressed() {//takes you where? - may not use yet
   gameFinish = true;
+  screenState = 1;
+  resetGame();
 }
+
 
 
 //The code to set the main menu images and things

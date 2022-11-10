@@ -49,7 +49,7 @@ class Ninja {
         //this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         this.ninjaSprite.immovable = true;
-        this.ninjaSprite.hp = 50;
+        this.ninjaSprite.hp = 50;//any changes here, need to be changed in the ganeReset function in main
         //this.attackEast.looping = false;
     }
 
@@ -102,25 +102,25 @@ class Ninja {
     }
 
     attackAnimation() {
-        console.log('ms pre', millis());
-        console.log('time pre', time);
-        console.log('-------------------');
+        //console.log('ms pre', millis());
+      //  console.log('time pre', time);
+      //  console.log('-------------------');
         if (keyIsDown(32) ) {
             if (this.ninjaDirectionEast == true) {
                     this.ninjaSprite.changeAnimation('attackEast');
                     this.ninjaSprite.animation.play();
-                    console.log('ms before if', millis());
-                    console.log('time before if', time);
-                    console.log('-------------------');
+                   // console.log('ms before if', millis());
+                   // console.log('time before if', time);
+                  //  console.log('-------------------');
                     if(millis() - time >= wait){
-                        console.log('ms in if', millis());
-                        console.log('time in if', time);
-                        console.log('-------------------');
+                       // console.log('ms in if', millis());
+                        //console.log('time in if', time);
+                      //  console.log('-------------------');
                         this.createAttackCollision('east');
                         time = millis();
-                        console.log('ms post', millis());
-                        console.log('time post', time);
-                        console.log('-------------------');
+                       // console.log('ms post', millis());
+                       // console.log('time post', time);
+                       // console.log('-------------------');
                     }
                    //if(keyIsDown(RIGHT_ARROW)){// not needed?
                       // this.ninjaSprite.position.x ++;
@@ -183,7 +183,8 @@ class Ninja {
 
         if (this.ninjaSprite.hp <= 0) {
             screenState = 3;
-            ninja.ninjaSprite.hp = 20; //stops the game over screen from constantly looping
+            resetGame();//resets game variables
+         //stops the game over screen from constantly looping
         }
     }
 
