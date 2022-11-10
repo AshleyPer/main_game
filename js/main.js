@@ -322,7 +322,7 @@ function enemy1Fight(){//basic start function for fighting
 }
 
 function enemy2Fight(){
-  enemy2.attackAnimation2();//very brief at present as its in collision
+  enemy2.attackAnimation2()
   if (ninja.ninjaAttackOn == true){
     if(enemy2.enemySprite.hp >0){
       enemy2.enemySprite.hp --;
@@ -355,8 +355,7 @@ function enemy3Fight(){
       enemy3.enemySprite.remove();
       score+=15
       enemyB.createEnemyB(random(enemyStartPosX), PosY);
-      //spawn another tier 3?
-      //spawn boss
+      
   }
   }
 }
@@ -373,7 +372,8 @@ function enemyBFight(){
       noStroke();
       fill(255,0,0);
       textSize(50);
-      text("YOU WIN", W/2,H/2);//REPLACE THIS WITH A PROPER ENDING
+      //triggers ending?
+      
     }
   }
 }
@@ -396,22 +396,10 @@ function resetGame(){//a function to call when return to main menu after game ov
   countEnemy1 = 0;
   countEnemy2 = 0;
   countEnemy3 = 0;
-  enemy1.setUpGroups();//this call creates all groups?
-  enemy1.createEnemy1(random(enemyStartPosX), H-45);//put in gameReset which starts
+  
+  enemy1.createEnemy1(random(enemyStartPosX), H-45);
   countEnemy1 ++;
- //enemy2.createEnemy2();
-  //enemy3.createEnemy3();
-  //enemyB.createEnemyB();
  
-
-  //enemy1.enemySprite.position.x = random(enemyStartPosX);//reset enemy positions - update when finalised
-  //enemy1.enemySprite.position.y = H-45;
-  //enemy2.enemySprite.position.x = random(enemyStartPosX);
-  //enemy2.enemySprite.position.y = H-45;
-  //enemy3.enemySprite.position.x = random(enemyStartPosX);
-  //enemy3.enemySprite.position.y = H-45
- //enemyB.enemySprite.position.x = random(enemyStartPosX);
-  //enemyB.enemySprite.position.y = H-45
   enemy1.enemySprite.hp = 10;//reset enemy health
   enemy2.enemySprite.hp = 20;
   enemy3.enemySprite.hp = 30;
@@ -431,6 +419,9 @@ function resetGame(){//a function to call when return to main menu after game ov
 
 function removeAllEnemySprites(){
   enemy1.enemyGroupOne.removeSprites();
+  enemyB.enemySprite.remove();
+  enemy2.enemyGroupTwo.removeSprites();
+  enemy3.enemySprite.remove();
   
 }
 
