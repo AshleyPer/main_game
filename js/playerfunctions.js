@@ -45,7 +45,7 @@ class Ninja {
         let ninjaPosition = this.ninjaSprite.position;
         this.ninjaPosition = ninjaPosition;
         // console.log(this.ninjaSprite.getAnimationLabel());
-        this.ninjaSprite.setCollider("rectangle",0,0,10,20 );
+        this.ninjaSprite.setCollider("rectangle", 0, 0, 10, 20);
         //this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         this.ninjaSprite.immovable = true;
@@ -58,16 +58,15 @@ class Ninja {
     createAttackCollision(direction) {
         if (direction === 'east') {
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
-            this.ninjaAttack.setCollider("rectangle", 10, 0, 30, 60);
-            
+            this.ninjaAttack.setCollider("rectangle", 15, 0, 20, 20);
+
         } else {
             this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
-            this.ninjaAttack.setCollider("rectangle", -10, 0, 30, 60);
+            this.ninjaAttack.setCollider("rectangle", -15, 0, 20, 20);
         }
-        this.ninjaAttack.setCollider("rectangle", 0,0,7,5)
-        //this.ninjaAttack.debug = true;
+        this.ninjaAttack.debug = true;
         this.ninjaAttack.immovable = true;
-        this.ninjaAttack.visible = false;
+        this.ninjaAttack.visible = true;
     }
 
     move() {
@@ -102,38 +101,24 @@ class Ninja {
     }
 
     attackAnimation() {
-        //console.log('ms pre', millis());
-      //  console.log('time pre', time);
-      //  console.log('-------------------');
-        if (keyIsDown(32) ) {
+        if (keyIsDown(32)) {
+            time++;
             if (this.ninjaDirectionEast == true) {
-                    this.ninjaSprite.changeAnimation('attackEast');
-                    this.ninjaSprite.animation.play();
-                   // console.log('ms before if', millis());
-                   // console.log('time before if', time);
-                  //  console.log('-------------------');
-                    if(millis() - time >= wait){
-                       // console.log('ms in if', millis());
-                        //console.log('time in if', time);
-                      //  console.log('-------------------');
-                        this.createAttackCollision('east');
-                        time = millis();
-                       // console.log('ms post', millis());
-                       // console.log('time post', time);
-                       // console.log('-------------------');
-                    }
-                   //if(keyIsDown(RIGHT_ARROW)){// not needed?
-                      // this.ninjaSprite.position.x ++;
-                   // }
+                this.ninjaSprite.changeAnimation('attackEast');
+                this.ninjaSprite.animation.play();
+                if (time >= wait) {
+                    this.createAttackCollision('east');
+                    time = 0;
+                }
             }
 
             if (this.ninjaDirectionEast == false) {
-                    this.ninjaSprite.changeAnimation('attackWest');
-                    this.ninjaSprite.animation.play();
-                    if(millis() - time >= wait){
-                        this.createAttackCollision('west');
-                        time = millis();
-                    }
+                this.ninjaSprite.changeAnimation('attackWest');
+                this.ninjaSprite.animation.play();
+                if (time >= wait) {
+                    this.createAttackCollision('west');
+                    time = 0;
+                }
             }
             this.ninjaAttackOn = true;
 
@@ -184,8 +169,56 @@ class Ninja {
         if (this.ninjaSprite.hp <= 0) {
             screenState = 3;
             resetGame();//resets game variables
-         //stops the game over screen from constantly looping
+            //stops the game over screen from constantly looping
         }
     }
 
+    //the function for the player fighting
+    enemyFight(player, enemy) {
+        enemy.hp -= 1; //any enemy hit has their hp reduced by 1
+
+        if (enemy1.enemySprite.hp <= 0) { //checks if tier 1 enemy drops to 0 hp
+            enemy1.enemySprite.remove();
+            if (countEnemy1 < 4) {
+                enemy1.createEnemy1(random(enemyStartPosX), PosY);
+                countEnemy1++; //counts tier 1 enemy deaths for spawning purposes.
+            }
+            score += 5; //adds score from enemy death
+        }
+
+        if (enemy1.enemyGroupOne.length == 0 && countEnemy1 > 3) {
+            enemy2.createEnemy2(random(enemyStartPosX), PosY); //after the 4th kill, spawns tier 2 enemies
+            countEnemy2++;
+        }
+
+        if (enemy2.enemySprite.hp <= 0) { //checks if tier 2 enemy drops to 0 hp
+            enemy2.enemySprite.remove();
+            score += 10; //adds score from enemy death
+            if (countEnemy2 < 3) {
+                enemy2.createEnemy2(random(enemyStartPosX), PosY); //spawns tier 2 enemy if less than 3 have been killed
+                countEnemy2++; //counts tier 2 kills
+            }
+        }
+
+        if (enemy2.enemyGroupTwo.length == 0 && countEnemy2 == 3) {
+            enemy3.createEnemy3(random(enemyStartPosX), PosY); //spawns tier 3 enemy
+            countEnemy3++;
+        }
+
+        if (enemy3.enemySprite.hp <= 0) { //checks if tier 3 enemy hits 0 hp
+            enemy3.enemySprite.remove();
+            score += 15; //adds score from enemy death
+            enemyB.createEnemyB(random(enemyStartPosX), PosY); //spawns boss
+        }
+        if (enemyB.enemySprite.hp <= 0) { //checks if boss hits 0 hp
+            enemyB.enemySprite.changeAnimation('deathB', enemyB.enemyBossDeath);
+            enemyB.enemySprite.remove();
+            score += 25;
+            noStroke();
+            fill(255, 0, 0);
+            textSize(50);
+            //triggers ending?
+
+        }
+    }
 }

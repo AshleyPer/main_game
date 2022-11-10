@@ -1,13 +1,13 @@
 "use strict";
 let enemyStartPosX = [-200, 1200]
-let PosY = H-45
+let PosY = H - 45
 let testAlley, aircon, bgWstuff, bgWOstuff, bgWcity, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
-let ninja = new Ninja(W/2, H - 45); //CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
+let ninja = new Ninja(W / 2, H - 45); //CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
 //starting positions for enemies tbc - also use for reset game
-  //CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
-  //Changing to random from array create off screen?
+//CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
+//Changing to random from array create off screen?
 let enemy1 = new Enemy();//tier 1 enemy
-let enemy2= new Enemy();//tier 2 enemy - spawn after teir 1 death?
+let enemy2 = new Enemy();//tier 2 enemy - spawn after teir 1 death?
 let enemy3 = new Enemy();//tier 3 enemy
 let enemyB = new Enemy();//boss enemy
 let countEnemy1 = 0;
@@ -17,15 +17,15 @@ let countEnemy3 = 0;
 let titleheading;
 let gameoverTitle;
 let score = 0;
-let time;
-let wait = 500;
+let time = 0;
+let wait = 20;
 
 let gameFinish = true;
 let screenState = 1;
 let ninTest;
 let ninjaLoadingScreen;
 let nls;
-let hero, E1a, E1b,E2a, E2b,E3a, E3b, Bea, Beb;//spec pics
+let hero, E1a, E1b, E2a, E2b, E3a, E3b, Bea, Beb;//spec pics
 
 let x1 = 0;
 let x2;
@@ -49,8 +49,6 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
-  time = millis();
- 
 
   //add a font
   font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
@@ -70,29 +68,29 @@ function setup() {
   //create the ninja
   ninja.createNinja();
 
-  
+
 
   //create the enemies
   enemy1.setUpGroups();
   enemy2.setUpGroups();
   //enemy3.setUpGroups();
-  
- enemy1.createEnemy1(random(enemyStartPosX),PosY);
- countEnemy1++
 
-enemy2.createEnemy2(random(enemyStartPosX),PosY);
-enemy2.enemySprite.remove();
-enemy3.createEnemy3(random(enemyStartPosX),PosY);
-enemy3.enemySprite.remove();
+  enemy1.createEnemy1(random(enemyStartPosX), PosY);
+  countEnemy1++
 
-enemyB.createEnemy3(random(enemyStartPosX),PosY);
-enemyB.enemySprite.remove();
+  enemy2.createEnemy2(random(enemyStartPosX), PosY);
+  enemy2.enemySprite.remove();
+  enemy3.createEnemy3(random(enemyStartPosX), PosY);
+  enemy3.enemySprite.remove();
+
+  enemyB.createEnemy3(random(enemyStartPosX), PosY);
+  enemyB.enemySprite.remove();
 
 
 
-  
 
- 
+
+
 
 
   x2 = width;
@@ -101,11 +99,11 @@ enemyB.enemySprite.remove();
   cloudX[2] = random(width, width + 600);
   cloudX[3] = random(width, width + 600);
   cloudX[4] = random(width, width + 600);
-  cloudY[0] = random(0,60);
-  cloudY[1] = random(0,60);
-  cloudY[2] = random(0,60);
-  cloudY[3] = random(0,60);
-  cloudY[4] = random(0,60);
+  cloudY[0] = random(0, 60);
+  cloudY[1] = random(0, 60);
+  cloudY[2] = random(0, 60);
+  cloudY[3] = random(0, 60);
+  cloudY[4] = random(0, 60);
 
 }
 
@@ -131,7 +129,7 @@ function draw() {
   }
   ninja.checkNinjaStatus();
 
-  
+
 }
 
 //draw the loading scene/screen
@@ -144,14 +142,14 @@ function drawLoading() {
   stroke(200);
   text("Loading...", width / 2, height / 2);
 
-  
+
   fill(0);
   stroke(0);
-  triangle(width, 0, width, 120, width-120, 0);
-  triangle(width, height, width - 120, height, width, height-120);
+  triangle(width, 0, width, 120, width - 120, 0);
+  triangle(width, height, width - 120, height, width, height - 120);
   triangle(0, 0, 120, 0, 0, 120);
   triangle(0, height, 120, height, 0, height - 120);
-  
+
   image(ninjaLoadingScreen, 0, height - (height / 3), 200, 200);
 
   if (frameCount % 300 == 0) {
@@ -165,44 +163,36 @@ function drawLoading() {
 //draw the gameplay scene/screen
 function drawGameplay() {
   gameFinish = false;
-  
+
   background("grey");
 
   hideAllBns();
   exitBn.showButton();//new location?
- 
+
   testScene();
 
-  
- 
+
+
   drawSprites();
 
-  
+
 
   ninja.move();
 
   ninja.attackAnimation();
 
-  
-
-  
-  //ninja.attackCollide(enemy1, enemy1Fight);
-  if(ninja.ninjaAttack){
-    //ninja.ninjaAttack.collide(enemy1.enemySprite,enemy1.attackAnimation1) this was from testing the move of the code
-    ninja.ninjaAttack.collide(enemy1.enemySprite,enemy1Fight);//start of fighting code
-    ninja.ninjaAttack.collide(enemy2.enemySprite,enemy2Fight);
-    ninja.ninjaAttack.collide(enemy3.enemySprite,enemy3Fight);
-    ninja.ninjaAttack.collide(enemyB.enemySprite,enemyBFight);
+//start of fighting code
+  if (ninja.ninjaAttack) {
+    ninja.ninjaAttack.collide(enemy1.enemySprite, ninja.enemyFight); //player attacks
   }
 
+  //enemy attacks, divided based on enemy type
   enemy1.enemySprite.collide(ninja.ninjaSprite, enemy1.attackAnimation1);
   enemy2.enemySprite.collide(ninja.ninjaSprite, enemy2.attackAnimation2);
   enemy3.enemySprite.collide(ninja.ninjaSprite, enemy3.attackAnimation3);
   enemyB.enemySprite.collide(ninja.ninjaSprite, enemyB.attackAnimationB);
 
-  
-  
-
+  //bounce code to stop instant deaths
   ninja.ninjaSprite.bounce(enemy1.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack)
   ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack)
@@ -212,23 +202,23 @@ function drawGameplay() {
 
   // text for score, needs styling    
   noStroke()
-  fill(255,150)
+  fill(255, 150)
   textSize(30)
   text("Score: " + score, 50, 50)
   //temp text for ninja health - remove when health bar running
   textSize(20)
-  text("Ninja Health: " + ninja.ninjaSprite.hp , 820,50)
-  text("enemy Health 1 : " + enemy1.enemySprite.hp , 820,80)
-  text("enemy Health 2 : " + enemy2.enemySprite.hp , 820,100)
-  text("enemy Health 3 : " + enemy3.enemySprite.hp , 820,120)
-  text("enemy Health B : " + enemyB.enemySprite.hp , 820,140)
-  text("enemy 1 Count : " + countEnemy1 , 820,160)
-  text("enemy 2 Count : " + countEnemy2 , 820,180)
- 
+  text("Ninja Health: " + ninja.ninjaSprite.hp, 820, 50)
+  text("enemy Health 1 : " + enemy1.enemySprite.hp, 820, 80)
+  text("enemy Health 2 : " + enemy2.enemySprite.hp, 820, 100)
+  text("enemy Health 3 : " + enemy3.enemySprite.hp, 820, 120)
+  text("enemy Health B : " + enemyB.enemySprite.hp, 820, 140)
+  text("enemy 1 Count : " + countEnemy1, 820, 160)
+  text("enemy 2 Count : " + countEnemy2, 820, 180)
+
 }
 
-function bounceBack(theNinja, theEnemy){
-  theEnemy.position.x = theEnemy.position.x + 5
+function bounceBack(theNinja, theEnemy) {
+  theEnemy.position.x = theEnemy.position.x + 100;
 }
 
 
@@ -239,7 +229,7 @@ function drawGameover() {//add score to game over screen?
   mainMenuBn.showButton();
   gameFinish = true;
   background(0);
-  image(gameoverTitle, 0,0);
+  image(gameoverTitle, 0, 0);
 
 
 }
@@ -279,7 +269,7 @@ function drawMainMenu() {
 
   textSize(20)
   text("Hover Over The Ninja for Specs", width / 2 - 340, height / 2 + 220);
- 
+
   textSize(20)
   text("Hover Over The Enemies for Specs", width - 170, height / 2 + 220);
   stroke(150);
@@ -291,96 +281,9 @@ function drawMainMenu() {
 
 }
 
-//CHANGED THE NAMES OF THE ENEMY HEALTH TO MATCH PLAYER
-  //TRIED TO MOVE TO A CLASS AND THEN CAN REMOVE THE FIGHT FUNCTIONS - BUT HAVENT BEEN SUCCESFUL YET
-  //TRIED TO MOVE IT IN WOTH THE ATTACK METHOD IN THE ENEMY CLASS
-    //IT WORKED BU THE HEALTH DECLINED TOO QUICKLY
-
-//the functions for the enemies fighting
-function enemy1Fight(){//basic start function for fighting
-  
-   enemy1.attackAnimation1();
-   if (ninja.ninjaAttackOn == true){
-    if(enemy1.enemySprite.hp >0){
-      enemy1.enemySprite.hp --;
-    }
-    else if(enemy1.enemySprite.hp <=0){
-      enemy1.enemySprite.remove();
-      if(countEnemy1 <4){
-      enemy1.createEnemy1(random(enemyStartPosX), PosY)
-      countEnemy1 ++;
-      }
-      
-      score += 5
-    }
-   
-  }
-  if(enemy1.enemyGroupOne.length == 0 && countEnemy1 > 3){
-    enemy2.createEnemy2(random(enemyStartPosX), PosY);
-    countEnemy2++
-  }
-}
-
-function enemy2Fight(){
-  enemy2.attackAnimation2()
-  if (ninja.ninjaAttackOn == true){
-    if(enemy2.enemySprite.hp >0){
-      enemy2.enemySprite.hp --;
-    }
-    else if(enemy2.enemySprite.hp <=0){
-      enemy2.enemySprite.remove();
-      score += 10
-      if(countEnemy2 <3){
-        enemy2.createEnemy2(random(enemyStartPosX), PosY);
-        countEnemy2++
-       
-      }
-    }console.log(enemy2.enemyGroupTwo.length)
-  }
-  if(enemy2.enemyGroupTwo.length == 0 && countEnemy2 == 3){
-    enemy3.createEnemy3(random(enemyStartPosX), PosY);
-    countEnemy3++
-    
-  }
-}
-
-function enemy3Fight(){
-  enemy3.attackAnimation3();
-
-  if (ninja.ninjaAttackOn == true){
-    if(enemy3.enemySprite.hp >0){
-      enemy3.enemySprite.hp --;
-    }
-    else if(enemy3.enemySprite.hp <= 0){
-      enemy3.enemySprite.remove();
-      score+=15
-      enemyB.createEnemyB(random(enemyStartPosX), PosY);
-      
-  }
-  }
-}
-
-function enemyBFight(){
-  enemyB.attackAnimationB();
-  if (ninja.ninjaAttackOn == true){
-    if(enemyB.enemySprite.hp >0){
-      enemyB.enemySprite.hp --;
-    }
-    else if(enemyB.enemySprite.hp <=0){
-      enemyB.enemySprite.remove();
-      score +=25;
-      noStroke();
-      fill(255,0,0);
-      textSize(50);
-      //triggers ending?
-      
-    }
-  }
-}
-
 
 //move rest function down when complete
-function resetGame(){//a function to call when return to main menu after game over, or game win
+function resetGame() {//a function to call when return to main menu after game over, or game win
   //NEEDS UPDATING
   //reset enemy positions
   //reset ninja position
@@ -391,15 +294,15 @@ function resetGame(){//a function to call when return to main menu after game ov
   //reset background
   //reset clouds?        
   removeAllEnemySprites();
-  ninja.ninjaSprite.position.x = W/2;//update these when staring positions finalised
-  ninja.ninjaSprite.position.y = H-45; 
+  ninja.ninjaSprite.position.x = W / 2;//update these when staring positions finalised
+  ninja.ninjaSprite.position.y = H - 45;
   countEnemy1 = 0;
   countEnemy2 = 0;
   countEnemy3 = 0;
-  
-  enemy1.createEnemy1(random(enemyStartPosX), H-45);
-  countEnemy1 ++;
- 
+
+  enemy1.createEnemy1(random(enemyStartPosX), H - 45);
+  countEnemy1++;
+
   enemy1.enemySprite.hp = 10;//reset enemy health
   enemy2.enemySprite.hp = 20;
   enemy3.enemySprite.hp = 30;
@@ -411,18 +314,18 @@ function resetGame(){//a function to call when return to main menu after game ov
   enemy2.enemySprite.changeAnimation('runEast2');
   enemy3.enemySprite.changeAnimation('runEast3');
   enemyB.enemySprite.changeAnimation('runEastB');
-  
+
   x1 = 0;
   x2 = width;
-    
+
 }
 
-function removeAllEnemySprites(){
+function removeAllEnemySprites() {
   enemy1.enemyGroupOne.removeSprites();
   enemyB.enemySprite.remove();
   enemy2.enemyGroupTwo.removeSprites();
   enemy3.enemySprite.remove();
-  
+
 }
 
 //functions for the buttons
@@ -445,10 +348,10 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 function gamePlayBnPressed() {
   gameFinish = false;
   screenState = 2;
-  
 
 
- 
+
+
 }
 
 function leaderBdBnPressed() {
@@ -467,7 +370,7 @@ function exitBnPressed() {//takes you where? - may not use yet
 
 //The code to set the main menu images and things
 
-function loadMainMenuImages(){
+function loadMainMenuImages() {
   ninTest = loadImage("assets/ninjapictest.png");//pic for character test main menu
   ninjaLoadingScreen = loadImage('assets/img/ninja_player/attack/attack_east/attack_3.png');
   hero = loadImage('assets/img/ninja_player/attack/attack_east/attack_2.png');
@@ -485,14 +388,14 @@ function loadMainMenuImages(){
 
 function characterImages() {
   image(ninTest, 60, 190);
-  Bea.resize(0,60);
-  image(Bea,885,40);
-  E3b.resize(0,60);
-  image(E3b,890,160);
-  E2b.resize(0,60);
-  image(E2b,890,280);
-  E1b.resize(0,60);
-  image(E1b,890,400);
+  Bea.resize(0, 60);
+  image(Bea, 885, 40);
+  E3b.resize(0, 60);
+  image(E3b, 890, 160);
+  E2b.resize(0, 60);
+  image(E2b, 890, 280);
+  E1b.resize(0, 60);
+  image(E1b, 890, 400);
 }
 
 //function for the on hover handling in the main menu for the character images
@@ -510,8 +413,8 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     rect(230, 200, 150, 150, 30);
     noStroke();
     fill(0);
-    hero.resize(0,35);
-    image(hero,180,132);
+    hero.resize(0, 35);
+    image(hero, 180, 132);
     text("Hero Ninja", 245, 154);
     text("UPDATE INFO", 230, 185);//add specs
     text("Move him with left", 230, 205);
@@ -523,8 +426,8 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     stroke(120);
     fill(100);
     rect(800, 75, 150, 80, 30);
-    Beb.resize(0,30);
-    image(Beb,730,60);
+    Beb.resize(0, 30);
+    image(Beb, 730, 60);
     noStroke();
     fill(0);
     textSize(12);
@@ -539,8 +442,8 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     stroke(120);
     fill(100);
     rect(800, 200, 140, 80, 30);
-    E3a.resize(0,30);
-    image(E3a,740,180);
+    E3a.resize(0, 30);
+    image(E3a, 740, 180);
     noStroke();
     fill(0);
     textSize(12);
@@ -552,8 +455,8 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     stroke(120);
     fill(100);
     rect(800, 320, 140, 80, 30);
-    E2a.resize(0,30);
-    image(E2a,740,300);
+    E2a.resize(0, 30);
+    image(E2a, 740, 300);
     noStroke();
     fill(0);
     textSize(12);
@@ -566,8 +469,8 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     stroke(120);
     fill(100);
     rect(800, 440, 140, 80, 30);
-    E1a.resize(0,30);
-    image(E1a,740,420);
+    E1a.resize(0, 30);
+    image(E1a, 740, 420);
     noStroke();
     fill(0);
     textSize(12);
