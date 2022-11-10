@@ -33,7 +33,7 @@ let scrollSpeed = 2;
 let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
-
+let count = 0;
 let font;
 
 function preload() {
@@ -175,7 +175,8 @@ function drawGameplay() {
 
   drawSprites();
 
-
+  ninja.drawNinjaHealthBar();
+  
 
   ninja.move();
 

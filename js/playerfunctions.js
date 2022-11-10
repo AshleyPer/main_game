@@ -45,12 +45,25 @@ class Ninja {
         let ninjaPosition = this.ninjaSprite.position;
         this.ninjaPosition = ninjaPosition;
         // console.log(this.ninjaSprite.getAnimationLabel());
-        this.ninjaSprite.setCollider("rectangle", 0, 0, 10, 20);
+        this.ninjaSprite.setCollider("rectangle",0,0,10,20 );
         //this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         this.ninjaSprite.immovable = true;
+        this.ninjaSprite.maxHP = 50;
         this.ninjaSprite.hp = 50;//any changes here, need to be changed in the ganeReset function in main
         //this.attackEast.looping = false;
+    }
+
+    drawNinjaHealthBar() {
+        strokeWeight(4);
+        stroke(0, 0, 0);
+        noFill();
+        rect(20, 77, this.ninjaSprite.maxHP * 4 + 4, 28, 20);
+        noStroke();
+        fill('red');
+        rect(22, 79, this.ninjaSprite.maxHP * 4, 24, 20);
+        fill('green');
+        rect(22, 79, this.ninjaSprite.hp * 4, 24, 20);
     }
 
     //create a sprite for the collision with the sword

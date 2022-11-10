@@ -145,25 +145,16 @@ class Enemy {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         enemy2.enemySprite.changeAnimation('attackEast2');
         ninja.ninjaSprite.hp -= 1;
-
-
     }
     attackAnimation3() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
-
-
-        enemy3.enemySprite.changeAnimation('attackEast3');
-        ninja.ninjaSprite.hp -= 2;
-
+            enemy3.enemySprite.changeAnimation('attackEast3');
+            ninja.ninjaSprite.hp -= 2;
     }
     attackAnimationB() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
-
-
-        enemyB.enemySprite.changeAnimation('attackEastB');
-        ninja.ninjaSprite.hp -= 3;
-
-
+            enemyB.enemySprite.changeAnimation('attackEastB');
+            ninja.ninjaSprite.hp -= 3;
     }
 
 }
