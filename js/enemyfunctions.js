@@ -60,7 +60,7 @@ class Enemy {
         this.enemyGroupOne.add(this.enemySprite);
         //this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
-
+        this.enemySprite.maxHp = 10
     }
 
     createEnemy2(x, y) {
@@ -84,6 +84,7 @@ class Enemy {
         this.enemySprite.setSpeed(1, angle);
         this.enemyGroupTwo.add(this.enemySprite);
         this.enemySprite.hp = 20//any changes here, need to be changed in the ganeReset function in main
+        this.enemySprite.maxHp = 20
     }
     createEnemy3(x, y) {
         this.enemySprite = createSprite(x, y);
@@ -107,6 +108,7 @@ class Enemy {
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 30//any changes here, need to be changed in the ganeReset function in main
+        this.enemySprite.maxHp = 30
     }
     createEnemyB(x, y) {
         this.enemySprite = createSprite(x, y);
@@ -131,10 +133,46 @@ class Enemy {
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 40//any changes here, need to be changed in the gameReset function in main
+        this.enemySprite.maxHp = 40
     }
 
+    drawEnemy1HealthBar(enemy){
+        strokeWeight(4);
+        stroke(0, 0, 0);
+        noFill();
+        rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+        noStroke();
+        fill('red');
+        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+        fill('green');
+        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+    }
 
+    /*
+    drawEnemy2HealthBar(enemy){
+        strokeWeight(4);
+        stroke(0, 0, 0);
+        noFill();
+        rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+        noStroke();
+        fill('red');
+        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+        fill('green');
+        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+    }
 
+    drawEnemy3HealthBar(enemy){
+        strokeWeight(4);
+        stroke(0, 0, 0);
+        noFill();
+        rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+        noStroke();
+        fill('red');
+        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+        fill('green');
+        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+    }
+    */
 
     attackAnimation1() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player

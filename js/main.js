@@ -176,8 +176,14 @@ function drawGameplay() {
   drawSprites();
 
   ninja.drawNinjaHealthBar();
+  enemy1.drawEnemy1HealthBar(enemy1.enemySprite);
   
+  /*
+  enemy2.drawEnemy2HealthBar(enemy2.enemySprite);
+  enemy3.drawEnemy3HealthBar(enemy3.enemySprite);
+  */
 
+  
   ninja.move();
 
   ninja.attackAnimation();

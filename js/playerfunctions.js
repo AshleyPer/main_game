@@ -77,9 +77,9 @@ class Ninja {
             this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", -15, 0, 20, 20);
         }
-        this.ninjaAttack.debug = true;
+        //this.ninjaAttack.debug = true;
         this.ninjaAttack.immovable = true;
-        this.ninjaAttack.visible = true;
+        this.ninjaAttack.visible = false;
     }
 
     move() {
