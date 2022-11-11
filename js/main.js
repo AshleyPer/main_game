@@ -21,6 +21,7 @@ let time = 0;
 let wait = 20;
 
 let gameFinish = true;
+let bossSpawned = false;
 let screenState = 1;
 let ninTest;
 let ninjaLoadingScreen;
