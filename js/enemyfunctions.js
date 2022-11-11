@@ -61,6 +61,7 @@ class Enemy {
         //this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 10
+        this.maxenemy1count = 3;
     }
 
     createEnemy2(x, y) {
@@ -85,7 +86,9 @@ class Enemy {
         this.enemyGroupTwo.add(this.enemySprite);
         this.enemySprite.hp = 20//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 20
+        this.maxenemy2count = 3;
     }
+
     createEnemy3(x, y) {
         this.enemySprite = createSprite(x, y);
         this.enemySprite.addAnimation('runEast3', this.enemy3Run);
@@ -137,15 +140,18 @@ class Enemy {
     }
 
     drawEnemy1HealthBar(enemy){
-        strokeWeight(4);
-        stroke(0, 0, 0);
-        noFill();
-        rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
-        noStroke();
-        fill('red');
-        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
-        fill('green');
-        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+        if(enemy.hp !== 0){
+            strokeWeight(4);
+            stroke(0, 0, 0);
+            noFill();
+            rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+            noStroke();
+            fill('red');
+            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+            fill('green');
+            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+        }
+
     }
 
     /*

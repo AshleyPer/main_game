@@ -189,17 +189,16 @@ class Ninja {
     //the function for the player fighting
     enemyFight(player, enemy) {
         enemy.hp -= 1; //any enemy hit has their hp reduced by 1
-
         if (enemy1.enemySprite.hp <= 0) { //checks if tier 1 enemy drops to 0 hp
             enemy1.enemySprite.remove();
-            if (countEnemy1 < 4) {
+            if (countEnemy1 < enemy1.maxenemy1count) {
                 enemy1.createEnemy1(random(enemyStartPosX), PosY);
                 countEnemy1++; //counts tier 1 enemy deaths for spawning purposes.
             }
             score += 5; //adds score from enemy death
         }
 
-        if (enemy1.enemyGroupOne.length == 0 && countEnemy1 > 3) {
+        if (enemy1.enemyGroupOne.length == 0 && countEnemy1 > enemy1.maxenemy1count -1 && countEnemy2 < 1) {
             enemy2.createEnemy2(random(enemyStartPosX), PosY); //after the 4th kill, spawns tier 2 enemies
             countEnemy2++;
         }
@@ -207,13 +206,13 @@ class Ninja {
         if (enemy2.enemySprite.hp <= 0) { //checks if tier 2 enemy drops to 0 hp
             enemy2.enemySprite.remove();
             score += 10; //adds score from enemy death
-            if (countEnemy2 < 3) {
+            if (countEnemy2 < enemy2.maxenemy2count) {
                 enemy2.createEnemy2(random(enemyStartPosX), PosY); //spawns tier 2 enemy if less than 3 have been killed
                 countEnemy2++; //counts tier 2 kills
             }
         }
 
-        if (enemy2.enemyGroupTwo.length == 0 && countEnemy2 == 3) {
+        if (enemy2.enemyGroupTwo.length == 0 && countEnemy2 > enemy2.maxenemy2count -1 && enemy1.enemyGroupOne.length == 0 ) {
             enemy3.createEnemy3(random(enemyStartPosX), PosY); //spawns tier 3 enemy
             countEnemy3++;
         }

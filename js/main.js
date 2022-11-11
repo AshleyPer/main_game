@@ -88,11 +88,6 @@ function setup() {
 
 
 
-
-
-
-
-
   x2 = width;
   cloudX[0] = random(width, width + 600);
   cloudX[1] = random(width, width + 600);
@@ -191,6 +186,9 @@ function drawGameplay() {
 //start of fighting code
   if (ninja.ninjaAttack) {
     ninja.ninjaAttack.collide(enemy1.enemySprite, ninja.enemyFight); //player attacks
+    ninja.ninjaAttack.collide(enemy2.enemySprite, ninja.enemyFight);
+    ninja.ninjaAttack.collide(enemy3.enemySprite, ninja.enemyFight);
+    ninja.ninjaAttack.collide(enemyB.enemySprite, ninja.enemyFight);
   }
 
   //enemy attacks, divided based on enemy type
