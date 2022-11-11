@@ -79,12 +79,12 @@ function setup() {
   enemy1.createEnemy1(random(enemyStartPosX), PosY);
   countEnemy1++
 
-  enemy2.createEnemy2(random(enemyStartPosX), PosY);
+  enemy2.createEnemy2(-100, -100);
   enemy2.enemySprite.remove();
-  enemy3.createEnemy3(random(enemyStartPosX), PosY);
+  enemy3.createEnemy3(-100, -100);
   enemy3.enemySprite.remove();
 
-  enemyB.createEnemy3(random(enemyStartPosX), PosY);
+  enemyB.createEnemy3(-100, -100);
   enemyB.enemySprite.remove();
 
 
@@ -174,10 +174,10 @@ function drawGameplay() {
   ninja.drawNinjaHealthBar();
   enemy1.drawEnemy1HealthBar(enemy1.enemySprite);
   
-  /*
+  
   enemy2.drawEnemy2HealthBar(enemy2.enemySprite);
   enemy3.drawEnemy3HealthBar(enemy3.enemySprite);
-  */
+ 
 
   
   ninja.move();
