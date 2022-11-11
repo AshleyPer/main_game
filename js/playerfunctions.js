@@ -49,8 +49,8 @@ class Ninja {
         //this.ninjaSprite.debug = true;
         this.ninjaSprite.scale = 4;
         this.ninjaSprite.immovable = true;
-        this.ninjaSprite.maxHP = 50;
-        this.ninjaSprite.hp = 50;//any changes here, need to be changed in the ganeReset function in main
+        this.ninjaSprite.maxHP = 250;
+        this.ninjaSprite.hp = 250;//any changes here, need to be changed in the ganeReset function in main
         //this.attackEast.looping = false;
     }
 

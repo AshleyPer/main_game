@@ -154,7 +154,7 @@ class Enemy {
 
     }
 
-    
+
     drawEnemy2HealthBar(enemy){
         if(enemy.hp > 0){
             strokeWeight(4);
@@ -182,7 +182,7 @@ class Enemy {
             rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
         }
     }
-    
+   
 
     attackAnimation1() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
