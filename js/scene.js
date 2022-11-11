@@ -15,11 +15,10 @@ function loadScenePics() {
 }
 
 function testScene() {
-    background(25,29,88);
-    // image(testAlley,0,0);
-    
+    background(25,29,88); 
     image(bgWstuff, x2, 75, W, H - 75);
     image(bgWcity, x1, 75, W, H - 75);
+    image(bgWOstuff, x3, 75, W, H - 75);
     noStroke();
     fill(25,29,88);
     rect(0, 0, width, 75);

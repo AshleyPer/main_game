@@ -140,7 +140,7 @@ class Enemy {
     }
 
     drawEnemy1HealthBar(enemy){
-        if(enemy.hp !== 0){
+        if(enemy.hp > 0){
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -154,31 +154,35 @@ class Enemy {
 
     }
 
-    /*
+    
     drawEnemy2HealthBar(enemy){
-        strokeWeight(4);
-        stroke(0, 0, 0);
-        noFill();
-        rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
-        noStroke();
-        fill('red');
-        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
-        fill('green');
-        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+        if(enemy.hp > 0){
+            strokeWeight(4);
+            stroke(0, 0, 0);
+            noFill();
+            rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+            noStroke();
+            fill('red');
+            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+            fill('green');
+            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+        }
     }
-
+    
     drawEnemy3HealthBar(enemy){
-        strokeWeight(4);
-        stroke(0, 0, 0);
-        noFill();
-        rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
-        noStroke();
-        fill('red');
-        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
-        fill('green');
-        rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+        if(enemy.hp > 0){
+            strokeWeight(4);
+            stroke(0, 0, 0);
+            noFill();
+            rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+            noStroke();
+            fill('red');
+            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+            fill('green');
+            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+        }
     }
-    */
+    
 
     attackAnimation1() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player

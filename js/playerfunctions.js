@@ -87,14 +87,17 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
-            this.ninjaSprite.position.x--
+            if (keyIsDown(LEFT_ARROW) && this.ninjaSprite.position.x >= 100){
+                this.ninjaSprite.position.x--
+            }
 
             x1 += scrollSpeed;
             x2 += scrollSpeed;
-            enemy1.enemySprite.position.x += scrollSpeed
-            enemy2.enemySprite.position.x += scrollSpeed
-            enemy3.enemySprite.position.x += scrollSpeed
-            enemyB.enemySprite.position.x += scrollSpeed
+            x3 += scrollSpeed;
+            enemy1.enemySprite.position.x += scrollSpeed;
+            enemy2.enemySprite.position.x += scrollSpeed;
+            enemy3.enemySprite.position.x += scrollSpeed;
+            enemyB.enemySprite.position.x += scrollSpeed;
 
         }
 
@@ -102,14 +105,17 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();
-            this.ninjaSprite.position.x++;
+            if (keyIsDown(RIGHT_ARROW) && this.ninjaSprite.position.x <= width - 100){
+                this.ninjaSprite.position.x++;
+            }
 
             x1 -= scrollSpeed;
             x2 -= scrollSpeed;
-            enemy1.enemySprite.position.x -= scrollSpeed
-            enemy2.enemySprite.position.x -= scrollSpeed
-            enemy3.enemySprite.position.x -= scrollSpeed
-            enemyB.enemySprite.position.x -= scrollSpeed
+            x3 -= scrollSpeed;
+            enemy1.enemySprite.position.x -= scrollSpeed;
+            enemy2.enemySprite.position.x -= scrollSpeed;
+            enemy3.enemySprite.position.x -= scrollSpeed;
+            enemyB.enemySprite.position.x -= scrollSpeed;
         }
     }
 
@@ -190,6 +196,9 @@ class Ninja {
     enemyFight(player, enemy) {
         enemy.hp -= 1; //any enemy hit has their hp reduced by 1
         if (enemy1.enemySprite.hp <= 0) { //checks if tier 1 enemy drops to 0 hp
+            if(player.hp < player.maxHP) {
+                player.hp += 5;
+            }
             enemy1.enemySprite.remove();
             if (countEnemy1 < enemy1.maxenemy1count) {
                 enemy1.createEnemy1(random(enemyStartPosX), PosY);
@@ -228,6 +237,7 @@ class Ninja {
             enemyB.enemySprite.changeAnimation('deathB', enemyB.enemyBossDeath);
             enemyB.enemySprite.remove();
             score += 25;
+            screenState = 5;
             noStroke();
             fill(255, 0, 0);
             textSize(50);

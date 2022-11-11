@@ -5,6 +5,7 @@ const MAIN_MENU = 1;
 const GAMEPLAY = 2;
 const GAME_OVER = 3;
 const LEADER_BOARD = 4;
+const WINNER = 5;
 
 //the parameters that are going into the constructor when instancing the class
 //buttonText, positionX, positionY, buttonWidth, buttonHeight, backgroundColour, fontSize
