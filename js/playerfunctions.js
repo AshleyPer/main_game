@@ -58,12 +58,16 @@ class Ninja {
         strokeWeight(4);
         stroke(0, 0, 0);
         noFill();
-        rect(20, 77, this.ninjaSprite.maxHP * 4 + 4, 28, 20);
+        rect(20, 38, this.ninjaSprite.maxHP * 1.2 + 4, 28, 20);
         noStroke();
         fill('red');
-        rect(22, 79, this.ninjaSprite.maxHP * 4, 24, 20);
+        rect(22, 40, this.ninjaSprite.maxHP * 1.2, 24, 20);
         fill('green');
-        rect(22, 79, this.ninjaSprite.hp * 4, 24, 20);
+        rect(22, 40, this.ninjaSprite.hp * 1.2, 24, 20);
+
+        textSize(18);
+        fill('black');
+        text("Your Health", this.ninjaSprite.maxHP / 2 , 58)
     }
 
     //create a sprite for the collision with the sword

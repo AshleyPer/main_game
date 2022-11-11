@@ -178,10 +178,9 @@ function drawGameplay() {
   ninja.drawNinjaHealthBar();
   enemy1.drawEnemy1HealthBar(enemy1.enemySprite);
   
-  
   enemy2.drawEnemy2HealthBar(enemy2.enemySprite);
   enemy3.drawEnemy3HealthBar(enemy3.enemySprite);
- 
+  enemyB.drawEnemyBossHealthBar(enemyB.enemySprite);
 
   
   ninja.move();
@@ -214,7 +213,7 @@ function drawGameplay() {
   noStroke()
   fill(255, 150)
   textSize(30)
-  text("Score: " + score, 50, 50)
+  //text("Score: " + score, 50, 50)
   //temp text for ninja health - remove when health bar running
   textSize(20)
   text("Ninja Health: " + ninja.ninjaSprite.hp, 820, 50)
@@ -296,7 +295,7 @@ function drawWinner() {
   stroke(255);
   textAlign(CENTER);
   textSize(100)
-  text('You are Winner!', width/2, height/2);
+  text('You are a Winner!', width/2, height/2);
 }
 
 

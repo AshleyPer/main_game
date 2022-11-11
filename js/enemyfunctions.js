@@ -135,8 +135,8 @@ class Enemy {
         this.enemySprite.setSpeed(1, angle);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
-        this.enemySprite.hp = 40//any changes here, need to be changed in the gameReset function in main
-        this.enemySprite.maxHp = 40
+        this.enemySprite.hp = 100//any changes here, need to be changed in the gameReset function in main
+        this.enemySprite.maxHp = 100
     }
 
     drawEnemy1HealthBar(enemy){
@@ -160,12 +160,12 @@ class Enemy {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
-            rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+            rect(enemy.position.x - 60, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
             noStroke();
             fill('red');
-            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+            rect(enemy.position.x - 59, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
             fill('green');
-            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+            rect(enemy.position.x - 59, enemy.position.y - 78, enemy.hp * 6, 14, 20);
         }
     }
     
@@ -174,12 +174,35 @@ class Enemy {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
-            rect(enemy.position.x - 28, enemy.position.y - 80, enemy.maxHp * 6 + 2, 18, 20);
+            rect(enemy.position.x - 60, enemy.position.y - 80, enemy.maxHp * 4 + 2, 18, 20);
             noStroke();
             fill('red');
-            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.maxHp * 6, 14, 20);
+            rect(enemy.position.x - 59, enemy.position.y - 78, enemy.maxHp * 4, 14, 20);
             fill('green');
-            rect(enemy.position.x - 27, enemy.position.y - 78, enemy.hp * 6, 14, 20);
+            rect(enemy.position.x - 59, enemy.position.y - 78, enemy.hp * 4, 14, 20);
+        }
+    }
+
+    drawEnemyBossHealthBar(enemy){
+        // 
+        console.log(enemy)
+        if(enemy.hp > 0 && enemy.position.x >= 40 && bossSpawned == true){
+            strokeWeight(4);
+            stroke(0, 0, 0);
+            noFill();
+            rect(200, 120, enemy.maxHp * 6 + 4, 30);
+            noStroke();
+
+            fill('black');
+            rect(202, 122, enemy.maxHp * 6, 26);
+
+            fill(64, 8, 3);
+            rect(202, 122, enemy.hp * 6, 26);
+
+            textStyle(BOLD);
+            textSize(20);
+            fill('white');
+            text("The Cyclops Demon",  400, 140)
         }
     }
    
