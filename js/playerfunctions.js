@@ -91,35 +91,38 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
-            if (keyIsDown(LEFT_ARROW) && this.ninjaSprite.position.x >= 100){
-                this.ninjaSprite.position.x--
+            if (keyIsDown(LEFT_ARROW) && this.ninjaSprite.position.x >= 200){
+                this.ninjaSprite.position.x -= scrollSpeed;
             }
 
-            x1 += scrollSpeed;
-            x2 += scrollSpeed;
-            x3 += scrollSpeed;
-            enemy1.enemySprite.position.x += scrollSpeed;
-            enemy2.enemySprite.position.x += scrollSpeed;
-            enemy3.enemySprite.position.x += scrollSpeed;
-            enemyB.enemySprite.position.x += scrollSpeed;
-
+            if(this.ninjaSprite.position.x < width / 3){
+                x1 += scrollSpeed;
+                x2 += scrollSpeed;
+                x3 += scrollSpeed;
+                enemy1.enemySprite.position.x += scrollSpeed;
+                enemy2.enemySprite.position.x += scrollSpeed;
+                enemy3.enemySprite.position.x += scrollSpeed;
+                enemyB.enemySprite.position.x += scrollSpeed;
+            }
         }
 
         if (keyIsDown(RIGHT_ARROW)) {
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();
-            if (keyIsDown(RIGHT_ARROW) && this.ninjaSprite.position.x <= width - 100){
-                this.ninjaSprite.position.x++;
+            if (keyIsDown(RIGHT_ARROW) && this.ninjaSprite.position.x <= width - 200){
+                this.ninjaSprite.position.x += scrollSpeed;
             }
 
-            x1 -= scrollSpeed;
-            x2 -= scrollSpeed;
-            x3 -= scrollSpeed;
-            enemy1.enemySprite.position.x -= scrollSpeed;
-            enemy2.enemySprite.position.x -= scrollSpeed;
-            enemy3.enemySprite.position.x -= scrollSpeed;
-            enemyB.enemySprite.position.x -= scrollSpeed;
+            if(this.ninjaSprite.position.x > width / 2){
+                x1 -= scrollSpeed;
+                x2 -= scrollSpeed;
+                x3 -= scrollSpeed;
+                enemy1.enemySprite.position.x -= scrollSpeed;
+                enemy2.enemySprite.position.x -= scrollSpeed;
+                enemy3.enemySprite.position.x -= scrollSpeed;
+                enemyB.enemySprite.position.x -= scrollSpeed;
+            }
         }
     }
 
@@ -201,15 +204,24 @@ class Ninja {
     enemyFight(player, enemy) {
         enemy.hp -= 1; //any enemy hit has their hp reduced by 1
         if (enemy1.enemySprite.hp <= 0) { //checks if tier 1 enemy drops to 0 hp
-            if(player.hp < player.maxHP) {
-                player.hp += 5;
-            }
             enemy1.enemySprite.remove();
-            if (countEnemy1 < enemy1.maxenemy1count) {
+            if (countEnemy1 < enemy1.maxenemy1count && countEnemy1 < 3) {
                 enemy1.createEnemy1(random(enemyStartPosX), PosY);
-                countEnemy1++; //counts tier 1 enemy deaths for spawning purposes.
+                countEnemy1++; //counts tier 1 enemy spawns.
             }
-            score += 5; //adds score from enemy death
+
+            // if(countEnemy1 >= 3 && countEnemy1 < enemy1.maxenemy1count && countEnemy1 < 5){
+            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
+            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
+            //     countEnemy1 += 2;
+            // }
+
+            // if(countEnemy1 >= 5 && countEnemy1 < enemy1.maxenemy1count){
+            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
+            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
+            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
+            //     countEnemy1 += 3;
+            // }
         }
 
         if (enemy1.enemyGroupOne.length == 0 && countEnemy1 > enemy1.maxenemy1count -1 && countEnemy2 < 1) {
@@ -219,7 +231,6 @@ class Ninja {
 
         if (enemy2.enemySprite.hp <= 0) { //checks if tier 2 enemy drops to 0 hp
             enemy2.enemySprite.remove();
-            score += 10; //adds score from enemy death
             if (countEnemy2 < enemy2.maxenemy2count) {
                 enemy2.createEnemy2(random(enemyStartPosX), PosY); //spawns tier 2 enemy if less than 3 have been killed
                 countEnemy2++; //counts tier 2 kills
@@ -233,7 +244,6 @@ class Ninja {
 
         if (enemy3.enemySprite.hp <= 0 && bossSpawned == false) { //checks if tier 3 enemy hits 0 hp
             enemy3.enemySprite.remove();
-            score += 15; //adds score from enemy death
             enemyB.createEnemyB(random(enemyStartPosX), PosY); //spawns boss
             bossSpawned = true;
         }
@@ -241,7 +251,6 @@ class Ninja {
         if (enemyB.enemySprite.hp <= 0) { //checks if boss hits 0 hp
             enemyB.enemySprite.changeAnimation('deathB', enemyB.enemyBossDeath);
             enemyB.enemySprite.remove();
-            score += 25;
             screenState = 5;
             noStroke();
             fill(255, 0, 0);

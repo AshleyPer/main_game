@@ -57,7 +57,7 @@ class Enemy {
 
         this.enemySprite.rotationToDirection = true;
         this.enemySprite.setSpeed(1, angle);
-        this.enemyGroupOne.add(this.enemySprite);
+        this.enemySprite.addToGroup(this.enemyGroupOne);
         //this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 10
@@ -83,7 +83,7 @@ class Enemy {
 
         this.enemySprite.rotationToDirection = true;
         this.enemySprite.setSpeed(1, angle);
-        this.enemyGroupTwo.add(this.enemySprite);
+        this.enemySprite.addToGroup(this.enemyGroupTwo);
         this.enemySprite.hp = 20//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 20
         this.maxenemy2count = 3;
@@ -107,7 +107,7 @@ class Enemy {
         }
 
         this.enemySprite.setSpeed(1, angle);
-        // this.enemyGroupThree.add(this.enemySprite);
+        this.enemySprite.addToGroup(this.enemyGroupThree);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 30//any changes here, need to be changed in the ganeReset function in main
@@ -185,7 +185,7 @@ class Enemy {
 
     drawEnemyBossHealthBar(enemy){
         // 
-        //console.log(enemy)
+        console.log(enemy)
         if(enemy.hp > 0 && enemy.position.x >= 40 && bossSpawned == true){
             strokeWeight(4);
             stroke(0, 0, 0);

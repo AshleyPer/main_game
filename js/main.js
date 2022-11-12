@@ -15,8 +15,7 @@ let countEnemy2 = 0;
 let countEnemy3 = 0;
 
 let titleheading;
-let gameoverTitle;
-let score = 0;
+let gameoverTitle, victory;
 let time = 0;
 let wait = 20;
 
@@ -30,12 +29,13 @@ let hero, E1a, E1b, E2a, E2b, E3a, E3b, Bea, Beb;//spec pics
 
 let x1 = 0;
 let x2, x3;
-let scrollSpeed = 2;
+let scrollSpeed = 3;
 let clouds = new Array(5);
 let cloudX = new Array(5);
 let cloudY = new Array(5);
 let count = 0;
 let font;
+let alp;
 
 
 //sound variables
@@ -72,7 +72,7 @@ function setup() {
 
   //create the ninja
   ninja.createNinja();
-
+  alp = 255;
 
 
   //create the enemies
@@ -135,7 +135,7 @@ function draw() {
       break;
   }
   ninja.checkNinjaStatus();
-
+  
 
 }
 
@@ -178,7 +178,7 @@ function drawGameplay() {
 
   testScene();
 
-
+  console.log(enemy1.enemyGroupOne.length)
 
   drawSprites();
 
@@ -196,8 +196,8 @@ function drawGameplay() {
 
 //start of fighting code
   if (ninja.ninjaAttack) {
-    ninja.ninjaAttack.collide(enemy1.enemySprite, ninja.enemyFight); //player attacks
-    ninja.ninjaAttack.collide(enemy2.enemySprite, ninja.enemyFight);
+    ninja.ninjaAttack.collide(enemy1.enemyGroupOne, ninja.enemyFight); //player attacks
+    ninja.ninjaAttack.collide(enemy2.enemyGroupTwo, ninja.enemyFight);
     ninja.ninjaAttack.collide(enemy3.enemySprite, ninja.enemyFight);
     ninja.ninjaAttack.collide(enemyB.enemySprite, ninja.enemyFight);
   }
@@ -298,11 +298,15 @@ function drawMainMenu() {
 }
 
 function drawWinner() {
-  background(100);
-  stroke(255);
-  textAlign(CENTER);
-  textSize(100)
-  text('You are a Winner!', width/2, height/2);
+  background(0);
+  image(victory, 0, 0);
+  fill(255, alp);
+  rect(0, 0, W, H);
+  alp -= 1;
+  if(alp == 0){
+
+  }
+
 }
 
 
@@ -332,7 +336,6 @@ function resetGame() {//a function to call when return to main menu after game o
   enemy3.enemySprite.hp = 30;
   enemyB.enemySprite.hp = 40;
   ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
-  score = 0;
   ninja.ninjaAttackOn = false;
   enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
   enemy2.enemySprite.changeAnimation('runEast2');
@@ -408,6 +411,7 @@ function loadMainMenuImages() {
   Beb = loadImage('assets/img/enemies/boss/run/run3.png');
   titleheading = loadImage('assets/img/gamejam_title.png');
   gameoverTitle = loadImage('assets/img/gamejam_gameover.png');
+  victory = loadImage('assets/img/victory.png');
 }
 
 function characterImages() {
