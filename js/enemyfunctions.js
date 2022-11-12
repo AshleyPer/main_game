@@ -57,7 +57,7 @@ class Enemy {
 
         this.enemySprite.rotationToDirection = true;
         this.enemySprite.setSpeed(1, angle);
-        this.enemySprite.addToGroup(this.enemyGroupOne);
+        this.enemyGroupOne.add(this.enemySprite);
         //this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 10
@@ -83,7 +83,7 @@ class Enemy {
 
         this.enemySprite.rotationToDirection = true;
         this.enemySprite.setSpeed(1, angle);
-        this.enemySprite.addToGroup(this.enemyGroupTwo);
+        this.enemyGroupTwo.add(this.enemySprite);
         this.enemySprite.hp = 20//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 20
         this.maxenemy2count = 3;
@@ -139,8 +139,8 @@ class Enemy {
         this.enemySprite.maxHp = 100
     }
 
-    drawEnemy1HealthBar(enemy){
-        if(enemy.hp > 0){
+    drawEnemy1HealthBar(enemy) {
+        if (enemy.hp > 0) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -155,8 +155,8 @@ class Enemy {
     }
 
 
-    drawEnemy2HealthBar(enemy){
-        if(enemy.hp > 0){
+    drawEnemy2HealthBar(enemy) {
+        if (enemy.hp > 0) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -168,9 +168,9 @@ class Enemy {
             rect(enemy.position.x - 59, enemy.position.y - 78, enemy.hp * 6, 14, 20);
         }
     }
-    
-    drawEnemy3HealthBar(enemy){
-        if(enemy.hp > 0){
+
+    drawEnemy3HealthBar(enemy) {
+        if (enemy.hp > 0) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -183,10 +183,8 @@ class Enemy {
         }
     }
 
-    drawEnemyBossHealthBar(enemy){
-        // 
-        console.log(enemy)
-        if(enemy.hp > 0 && enemy.position.x >= 40 && bossSpawned == true){
+    drawEnemyBossHealthBar(enemy) {
+        if (enemy.hp > 0 && enemy.position.x >= 40 && bossSpawned == true) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -202,10 +200,10 @@ class Enemy {
             textStyle(BOLD);
             textSize(20);
             fill('white');
-            text("The Cyclops Demon",  400, 140)
+            text("The Cyclops Demon", 400, 140)
         }
     }
-   
+
 
     attackAnimation1() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
@@ -219,13 +217,13 @@ class Enemy {
     }
     attackAnimation3() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
-            enemy3.enemySprite.changeAnimation('attackEast3');
-            ninja.ninjaSprite.hp -= 2;
+        enemy3.enemySprite.changeAnimation('attackEast3');
+        ninja.ninjaSprite.hp -= 2;
     }
     attackAnimationB() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
-            enemyB.enemySprite.changeAnimation('attackEastB');
-            ninja.ninjaSprite.hp -= 3;
+        enemyB.enemySprite.changeAnimation('attackEastB');
+        ninja.ninjaSprite.hp -= 3;
     }
 
 }
