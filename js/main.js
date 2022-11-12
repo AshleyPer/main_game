@@ -44,7 +44,7 @@ let backSound;
 let lossSound;
 let playGameSound;
 let music;
-//let
+let ninjaHurtSound;
 //let
 
 function preload() {
@@ -55,17 +55,11 @@ function preload() {
   enemyB.loadEnemyAnimations();
   loadScenePics();
   loadMainMenuImages();
+
   //Load the sounds
   soundFormats('mp3', 'wav');
   ninjaAttackSound = loadSound('assets/sounds/ninja/Fast_Action_Swish_HW_05.wav');
- 
-
-  //backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_Back Version4.wav');
-  //backSound.setVolume(0.3);
-
-  //lossSound = loadSound('assets/sounds/ninja/attack/Fast_Action_Swish_HW_05.wav');
-  //lossSound.setVolume(0.3);
-
+  ninjaHurtSound = loadSound('assets/sounds/ninja/Grunt_Pain_Male_BB_10_SCREAM_LIBRARY_BRFX-004.wav');
   playGameSound = loadSound('assets/sounds/menu/playgame_sound.wav');
   backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_BackVersion4.wav');
   music = loadSound('assets/sounds/Cyborg_Ninja.mp3');
@@ -259,13 +253,12 @@ function bounceBack(theNinja, theEnemy) {
 
 //game over scene/screen
 function drawGameover() {//add score to game over screen?
+  ninjaHurtSound.stop();
   hideAllBns();
   mainMenuBn.showButton();
   gameFinish = true;
   background(0);
   image(gameoverTitle, 0, 0);
-
-
 }
 
 

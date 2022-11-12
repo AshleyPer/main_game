@@ -98,6 +98,9 @@ class Ninja {
 
     move() {
         if (keyIsDown(LEFT_ARROW)) {
+            if(!keyIsDown(32)){
+                ninjaAttackSound.stop();
+            }
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
@@ -117,6 +120,9 @@ class Ninja {
         }
 
         if (keyIsDown(RIGHT_ARROW)) {
+            if(!keyIsDown(32)){
+                ninjaAttackSound.stop();
+            }
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
             this.ninjaSprite.animation.play();

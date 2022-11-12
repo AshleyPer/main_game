@@ -205,21 +205,36 @@ class Enemy {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         enemy1.enemySprite.changeAnimation('attackEast1');
         ninja.ninjaSprite.hp -= 1;
+
+        if(!ninjaHurtSound.isPlaying()){
+            ninjaHurtSound.play(0.3);
+        }
+    
     }
     attackAnimation2() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         enemy2.enemySprite.changeAnimation('attackEast2');
         ninja.ninjaSprite.hp -= 1;
+
+        if(!ninjaHurtSound.isPlaying()){
+            ninjaHurtSound.play(0.3);
+        }
     }
     attackAnimation3() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         enemy3.enemySprite.changeAnimation('attackEast3');
         ninja.ninjaSprite.hp -= 2;
+        if(!ninjaHurtSound.isPlaying()){
+            ninjaHurtSound.play(0.3);
+        }
     }
     attackAnimationB() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player
         enemyB.enemySprite.changeAnimation('attackEastB');
         ninja.ninjaSprite.hp -= 3;
+        if(!ninjaHurtSound.isPlaying()){
+            ninjaHurtSound.play(0.3);
+        }
     }
 
 }
