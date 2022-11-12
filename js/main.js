@@ -342,6 +342,7 @@ function resetGame() {//a function to call when return to main menu after game o
  
   ninja.ninjaSprite.hp = 250;//reset ninja health change when finalised
   ninja.ninjaAttackOn = false;
+  bossSpawned = false;
   enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
   enemy2.enemySprite.changeAnimation('runEast2');
   enemy3.enemySprite.changeAnimation('runEast3');

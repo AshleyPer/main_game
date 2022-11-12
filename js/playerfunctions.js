@@ -212,19 +212,6 @@ class Ninja {
                 
                 countEnemy1++; //counts tier 1 enemy spawns.
             }
-
-            // if(countEnemy1 >= 3 && countEnemy1 < enemy1.maxenemy1count && countEnemy1 < 5){
-            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
-            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
-            //     countEnemy1 += 2;
-            // }
-
-            // if(countEnemy1 >= 5 && countEnemy1 < enemy1.maxenemy1count){
-            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
-            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
-            //     enemy1.createEnemy1(random(enemyStartPosX), PosY);
-            //     countEnemy1 += 3;
-            // }
         }
 
         if (enemy1.enemyGroupOne.length == 0 && countEnemy1 > enemy1.maxenemy1count -1  && countEnemy2 < 1) {
@@ -252,7 +239,7 @@ class Ninja {
             enemy3.enemySprite.remove();
             enemyB.createEnemyB(random(enemyStartPosX), PosY); //spawns boss
             bossSpawned = true;
-            makeHealthPack(enemy1.enemySprite.position.x, height - 15);
+            makeHealthPack(W/2, height - 15);
         }
 
         if (enemyB.enemySprite.hp <= 0) { //checks if boss hits 0 hp

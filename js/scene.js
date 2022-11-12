@@ -16,18 +16,7 @@ function loadScenePics() {
 
 function testScene() {
     background(25,29,88); 
-    image(bgWstuff, x2, 75, W, H - 75);
-    image(bgWcity, x1, 75, W, H - 75);
-    image(bgWOstuff, x3, 75, W, H - 75);
-    noStroke();
-    fill(25,29,88);
-    rect(0, 0, width, 75);
     image(bgMoon, width / 2, 0);
-    image(bgDoor, x2 + (width - (width / 3)), height - (height / 3.5));
-    image(aircon, x2 + (width/2 - 150), height / 3.5);
-
-
-
     for(let i = 0; i < clouds.length; i++){
         image(clouds[i], cloudX[i], cloudY[i]);
         cloudX[i] -= scrollSpeed/4;  
@@ -36,12 +25,24 @@ function testScene() {
         } 
     }
 
+    image(bgWstuff, x2, 0, W, H);
+    image(bgWcity, x1, 0, W, H);
+    image(bgWOstuff, x3, 75, W, H - 75);
+    image(bgDoor, x2 + (width - (width / 3)), height - (height / 3.5));
+    image(aircon, x2 + (width/2 - 150), height / 3.5);
+
+
+
+
 
     if (x1 < -width) {
         x1 = width;
     }
     if (x2 < -width) {
         x2 = width;
+    }
+    if(x3 < -(width*2)) {
+        x3 = -width;
     }
 
 }
