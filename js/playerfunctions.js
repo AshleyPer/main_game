@@ -79,9 +79,17 @@ class Ninja {
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", 15, 0, 20, 20);
 
+            if(!ninjaAttackSound.isPlaying()){
+                ninjaAttackSound.play()
+            }
+
         } else {
             this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", -15, 0, 20, 20);
+
+            if(!ninjaAttackSound.isPlaying()){
+                ninjaAttackSound.play()
+            }
         }
         //this.ninjaAttack.debug = true;
         this.ninjaAttack.immovable = true;
@@ -130,7 +138,6 @@ class Ninja {
 
     attackAnimation() {
         if (keyIsDown(32)) {
-            //ninjaAttackSound.play();
             time++;
             if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('attackEast');
@@ -177,6 +184,7 @@ class Ninja {
             this.ninjaAttackOn = false;
             this.ninjaSprite.animation.stop();
             this.ninjaSprite.animation.rewind();
+            ninjaAttackSound.stop();
             if (this.ninjaAttack) {
                 this.ninjaAttack.remove();
             }

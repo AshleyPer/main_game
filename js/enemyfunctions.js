@@ -4,9 +4,6 @@ class Enemy {
         this.positionY = positionY;
         this.enemySprite;
         this.attackOn = false;//not in use
-
-
-
     }
 
     loadEnemyAnimations() {
@@ -203,7 +200,6 @@ class Enemy {
             text("The Cyclops Demon", 400, 140)
         }
     }
-
 
     attackAnimation1() {
         // if the enemy collides with player - change animation(attackAnimation) and remove hp from player

@@ -39,8 +39,12 @@ let alp;
 
 
 //sound variables
-let delaySound;
 let ninjaAttackSound;
+let backSound;
+let lossSound;
+let playGameSound;
+//let
+//let
 
 function preload() {
   ninja.loadNinjaAnimations();
@@ -55,7 +59,6 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
-  delaySound = new p5.Delay();
   //add a font
   font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
   //create the buttons
@@ -111,13 +114,21 @@ function setup() {
   cloudY[4] = random(0, 60);
 
   //Load the sounds
-  //soundFormats('mp3', 'ogg', 'wav');
-  //ninjaAttackSound = loadSound('assets/sounds/ninja/attack/ninja_attack');
+  soundFormats('mp3', 'wav');
+  ninjaAttackSound = loadSound('assets/sounds/ninja/Fast_Action_Swish_HW_05.wav');
+  ninjaAttackSound.setVolume(0.3);
+
+  //backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_Back Version4.wav');
+  //backSound.setVolume(0.3);
+
+  //lossSound = loadSound('assets/sounds/ninja/attack/Fast_Action_Swish_HW_05.wav');
+  //lossSound.setVolume(0.3);
+
+  playGameSound = loadSound('assets/sounds/menu/playgame_sound.wav');
+
 }
 
-
 function draw() {
-
   switch (screenState) {
     case 0:
       drawLoading();
@@ -307,7 +318,7 @@ function resetGame() {//a function to call when return to main menu after game o
   //reset score
   //reset sound
   //reset background
-  //reset clouds?        
+  //reset clouds?
   removeAllEnemySprites();
   gameFinish = true;
   ninja.ninjaSprite.position.x = W / 2;//update these when staring positions finalised
@@ -368,9 +379,14 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 }
 
 function gamePlayBnPressed() {
+  playGameSound.setVolume(0);
+  playGameSound.play();
+  playGameSound.stop();
+  
+
   gameFinish = false;
   screenState = 2;
-  
+
 }
 
 function leaderBdBnPressed() {
@@ -381,7 +397,9 @@ function leaderBdBnPressed() {
 
 function exitBnPressed() {
   gameFinish = true;
-  
+
+  playGameSound.setVolume(1);
+  playGameSound.play();
   enemy1.enemySprite.hp = 0;
   enemy2.enemySprite.hp = 0;
   enemy3.enemySprite.hp = 0;
@@ -507,3 +525,15 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     text("  Strikes to Kill:", 800, 465);
   }
 }
+
+/* Credits
+
+Sounds
+
+Music theme from- https://incompetech.com/music/royalty-free/music.html
+"Cyborg Ninja" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+*/
