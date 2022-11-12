@@ -15,13 +15,13 @@ let countEnemy2 = 0;
 let countEnemy3 = 0;
 
 let titleheading;
-let gameoverTitle, victory;
+let gameoverTitle, victory, healthpack, hPack;
 let time = 0;
 let wait = 20;
 
 let gameFinish = true;
 let bossSpawned = false;
-let screenState = 1;
+let screenState = 0;
 let ninTest;
 let ninjaLoadingScreen;
 let nls;
@@ -77,7 +77,7 @@ function setup() {
   //enemy3.setUpGroups();
 
   enemy1.createEnemy1(random(enemyStartPosX), PosY);
-  countEnemy1++
+  enemy1.enemySprite.remove();
 
   enemy2.createEnemy2(-100, -100);
   enemy2.enemySprite.remove();
@@ -86,6 +86,9 @@ function setup() {
 
   enemyB.createEnemy3(-100, -100);
   enemyB.enemySprite.remove();
+
+  makeHealthPack();
+  hPack.remove();
 
 
 
@@ -163,28 +166,26 @@ function drawLoading() {
 //draw the gameplay scene/screen
 function drawGameplay() {
   gameFinish = false;
-
   background("grey");
-
   hideAllBns();
   exitBn.showButton();//new location?
 
+  if(countEnemy1 < 1){
+    enemy1.createEnemy1(random(enemyStartPosX), PosY);
+    countEnemy1++
+  }
+
   testScene();
-
-  console.log(enemy1.enemyGroupOne.length)
-
   drawSprites();
 
   ninja.drawNinjaHealthBar();
   enemy1.drawEnemy1HealthBar(enemy1.enemySprite);
-  
   enemy2.drawEnemy2HealthBar(enemy2.enemySprite);
   enemy3.drawEnemy3HealthBar(enemy3.enemySprite);
   enemyB.drawEnemyBossHealthBar(enemyB.enemySprite);
 
   
   ninja.move();
-
   ninja.attackAnimation();
 
 //start of fighting code
@@ -202,18 +203,17 @@ function drawGameplay() {
   enemyB.enemySprite.collide(ninja.ninjaSprite, enemyB.attackAnimationB);
 
   //bounce code to stop instant deaths
-  ninja.ninjaSprite.bounce(enemy1.enemySprite, bounceBack)
-  ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack)
-  ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack)
-  ninja.ninjaSprite.bounce(enemyB.enemySprite, bounceBack)
+  ninja.ninjaSprite.bounce(enemy1.enemySprite, bounceBack);
+  ninja.ninjaSprite.bounce(enemy2.enemySprite, bounceBack);
+  ninja.ninjaSprite.bounce(enemy3.enemySprite, bounceBack);
+  ninja.ninjaSprite.bounce(enemyB.enemySprite, bounceBack);
 
-
-
-  // text for score, needs styling    
+  ninja.ninjaSprite.collide(hPack, ninja.restoreHP);
+   
   noStroke()
   fill(255, 150)
-  textSize(30)
-  //text("Score: " + score, 50, 50)
+
+
   //temp text for ninja health - remove when health bar running
   textSize(20)
   text("Ninja Health: " + ninja.ninjaSprite.hp, 820, 50)
@@ -261,8 +261,7 @@ function drawMainMenu() {
   hideAllBns();
   background(80)
   gamePlayBn.showButton();
-  exitBn.showButton();
-  leaderBoardBn.showButton();
+
   //below is all testing code 
   fill(255);
   textFont(font);
@@ -302,6 +301,12 @@ function drawWinner() {
 
 }
 
+function makeHealthPack(x,y) {
+  hPack = createSprite(x,y);
+  hPack.addImage(healthpack);
+  hPack.setCollider('rectangle');
+}
+
 
 //move rest function down when complete
 function resetGame() {//a function to call when return to main menu after game over, or game win
@@ -321,14 +326,11 @@ function resetGame() {//a function to call when return to main menu after game o
   countEnemy2 = 0;
   countEnemy3 = 0;
 
-  enemy1.createEnemy1(random(enemyStartPosX), H - 45);
-  countEnemy1++;
-
   enemy1.enemySprite.hp = 10;//reset enemy health
   enemy2.enemySprite.hp = 20;
   enemy3.enemySprite.hp = 30;
-  enemyB.enemySprite.hp = 40;
-  ninja.ninjaSprite.hp = 50;//reset ninja health change when finalised
+  enemyB.enemySprite.hp = 100;
+  ninja.ninjaSprite.hp = 250;//reset ninja health change when finalised
   ninja.ninjaAttackOn = false;
   enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
   enemy2.enemySprite.changeAnimation('runEast2');
@@ -337,6 +339,7 @@ function resetGame() {//a function to call when return to main menu after game o
 
   x1 = 0;
   x2 = width;
+  x3 = -width;
 
 }
 
@@ -405,6 +408,8 @@ function loadMainMenuImages() {
   titleheading = loadImage('assets/img/gamejam_title.png');
   gameoverTitle = loadImage('assets/img/gamejam_gameover.png');
   victory = loadImage('assets/img/victory.png');
+  //healthpack image
+  healthpack = loadImage('assets/img/powerup_box_health.png');
 }
 
 function characterImages() {

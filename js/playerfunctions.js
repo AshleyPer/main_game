@@ -32,6 +32,8 @@ class Ninja {
 
         this.runEast = loadAnimation('assets/img/ninja_player/run/run_east/ninja_1.png', 'assets/img/ninja_player/run/run_east/ninja_4.png');
         this.runEast.frameDelay = 10;
+
+
     }
 
     createNinja() {
@@ -201,7 +203,7 @@ class Ninja {
 
     //the function for the player fighting
     enemyFight(player, enemy) {
-        enemy.hp -= 1; //any enemy hit has their hp reduced by 1
+        enemy.hp -= 0.5; //any enemy hit has their hp reduced by 1
         if (enemy1.enemySprite.hp <= 0) { //checks if tier 1 enemy drops to 0 hp
             enemy1.enemySprite.remove();
             if (countEnemy1 < enemy1.maxenemy1count && countEnemy1 < 3) {
@@ -226,6 +228,7 @@ class Ninja {
         if (enemy1.enemyGroupOne.length == 0 && countEnemy1 > enemy1.maxenemy1count -1 && countEnemy2 < 1) {
             enemy2.createEnemy2(random(enemyStartPosX), PosY); //after the 4th kill, spawns tier 2 enemies
             countEnemy2++;
+            makeHealthPack(enemy1.enemySprite.position.x, height - 15);
         }
 
         if (enemy2.enemySprite.hp <= 0) { //checks if tier 2 enemy drops to 0 hp
@@ -239,12 +242,14 @@ class Ninja {
         if (enemy2.enemyGroupTwo.length == 0 && countEnemy2 > enemy2.maxenemy2count -1 && enemy1.enemyGroupOne.length == 0 && countEnemy3 !== 1) {
             enemy3.createEnemy3(random(enemyStartPosX), PosY); //spawns tier 3 enemy
             countEnemy3++;
+            makeHealthPack(enemy1.enemySprite.position.x, height - 15);
         }
 
         if (enemy3.enemySprite.hp <= 0 && bossSpawned == false) { //checks if tier 3 enemy hits 0 hp
             enemy3.enemySprite.remove();
             enemyB.createEnemyB(random(enemyStartPosX), PosY); //spawns boss
             bossSpawned = true;
+            makeHealthPack(enemy1.enemySprite.position.x, height - 15);
         }
 
         if (enemyB.enemySprite.hp <= 0) { //checks if boss hits 0 hp
@@ -258,4 +263,10 @@ class Ninja {
 
         }
     }
+
+    restoreHP(player, pack) {
+        pack.remove();
+        player.hp = player.maxHP;
+    }
+
 }
