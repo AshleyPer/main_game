@@ -61,7 +61,7 @@ class Enemy {
         //this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 10
-        this.maxenemy1count = 3;
+        this.maxenemy1count = 5;
     }
 
     createEnemy2(x, y) {
@@ -107,7 +107,7 @@ class Enemy {
         }
 
         this.enemySprite.setSpeed(1, angle);
-        this.enemySprite.addToGroup(this.enemyGroupThree);
+        //this.enemySprite.addToGroup(this.enemyGroupThree);
         let enemyPosition = this.enemySprite.position;
         this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 30//any changes here, need to be changed in the ganeReset function in main
@@ -140,7 +140,7 @@ class Enemy {
     }
 
     drawEnemy1HealthBar(enemy) {
-        if (enemy.hp > 0) {
+        if (enemy.hp > 0 && countEnemy1 >0) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -156,7 +156,7 @@ class Enemy {
 
 
     drawEnemy2HealthBar(enemy) {
-        if (enemy.hp > 0) {
+        if (enemy.hp > 0 && countEnemy2>0 ) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();
@@ -170,7 +170,7 @@ class Enemy {
     }
 
     drawEnemy3HealthBar(enemy) {
-        if (enemy.hp > 0) {
+        if (enemy.hp > 0 && countEnemy3 > 0 ) {
             strokeWeight(4);
             stroke(0, 0, 0);
             noFill();

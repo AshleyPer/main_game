@@ -1,5 +1,5 @@
 "use strict";
-let enemyStartPosX = [-200, 1200]
+let enemyStartPosX = [-100, 1100]
 let PosY = H - 45
 let testAlley, aircon, bgWstuff, bgWOstuff, bgWcity, cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, bgDoor, bgMoon;
 let ninja = new Ninja(W / 2, H - 45); //CHANGES HERE TO POSITIONS NEED TO BE CHANGED IN GAMErESET FUNCTION AT BOTTOM 
@@ -328,16 +328,18 @@ function resetGame() {//a function to call when return to main menu after game o
   //reset background
   //reset clouds?        
   removeAllEnemySprites();
+  gameFinish = true;
   ninja.ninjaSprite.position.x = W / 2;//update these when staring positions finalised
   ninja.ninjaSprite.position.y = H - 45;
   countEnemy1 = 0;
   countEnemy2 = 0;
   countEnemy3 = 0;
-
   enemy1.enemySprite.hp = 10;//reset enemy health
   enemy2.enemySprite.hp = 20;
   enemy3.enemySprite.hp = 30;
   enemyB.enemySprite.hp = 100;
+
+ 
   ninja.ninjaSprite.hp = 250;//reset ninja health change when finalised
   ninja.ninjaAttackOn = false;
   enemy1.enemySprite.changeAnimation('runEast1');//reset enemy to idle
@@ -352,10 +354,17 @@ function resetGame() {//a function to call when return to main menu after game o
 }
 
 function removeAllEnemySprites() {
-  enemy1.enemyGroupOne.removeSprites();
+  //enemy1.enemyGroupOne.removeSprites();
+  enemy1.enemySprite.remove();
   enemyB.enemySprite.remove();
-  enemy2.enemyGroupTwo.removeSprites();
+  //enemy2.enemyGroupTwo.removeSprites();
+ // enemy3.enemyGroupThree.removeSprites();
   enemy3.enemySprite.remove();
+  enemy2.enemySprite.remove();
+  hPack.remove();
+ // console.log("1" + enemyGroupOne)
+  //console.log("2" + enemyGroupTwo)
+  //console.log("3" + enemyGroupThree)
 
 }
 
@@ -379,8 +388,12 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 function gamePlayBnPressed() {
   gameFinish = false;
   screenState = 2;
+  //enemy2.enemySprite.hp = 20;
 
-
+  //enemy1.enemySprite.hp = 10;//reset enemy health
+  //enemy2.enemySprite.hp = 20;
+  //enemy3.enemySprite.hp = 30;
+ // enemyB.enemySprite.hp = 100;
 
 
 }
@@ -393,6 +406,12 @@ function leaderBdBnPressed() {
 
 function exitBnPressed() {//takes you where? - may not use yet
   gameFinish = true;
+  
+  enemy1.enemySprite.hp = 0;
+  enemy2.enemySprite.hp = 0;
+  enemy3.enemySprite.hp = 0;
+  enemyB.enemySprite.hp = 0;
+  removeAllEnemySprites();
   screenState = 1;
   resetGame();
 }
