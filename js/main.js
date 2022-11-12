@@ -43,6 +43,7 @@ let ninjaAttackSound;
 let backSound;
 let lossSound;
 let playGameSound;
+let music;
 //let
 //let
 
@@ -54,6 +55,21 @@ function preload() {
   enemyB.loadEnemyAnimations();
   loadScenePics();
   loadMainMenuImages();
+  //Load the sounds
+  soundFormats('mp3', 'wav');
+  ninjaAttackSound = loadSound('assets/sounds/ninja/Fast_Action_Swish_HW_05.wav');
+ 
+
+  //backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_Back Version4.wav');
+  //backSound.setVolume(0.3);
+
+  //lossSound = loadSound('assets/sounds/ninja/attack/Fast_Action_Swish_HW_05.wav');
+  //lossSound.setVolume(0.3);
+
+  playGameSound = loadSound('assets/sounds/menu/playgame_sound.wav');
+  backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_BackVersion4.wav');
+  music = loadSound('assets/sounds/Cyborg_Ninja.mp3');
+
 }
 
 
@@ -113,18 +129,11 @@ function setup() {
   cloudY[3] = random(0, 60);
   cloudY[4] = random(0, 60);
 
-  //Load the sounds
-  soundFormats('mp3', 'wav');
-  ninjaAttackSound = loadSound('assets/sounds/ninja/Fast_Action_Swish_HW_05.wav');
-  ninjaAttackSound.setVolume(0.3);
+  playGameSound.setVolume(0);
+  playGameSound.play();
+  playGameSound.stop();
 
-  //backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_Back Version4.wav');
-  //backSound.setVolume(0.3);
-
-  //lossSound = loadSound('assets/sounds/ninja/attack/Fast_Action_Swish_HW_05.wav');
-  //lossSound.setVolume(0.3);
-
-  playGameSound = loadSound('assets/sounds/menu/playgame_sound.wav');
+  
 
 }
 
@@ -184,10 +193,15 @@ function drawLoading() {
 
 //draw the gameplay scene/screen
 function drawGameplay() {
+
   gameFinish = false;
   background("grey");
   hideAllBns();
-  exitBn.showButton();//new location?
+  exitBn.showButton();
+  if(music.isPlaying()==false){
+    music.setVolume(0.05)
+    music.play()
+  }
 
   if(countEnemy1 < 1){
     enemy1.createEnemy1(random(enemyStartPosX), PosY);
@@ -330,6 +344,7 @@ function resetGame() {//a function to call when return to main menu after game o
   enemy2.enemySprite.hp = 20;
   enemy3.enemySprite.hp = 30;
   enemyB.enemySprite.hp = 100;
+  music.stop();
 
  
   ninja.ninjaSprite.hp = 250;//reset ninja health change when finalised
@@ -379,9 +394,8 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 }
 
 function gamePlayBnPressed() {
-  playGameSound.setVolume(0);
+  playGameSound.setVolume(0.1);
   playGameSound.play();
-  playGameSound.stop();
   
 
   gameFinish = false;
@@ -398,7 +412,7 @@ function leaderBdBnPressed() {
 function exitBnPressed() {
   gameFinish = true;
 
-  playGameSound.setVolume(1);
+  playGameSound.setVolume(0.1);
   playGameSound.play();
   enemy1.enemySprite.hp = 0;
   enemy2.enemySprite.hp = 0;

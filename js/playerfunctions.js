@@ -79,17 +79,17 @@ class Ninja {
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", 15, 0, 20, 20);
 
-            if(!ninjaAttackSound.isPlaying()){
-                ninjaAttackSound.play()
-            }
+           // if(!ninjaAttackSound.isPlaying()){
+          //      ninjaAttackSound.play()
+          //  }
 
         } else {
             this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", -15, 0, 20, 20);
 
-            if(!ninjaAttackSound.isPlaying()){
-                ninjaAttackSound.play()
-            }
+          //  if(!ninjaAttackSound.isPlaying()){
+          //      ninjaAttackSound.play()
+          //  }
         }
         //this.ninjaAttack.debug = true;
         this.ninjaAttack.immovable = true;
@@ -157,6 +157,9 @@ class Ninja {
                 }
             }
             this.ninjaAttackOn = true;
+            if(!ninjaAttackSound.isPlaying()){
+                ninjaAttackSound.play()
+            }
 
         }
     }
