@@ -80,17 +80,10 @@ class Ninja {
             this.ninjaAttack = createSprite(this.ninjaPosition.x + 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", 15, 0, 20, 20);
 
-           // if(!ninjaAttackSound.isPlaying()){
-          //      ninjaAttackSound.play()
-          //  }
-
         } else {
             this.ninjaAttack = createSprite(this.ninjaPosition.x - 20, this.ninjaPosition.y, 20);
             this.ninjaAttack.setCollider("rectangle", -15, 0, 20, 20);
 
-          //  if(!ninjaAttackSound.isPlaying()){
-          //      ninjaAttackSound.play()
-          //  }
         }
         //this.ninjaAttack.debug = true;
         this.ninjaAttack.immovable = true;
@@ -98,6 +91,7 @@ class Ninja {
     }
 
     move() {
+        
         if (keyIsDown(LEFT_ARROW)) {
             if(!keyIsDown(32)){
                 ninjaAttackSound.stop();
@@ -121,10 +115,25 @@ class Ninja {
                 enemyB.enemySprite.position.x += scrollSpeed;
             }
         }
+        /*
+        //older code in case - but background ends to left early
+         if (keyIsDown(LEFT_ARROW)) {
+            this.ninjaSprite.changeAnimation('runWest')
+            this.ninjaDirectionEast = false;
+            this.ninjaSprite.animation.play();
+            this.ninjaSprite.position.x-=1.5
+            x1 += scrollSpeed;
+            x2 += scrollSpeed;
+            enemy1.enemySprite.position.x += scrollSpeed
+            enemy2.enemySprite.position.x += scrollSpeed
+            enemy3.enemySprite.position.x += scrollSpeed
+            enemyB.enemySprite.position.x += scrollSpeed
+        }
+    */
 
         if (keyIsDown(RIGHT_ARROW)) {
             if(!keyIsDown(32)){
-                ninjaAttackSound.stop();
+                 ninjaAttackSound.stop();//comment this out if sword plays up
             }
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
@@ -143,6 +152,22 @@ class Ninja {
                 enemyB.enemySprite.position.x -= scrollSpeed;
             }
         }
+        /*
+        //older code in case
+        
+        if (keyIsDown(RIGHT_ARROW)) {
+            this.ninjaSprite.changeAnimation('runEast')
+            this.ninjaDirectionEast = true;
+            this.ninjaSprite.animation.play();
+            this.ninjaSprite.position.x+=1.5;
+            x1 -= scrollSpeed;
+            x2 -= scrollSpeed;
+            enemy1.enemySprite.position.x -= scrollSpeed
+            enemy2.enemySprite.position.x -= scrollSpeed
+            enemy3.enemySprite.position.x -= scrollSpeed
+            enemyB.enemySprite.position.x -= scrollSpeed
+        }
+        */
     }
 
     attackAnimation() {

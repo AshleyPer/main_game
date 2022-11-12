@@ -55,7 +55,6 @@ class Enemy {
         this.enemySprite.rotationToDirection = true;
         this.enemySprite.setSpeed(1, angle);
         this.enemyGroupOne.add(this.enemySprite);
-        //this.enemyPosition = enemyPosition;
         this.enemySprite.hp = 10//any changes here, need to be changed in the ganeReset function in main
         this.enemySprite.maxHp = 10
         this.maxenemy1count = 5;

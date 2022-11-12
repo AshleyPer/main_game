@@ -317,15 +317,7 @@ function makeHealthPack(x,y) {
 
 //move rest function down when complete
 function resetGame() {//a function to call when return to main menu after game over, or game win
-  //NEEDS UPDATING
-  //reset enemy positions
-  //reset ninja position
-  //reset health enemy
-  //reset health ninja
-  //reset score
-  //reset sound
-  //reset background
-  //reset clouds?
+ 
   removeAllEnemySprites();
   gameFinish = true;
   ninja.ninjaSprite.position.x = W / 2;//update these when staring positions finalised
@@ -355,18 +347,14 @@ function resetGame() {//a function to call when return to main menu after game o
 }
 
 function removeAllEnemySprites() {
-  //enemy1.enemyGroupOne.removeSprites();
+
   enemy1.enemySprite.remove();
   enemyB.enemySprite.remove();
-  //enemy2.enemyGroupTwo.removeSprites();
- // enemy3.enemyGroupThree.removeSprites();
+
   enemy3.enemySprite.remove();
   enemy2.enemySprite.remove();
   hPack.remove();
- // console.log("1" + enemyGroupOne)
-  //console.log("2" + enemyGroupTwo)
-  //console.log("3" + enemyGroupThree)
-
+ 
 }
 
 //functions for the buttons
@@ -417,7 +405,6 @@ function exitBnPressed() {
 }
 
 
-
 //The code to set the main menu images and things
 
 function loadMainMenuImages() {
@@ -435,7 +422,6 @@ function loadMainMenuImages() {
   titleheading = loadImage('assets/img/gamejam_title.png');
   gameoverTitle = loadImage('assets/img/gamejam_gameover.png');
   victory = loadImage('assets/img/victory.png');
-  //healthpack image
   healthpack = loadImage('assets/img/powerup_box_health.png');
 }
 
