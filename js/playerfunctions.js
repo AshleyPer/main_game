@@ -94,7 +94,8 @@ class Ninja {
         
         if (keyIsDown(LEFT_ARROW)) {
             if(!keyIsDown(32)){
-                ninjaAttackSound.stop();
+                //ninjaAttackSound.stop();//comment this out if sword sound buggy
+                
             }
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
@@ -133,7 +134,8 @@ class Ninja {
 
         if (keyIsDown(RIGHT_ARROW)) {
             if(!keyIsDown(32)){
-                 ninjaAttackSound.stop();//comment this out if sword plays up
+               // ninjaAttackSound.stop();
+                
             }
             this.ninjaSprite.changeAnimation('runEast')
             this.ninjaDirectionEast = true;
@@ -192,7 +194,7 @@ class Ninja {
             }
             this.ninjaAttackOn = true;
             if(!ninjaAttackSound.isPlaying()){
-                ninjaAttackSound.setVolume(1.5);
+                ninjaAttackSound.setVolume(0.25);
                 ninjaAttackSound.play();
             }
 
@@ -282,7 +284,7 @@ class Ninja {
         }
         if (enemy3.enemySprite.hp <= 0) { //checks if tier 2 enemy drops to 0 hp
             enemy3.enemySprite.remove();
-            if (countEnemy3 < 3) {
+            if (countEnemy3 < 2) {
                 enemy3.createEnemy3(random(enemyStartPosX), PosY); //spawns tier 2 enemy if less than 3 have been killed
                 countEnemy3++; //counts tier 2 kills
             }
@@ -307,7 +309,7 @@ class Ninja {
     }
 
     restoreHP(player, pack) {
-        healthPackSound.setVolume(0.5);
+        healthPackSound.setVolume(0.2);
         healthPackSound.play();
         pack.remove();
         player.hp = player.maxHP;

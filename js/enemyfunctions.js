@@ -205,9 +205,10 @@ class Enemy {
         enemy1.enemySprite.changeAnimation('attackEast1');
         ninja.ninjaSprite.hp -= 1;
 
-       // if(!ninjaHurtSound.isPlaying()){
-      //      ninjaHurtSound.play(0.3);
-      //  }
+       if(!ninjaHurtSound.isPlaying()){
+           ninjaHurtSound.setVolume(0.2);
+           ninjaHurtSound.play();
+        }
     
     }
     attackAnimation2() {
@@ -216,7 +217,8 @@ class Enemy {
         ninja.ninjaSprite.hp -= 1;
 
         if(!ninjaHurtSound.isPlaying()){
-            ninjaHurtSound.play(0.3);
+            ninjaHurtSound.setVolume(0.2);
+            ninjaHurtSound.play();
         }
     }
     attackAnimation3() {
@@ -224,7 +226,8 @@ class Enemy {
         enemy3.enemySprite.changeAnimation('attackEast3');
         ninja.ninjaSprite.hp -= 2;
         if(!ninjaHurtSound.isPlaying()){
-            ninjaHurtSound.play(0.3);
+            ninjaHurtSound.setVolume(0.2);
+            ninjaHurtSound.play();
         }
     }
     attackAnimationB() {
@@ -232,7 +235,8 @@ class Enemy {
         enemyB.enemySprite.changeAnimation('attackEastB');
         ninja.ninjaSprite.hp -= 3;
         if(!ninjaHurtSound.isPlaying()){
-            ninjaHurtSound.play(0.3);
+            ninjaHurtSound.setVolume(0.2);
+            ninjaHurtSound.play();
         }
     }
 

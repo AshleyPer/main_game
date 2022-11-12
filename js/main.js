@@ -123,9 +123,11 @@ function setup() {
   cloudY[3] = random(0, 60);
   cloudY[4] = random(0, 60);
 
-  playGameSound.setVolume(0);
+  playGameSound.setVolume(0);//plays the short sounds once so they dont delay first time in game
   playGameSound.play();
   playGameSound.stop();
+  backSound.setVolume(0);
+  
 
   
 
@@ -449,17 +451,19 @@ function characterPopUps() {//test code maybe use a function/class with paramete
   if (mouseX > 30 && mouseX < 125 && mouseY < 430 && mouseY > 170) {//check position when final
     stroke(120);
     fill(100);
-    rect(230, 190, 170, 130, 30);
+    rect(230, 205, 180, 170, 30);
     noStroke();
     fill(0);
     hero.resize(0, 35);
     image(hero, 180, 132);
     text("Shinobi", 245, 154);
     
-    text("Move him with left", 230, 195);
-    text("and right arrows", 230, 215);
-    text("space bar for attack", 230, 235);
-    text(" ", 230, 265);
+    text("Move with left", 230, 185);
+    text("and right arrows", 230, 205);
+    text("Space bar for attack", 230, 225);
+    healthpack.resize(0,20)
+    image(healthpack, 220,235)
+    text("Restores Health", 230, 275);
   }
   if (mouseX > 890 && mouseX < 950 && mouseY < 135 && mouseY > 50) {//check these once image up
     stroke(120);
@@ -470,9 +474,9 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     noStroke();
     fill(0);
     textSize(12);
-    text(" Kikuropusu Akuma", 800, 60);
+    text("  Kikuropusu Akuma", 800, 57);
     text(" Cyclops Demon", 800, 80);// add specs
-    text(" Enemy Level: Boss", 800, 100);
+    text("  Enemy Level: Boss", 800, 103);
     //text("....", 800,110);
 
   }
@@ -486,8 +490,8 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     noStroke();
     fill(0);
     textSize(12);
-    text("Mazoku", 800, 190);
-    text("enemy Level: 3", 800, 210);//add specs
+    text("Mazoku", 800, 192);
+    text("Enemy Level: 3", 800, 212);//add specs
     
   }
   if (mouseX > 890 && mouseX < 930 && mouseY < 350 && mouseY > 285) {//check these once image up
@@ -495,12 +499,12 @@ function characterPopUps() {//test code maybe use a function/class with paramete
     fill(100);
     rect(800, 320, 140, 60, 30);
     E2a.resize(0, 30);
-    image(E2a, 740, 300);
+    image(E2a, 740, 303);
     noStroke();
     fill(0);
     textSize(12);
     text("Kurai", 800, 312);
-    text("Enemy Level: 2", 800, 332);// add specs
+    text("  Enemy Level: 2", 800, 332);// add specs
     
 
   }
