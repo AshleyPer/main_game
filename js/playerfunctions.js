@@ -125,6 +125,7 @@ class Ninja {
 
     attackAnimation() {
         if (keyIsDown(32)) {
+            //ninjaAttackSound.play();
             time++;
             if (this.ninjaDirectionEast == true) {
                 this.ninjaSprite.changeAnimation('attackEast');

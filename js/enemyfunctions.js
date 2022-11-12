@@ -185,7 +185,7 @@ class Enemy {
 
     drawEnemyBossHealthBar(enemy){
         // 
-        console.log(enemy)
+        //console.log(enemy)
         if(enemy.hp > 0 && enemy.position.x >= 40 && bossSpawned == true){
             strokeWeight(4);
             stroke(0, 0, 0);

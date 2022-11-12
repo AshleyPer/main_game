@@ -37,6 +37,10 @@ let cloudY = new Array(5);
 let count = 0;
 let font;
 
+
+//sound variables
+let ninjaAttackSound;
+
 function preload() {
   ninja.loadNinjaAnimations();
   enemy1.loadEnemyAnimations();
@@ -50,7 +54,7 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
-
+  //delayTime('1');
   //add a font
   font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
   //create the buttons
@@ -102,6 +106,9 @@ function setup() {
   cloudY[3] = random(0, 60);
   cloudY[4] = random(0, 60);
 
+  //Load the sounds
+  //soundFormats('mp3', 'ogg', 'wav');
+  //ninjaAttackSound = loadSound('assets/sounds/ninja/attack/ninja_attack');
 }
 
 
