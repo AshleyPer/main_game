@@ -42,7 +42,7 @@ let alp;
 let ninjaAttackSound;
 let backSound;
 let lossSound;
-let playGameSound, music, healthPackSound;
+let playGameSound, music, healthPackSound, ninjaHurtSound;
 
 
 
