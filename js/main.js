@@ -39,6 +39,7 @@ let alp;
 
 
 //sound variables
+let delaySound;
 let ninjaAttackSound;
 
 function preload() {
@@ -54,7 +55,7 @@ function preload() {
 
 function setup() {
   createCanvas(W, H);
-  //delayTime('1');
+  delaySound = new p5.Delay();
   //add a font
   font = loadFont('assets/fonts/IndieFlower-Regular.ttf');
   //create the buttons
