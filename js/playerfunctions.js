@@ -105,14 +105,16 @@ class Ninja {
             this.ninjaSprite.changeAnimation('runWest')
             this.ninjaDirectionEast = false;
             this.ninjaSprite.animation.play();
+
             if (keyIsDown(LEFT_ARROW) && this.ninjaSprite.position.x >= 200){
                 this.ninjaSprite.position.x -= scrollSpeed;
             }
 
-            if(this.ninjaSprite.position.x < width / 3){
+            if(this.ninjaSprite.position.x < width / 2){
                 x1 += scrollSpeed;
                 x2 += scrollSpeed;
                 x3 += scrollSpeed;
+                //
                 enemy1.enemySprite.position.x += scrollSpeed;
                 enemy2.enemySprite.position.x += scrollSpeed;
                 enemy3.enemySprite.position.x += scrollSpeed;
@@ -165,7 +167,7 @@ class Ninja {
             }
             this.ninjaAttackOn = true;
             if(!ninjaAttackSound.isPlaying()){
-                ninjaAttackSound.setVolume(0.2);
+                ninjaAttackSound.setVolume(1.5);
                 ninjaAttackSound.play();
             }
 

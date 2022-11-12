@@ -463,73 +463,73 @@ function characterPopUps() {//test code maybe use a function/class with paramete
   if (mouseX > 30 && mouseX < 125 && mouseY < 430 && mouseY > 170) {//check position when final
     stroke(120);
     fill(100);
-    rect(230, 200, 150, 150, 30);
+    rect(230, 190, 170, 130, 30);
     noStroke();
     fill(0);
     hero.resize(0, 35);
     image(hero, 180, 132);
-    text("Hero Ninja", 245, 154);
-    text("UPDATE INFO", 230, 185);//add specs
-    text("Move him with left", 230, 205);
-    text("and right arrows", 230, 225);
-    text("space bar for attack", 230, 245);
+    text("Shinobi", 245, 154);
+    
+    text("Move him with left", 230, 195);
+    text("and right arrows", 230, 215);
+    text("space bar for attack", 230, 235);
     text(" ", 230, 265);
   }
   if (mouseX > 890 && mouseX < 950 && mouseY < 135 && mouseY > 50) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 75, 150, 80, 30);
+    rect(800, 75, 150, 85, 30);
     Beb.resize(0, 30);
     image(Beb, 730, 60);
     noStroke();
     fill(0);
     textSize(12);
-    text("Boss Enemy", 800, 60);
-    text("Weapon:", 800, 80);// add specs
-    text("Strikes to Kill:", 800, 100);
+    text(" Kikuropusu Akuma", 800, 60);
+    text(" Cyclops Demon", 800, 80);// add specs
+    text(" Enemy Level: Boss", 800, 100);
     //text("....", 800,110);
 
   }
 
-  if (mouseX > 890 && mouseX < 930 && mouseY < 250 && mouseY > 190) {//check these once image up
+  if (mouseX > 890 && mouseX < 930 && mouseY < 230 && mouseY > 160) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 200, 140, 80, 30);
+    rect(800, 200, 140, 60, 30);
     E3a.resize(0, 30);
     image(E3a, 740, 180);
     noStroke();
     fill(0);
     textSize(12);
-    text("Name:", 800, 180);
-    text("Weapon:", 800, 200);//add specs
-    text("Strikes to kill:", 800, 220);
+    text("Mazoku", 800, 190);
+    text("enemy Level: 3", 800, 210);//add specs
+    
   }
   if (mouseX > 890 && mouseX < 930 && mouseY < 350 && mouseY > 285) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 320, 140, 80, 30);
+    rect(800, 320, 140, 60, 30);
     E2a.resize(0, 30);
     image(E2a, 740, 300);
     noStroke();
     fill(0);
     textSize(12);
-    text("Name:", 800, 300);
-    text("Weapon: ", 800, 320);// add specs
-    text("Strikes to kill: ", 800, 340);
+    text("Kurai", 800, 312);
+    text("Enemy Level: 2", 800, 332);// add specs
+    
 
   }
-  if (mouseX > 890 && mouseX < 930 && mouseY < 490 && mouseY > 430) {//check these once image up
+  if (mouseX > 890 && mouseX < 930 && mouseY < 470 && mouseY > 410) {//check these once image up
     stroke(120);
     fill(100);
-    rect(800, 440, 140, 80, 30);
+    rect(800, 440, 140, 60, 30);
     E1a.resize(0, 30);
     image(E1a, 740, 420);
     noStroke();
     fill(0);
     textSize(12);
-    text("  Name:", 800, 425);//add specs
-    text("  Weapon: Fists", 800, 445);
-    text("  Strikes to Kill:", 800, 465);
+    text("Daku", 800, 432);//add specs
+    text(" Enemy Level: 1", 800, 452);
+    
   }
 }
 

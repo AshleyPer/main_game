@@ -206,9 +206,9 @@ class Enemy {
         enemy1.enemySprite.changeAnimation('attackEast1');
         ninja.ninjaSprite.hp -= 1;
 
-        if(!ninjaHurtSound.isPlaying()){
-            ninjaHurtSound.play(0.3);
-        }
+       // if(!ninjaHurtSound.isPlaying()){
+      //      ninjaHurtSound.play(0.3);
+      //  }
     
     }
     attackAnimation2() {
