@@ -158,7 +158,8 @@ class Ninja {
             }
             this.ninjaAttackOn = true;
             if(!ninjaAttackSound.isPlaying()){
-                ninjaAttackSound.play()
+                ninjaAttackSound.setVolume(0.2);
+                ninjaAttackSound.play();
             }
 
         }
