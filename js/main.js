@@ -42,10 +42,9 @@ let alp;
 let ninjaAttackSound;
 let backSound;
 let lossSound;
-let playGameSound;
-let music;
-let ninjaHurtSound;
-//let
+let playGameSound, music, healthPackSound;
+
+
 
 function preload() {
   ninja.loadNinjaAnimations();
@@ -63,6 +62,7 @@ function preload() {
   playGameSound = loadSound('assets/sounds/menu/playgame_sound.wav');
   backSound = loadSound('assets/sounds/menu/ui_SoundPack04_-_BackVersion4.wav');
   music = loadSound('assets/sounds/Cyborg_Ninja.mp3');
+  healthPackSound = loadSound('assets/sounds/ninja/healthpack.wav');
 
 }
 

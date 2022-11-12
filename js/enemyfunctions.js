@@ -193,7 +193,7 @@ class Enemy {
 
             fill(64, 8, 3);
             rect(202, 122, enemy.hp * 6, 26);
-
+            textFont(font);
             textStyle(BOLD);
             textSize(20);
             fill('white');

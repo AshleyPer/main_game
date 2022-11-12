@@ -66,10 +66,11 @@ class Ninja {
         rect(22, 40, this.ninjaSprite.maxHP * 1.2, 24, 20);
         fill('green');
         rect(22, 40, this.ninjaSprite.hp * 1.2, 24, 20);
-
-        textSize(18);
+        textFont(font);
+        textStyle(BOLD);
+        textSize(22);
         fill('black');
-        text("Your Health", this.ninjaSprite.maxHP / 2 , 58)
+        text("Your Health", this.ninjaSprite.maxHP / 2 , 58);
     }
 
     //create a sprite for the collision with the sword
@@ -274,12 +275,13 @@ class Ninja {
             noStroke();
             fill(255, 0, 0);
             textSize(50);
-            //triggers ending?
 
         }
     }
 
     restoreHP(player, pack) {
+        healthPackSound.setVolume(0.5);
+        healthPackSound.play();
         pack.remove();
         player.hp = player.maxHP;
     }
