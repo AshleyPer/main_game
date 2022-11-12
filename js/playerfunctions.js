@@ -229,13 +229,20 @@ class Ninja {
             }
         }
 
-        if (enemy2.enemyGroupTwo.length == 0 && countEnemy2 > enemy2.maxenemy2count -1 && enemy1.enemyGroupOne.length == 0 && countEnemy3 !== 1) {
+        if (enemy2.enemyGroupTwo.length == 0 && countEnemy2 > enemy2.maxenemy2count -1 && enemy1.enemyGroupOne.length == 0 && countEnemy3 <1) {
             enemy3.createEnemy3(random(enemyStartPosX), PosY); //spawns tier 3 enemy
             countEnemy3++;
             makeHealthPack(W/2, height - 15);
         }
+        if (enemy3.enemySprite.hp <= 0) { //checks if tier 2 enemy drops to 0 hp
+            enemy3.enemySprite.remove();
+            if (countEnemy3 < 3) {
+                enemy3.createEnemy3(random(enemyStartPosX), PosY); //spawns tier 2 enemy if less than 3 have been killed
+                countEnemy3++; //counts tier 2 kills
+            }
+        }
 
-        if (enemy3.enemySprite.hp <= 0 && bossSpawned == false) { //checks if tier 3 enemy hits 0 hp
+        if (enemy3.enemySprite.hp <= 0 && bossSpawned == false) { //checks if tier 3 enemy hits 0 hp 
             enemy3.enemySprite.remove();
             enemyB.createEnemyB(random(enemyStartPosX), PosY); //spawns boss
             bossSpawned = true;

@@ -62,7 +62,7 @@ function setup() {
   mainMenuBn.buttonSetUp(mainMenuBnPressed)
   gamePlayBn.buttonSetUp(gamePlayBnPressed)
   exitBn.buttonSetUp(exitBnPressed)
-  leaderBoardBn.buttonSetUp(leaderBdBnPressed)
+  
 
   //giving the canvas some styling, this is the box that contains our game
   let canvas = document.getElementById('defaultCanvas0');
@@ -222,15 +222,7 @@ function drawGameplay() {
   fill(255, 150)
 
 
-  //temp text for ninja health - remove when health bar running
-  textSize(20)
-  text("Ninja Health: " + ninja.ninjaSprite.hp, 820, 50)
-  text("enemy Health 1 : " + enemy1.enemySprite.hp, 820, 80)
-  text("enemy Health 2 : " + enemy2.enemySprite.hp, 820, 100)
-  text("enemy Health 3 : " + enemy3.enemySprite.hp, 820, 120)
-  text("enemy Health B : " + enemyB.enemySprite.hp, 820, 140)
-  text("enemy 1 Count : " + countEnemy1, 820, 160)
-  text("enemy 2 Count : " + countEnemy2, 820, 180)
+  
 
 }
 
@@ -249,18 +241,6 @@ function drawGameover() {//add score to game over screen?
   image(gameoverTitle, 0, 0);
 
 
-}
-
-//leaderboard scene/screen
-function drawLeaderBoard() {
-  background(0, 0, 255)
-  mainMenuBn.showButton();
-  textSize(40);
-  textAlign(CENTER);
-  stroke(0);
-  text("Leader Board", width / 2, height / 2 - 100);
-  text("Under Construction", width / 2, height / 2 - 50);
-  text("may or may not be used", width / 2, height / 2);
 }
 
 
@@ -306,6 +286,7 @@ function drawWinner() {
   if(alp == 0){
 
   }
+
 
 }
 
@@ -373,7 +354,7 @@ function removeAllEnemySprites() {
 function hideAllBns() {
   mainMenuBn.hideButton();
   gamePlayBn.hideButton();
-  leaderBoardBn.hideButton();
+  
   exitBn.hideButton();
 }
 
@@ -389,14 +370,7 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
 function gamePlayBnPressed() {
   gameFinish = false;
   screenState = 2;
-  //enemy2.enemySprite.hp = 20;
-
-  //enemy1.enemySprite.hp = 10;//reset enemy health
-  //enemy2.enemySprite.hp = 20;
-  //enemy3.enemySprite.hp = 30;
- // enemyB.enemySprite.hp = 100;
-
-
+  
 }
 
 function leaderBdBnPressed() {
@@ -405,14 +379,14 @@ function leaderBdBnPressed() {
   screenState = 4;
 }
 
-function exitBnPressed() {//takes you where? - may not use yet
+function exitBnPressed() {
   gameFinish = true;
   
   enemy1.enemySprite.hp = 0;
   enemy2.enemySprite.hp = 0;
   enemy3.enemySprite.hp = 0;
   enemyB.enemySprite.hp = 0;
-  removeAllEnemySprites();
+ 
   screenState = 1;
   resetGame();
 }
