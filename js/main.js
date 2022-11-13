@@ -320,9 +320,7 @@ function makeHealthPack(x,y) {
 
 //move rest function down when complete
 function resetGame() {//a function to call when return to main menu after game over, or game win
-  console.log( 'before removing sprites,boss: ' + enemyB.enemySprite)
   removeAllEnemySprites();
-  console.log( 'after removing sprites,boss: ' + enemyB.enemySprite)
   gameFinish = true;
   ninja.ninjaSprite.position.x = W / 2;//update these when staring positions finalised
   ninja.ninjaSprite.position.y = H - 45;
