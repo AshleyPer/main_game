@@ -31,10 +31,6 @@ function testScene() {
     image(bgDoor, x2 + (width - (width / 3)), height - (height / 3.5));
     image(aircon, x2 + (width/2 - 150), height / 3.5);
 
-
-
-
-
     if (x1 < -width) {
         x1 = width;
     }

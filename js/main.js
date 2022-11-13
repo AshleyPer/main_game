@@ -254,7 +254,7 @@ function bounceBack(theNinja, theEnemy) {
 
 
 //game over scene/screen
-function drawGameover() {//add score to game over screen?
+function drawGameover() {
   ninjaHurtSound.stop();
   hideAllBns();
   mainMenuBn.showButton();
@@ -312,6 +312,7 @@ function drawWinner() {
 
 function makeHealthPack(x,y) {
   hPack = createSprite(x,y);
+  healthpack.resize(0, 30);
   hPack.addImage(healthpack);
   hPack.setCollider('rectangle');
 }
@@ -319,8 +320,9 @@ function makeHealthPack(x,y) {
 
 //move rest function down when complete
 function resetGame() {//a function to call when return to main menu after game over, or game win
- 
+  console.log( 'before removing sprites,boss: ' + enemyB.enemySprite)
   removeAllEnemySprites();
+  console.log( 'after removing sprites,boss: ' + enemyB.enemySprite)
   gameFinish = true;
   ninja.ninjaSprite.position.x = W / 2;//update these when staring positions finalised
   ninja.ninjaSprite.position.y = H - 45;
@@ -352,7 +354,6 @@ function removeAllEnemySprites() {
 
   enemy1.enemySprite.remove();
   enemyB.enemySprite.remove();
-
   enemy3.enemySprite.remove();
   enemy2.enemySprite.remove();
   hPack.remove();
@@ -363,7 +364,6 @@ function removeAllEnemySprites() {
 function hideAllBns() {
   mainMenuBn.hideButton();
   gamePlayBn.hideButton();
-  
   exitBn.hideButton();
 }
 
@@ -372,15 +372,11 @@ function mainMenuBnPressed() {//change screen and reset any variables, sound etc
   gameFinish = true;
   hideAllBns();
   screenState = 1;
-
-
 }
 
 function gamePlayBnPressed() {
   playGameSound.setVolume(0.1);
   playGameSound.play();
-  
-
   gameFinish = false;
   screenState = 2;
 
@@ -394,7 +390,6 @@ function leaderBdBnPressed() {
 
 function exitBnPressed() {
   gameFinish = true;
-
   playGameSound.setVolume(0.1);
   playGameSound.play();
   enemy1.enemySprite.hp = 0;
